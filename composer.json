@@ -4,10 +4,12 @@
   },
   "autoload":{
     "files":[
-      "Core/core.class.php"
+      "Core/lib/CoreLogic.class.php",
+      "Core/Core.class.php"
     ],
     "psr-4":{
-      "core\\":"core.class/"
+      "core\\":"core/",
+      "core\\lib\\":"core/lib/"
     }
   }
 }

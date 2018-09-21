@@ -1,15 +1,14 @@
 <?php
 namespace Core;
 
-//use Core\lib\CoreLogic;
-class Core
-//class Core extends CoreLogic
-{
+use Core\lib\CoreLogic;
 
+class Core extends CoreLogic
+{
     public static function start()
     {
-        self::request();
-        echo "adasd";
+       $req =  self::request();
+       var_dump($req);
     }
 
 
@@ -20,7 +19,7 @@ class Core
 
     public static function request()
     {
-//        self::reqLogic(strtolower($_SERVER['REQUEST_METHOD']));
+        return self::reqLogic(strtolower($_SERVER['REQUEST_METHOD']));
     }
 
 
