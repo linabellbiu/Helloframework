@@ -1,0 +1,13 @@
+{
+  "require": {
+
+  },
+  "autoload":{
+    "files":[
+      "Core/core.class.php"
+    ],
+    "psr-4":{
+      "core\\":"core.class/"
+    }
+  }
+}
