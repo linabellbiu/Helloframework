@@ -10,10 +10,13 @@ define('APP_DEBUG', true);
 //定义框架根目录
 define("PATH",__DIR__);
 
-// 定义应用目录
-define('APP_PATH', PATH.'/App/');
+//应用名
+define("APP_NAME",'App');
 
 
+//主文件
+//要根据服务器配置决定
+define('MAIN_FILE','index.php');
 
-// 引入入口文    件
+// 引入入口文件
 require_once PATH . "/Core/AEX.php";

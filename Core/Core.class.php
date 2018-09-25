@@ -1,27 +1,27 @@
 <?php
 namespace Core;
 
-use Core\lib\CoreLogic;
-
-class Core extends CoreLogic
+class Core
 {
     public static function start()
     {
-       $req =  self::request();
-       var_dump($req);
-    }
+        //初始化配置
+        App::init();
 
+        //映射url到控制器
+        App::dispatch();
+
+        //执行应用程序
+        App::exec();
+    }
 
     public static function run()
     {
-
+        self::start();
     }
 
-    public static function request()
+    public static function reqFrom()
     {
-        return self::reqLogic(strtolower($_SERVER['REQUEST_METHOD']));
+
     }
-
-
-
 }
