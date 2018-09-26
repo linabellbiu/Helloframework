@@ -6,7 +6,6 @@ class App
 
     static public function init()
     {
-
         // 定义当前请求的系统常量
         define('NOW_TIME', $_SERVER['REQUEST_TIME']);
         define('REQUEST_METHOD', $_SERVER['REQUEST_METHOD']);
@@ -18,18 +17,36 @@ class App
 
         //加载配置项
         self::load();
+
     }
 
     static public function load()
     {
+
+        if (UTF_8) {
+            header("Content-type:text/html;charset=utf-8");
+        }
+
         //加载公共函数
-        include_once PATH . '/Core/common/func.php';
+        include_once CORE_COMMON_PATH . 'function.php';
 
-        //加载应用函数
-        $app_conf = APP_PATH . '/commom/conf/conf.php';
+        //加载配置文件
+        config(load_config(SYS_CONFIG_PATH));
 
-        if (file_exists($app_conf)) {
-            include_once $app_conf;
+        try {
+            if (file_exists(APP_INTI)) {
+                foreach (include APP_INTI as $k => $v) {
+                    if ($k == 'app_config') {
+                        foreach ($v as $app_config) {
+                            config(load_config(APP_PATH . 'common/conf/' . $app_config . CONFIG));
+                        }
+                    }
+                }
+            } else {
+                throw new Error('init.php 在', APP_PATH . ' 没有找到');
+            }
+        } catch (Error $e) {
+            echo $e->getMessage();
         }
     }
 
@@ -55,8 +72,7 @@ class App
             if (!only_english_letter($c)) {
                 throw new Error("控制器名不合法,必须全部是英文字母");
             }
-            if (!only_english_letter($m))
-            {
+            if (!only_english_letter($m)) {
                 throw new Error("方法名不合法,必须全部是英文字母");
             }
 

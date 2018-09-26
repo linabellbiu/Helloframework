@@ -8,10 +8,12 @@
 
 namespace App\controller;
 
-class IndexController
+use Core\Controller;
+
+class IndexController extends Controller
 {
     function index()
     {
-        echo"hello word";
+       var_dump(config());
     }
 }

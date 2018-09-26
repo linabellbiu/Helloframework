@@ -10,6 +10,9 @@ namespace Core;
 class Error extends \Exception {
     public function errorMessage()
     {
+        if(!config("err_debug")) {
+            return ;
+        }
         $errorMsg = "<h2>:(</h2>".
             "Error on line :" . $this->getLine() ." in ".$this->getFile() ."<h4>" .$this->getMessage()."</h4>";
         exit($errorMsg);

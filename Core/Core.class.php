@@ -5,7 +5,7 @@ class Core
 {
     public static function start()
     {
-        //初始化配置
+
         App::init();
 
         //映射url到控制器
@@ -14,6 +14,7 @@ class Core
         //执行应用程序
         App::exec();
     }
+
 
     public static function run()
     {
