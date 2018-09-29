@@ -14,6 +14,6 @@ class IndexController extends Controller
 {
     function index()
     {
-       var_dump(config());
+       var_dump(route());
     }
 }

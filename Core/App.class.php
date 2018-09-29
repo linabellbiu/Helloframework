@@ -3,7 +3,6 @@ namespace Core;
 
 class App
 {
-
     static public function init()
     {
         // 定义当前请求的系统常量
@@ -17,7 +16,6 @@ class App
 
         //加载配置项
         self::load();
-
     }
 
     static public function load()
@@ -36,9 +34,9 @@ class App
         try {
             if (file_exists(APP_INTI)) {
                 foreach (include APP_INTI as $k => $v) {
-                    if ($k == 'app_config') {
+                    if ($k == APP_CONFIG) {
                         foreach ($v as $app_config) {
-                            config(load_config(APP_PATH . 'common/conf/' . $app_config . CONFIG));
+                            config(load_config(APP_PATH . 'conf/' . $app_config . CONFIG));
                         }
                     }
                 }
@@ -52,20 +50,34 @@ class App
 
     public static function dispatch()
     {
-        $c = "Index";
-        $m = "index";
-        $res = preg_match('/' . MAIN_FILE . '/i', REQUEST_URI, $matches);
+        self::urlMapp();
+        self::getController();
+    }
+
+    /**
+     * url 映射
+     */
+    public static function urlMapp()
+    {
+        $c = INDEX_CONTROLLER;
+        $m = INDEX_METHOD;
+
+        $n = strpos(REQUEST_URI,'?');
+        $u = substr(REQUEST_URI,0,$n);
+        $res = preg_match('/' . MAIN_FILE . '/i', $u, $matches);
         if ($res) {
-            $args = explode(MAIN_FILE, REQUEST_URI);
+            $args = explode(MAIN_FILE, $u);
         } else {
-            $args = explode('/', REQUEST_URI);
+            $args = explode('/', $u);
         }
 
-        if (!empty($args[1])) {
-            $c = ucfirst(strtolower($args[1]));
-        }
-        if (!empty($args[2])) {
-            $m = strtolower($args[2]);
+        if($args[1] !== '?') {
+            if (!empty($args[1])) {
+                $c = uconlyfirst($args[1]);
+            }
+            if (!empty($args[2])) {
+                $m = strtolower($args[2]);
+            }
         }
 
         try {
@@ -80,11 +92,18 @@ class App
             echo $e->errorMessage();
         }
 
+        if(!route($c, $m))
+        {
+            $c = INDEX_CONTROLLER;
+            $m = INDEX_METHOD;
+        }
         define("__M__", $m);
         define("__C__", $c);
-        self::getController();
     }
 
+    /**
+     * 获取控制器
+     */
     public static function getController()
     {
         $class = __C__ . 'Controller';
@@ -93,6 +112,9 @@ class App
         define("__CLASSEXPLAME__", __CONTEROLLERINFO__ . $class);
     }
 
+    /**
+     * 执行应用程序
+     */
     public static function exec()
     {
         try {

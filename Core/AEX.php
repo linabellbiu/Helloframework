@@ -10,10 +10,14 @@ const EXT = '.class.php';
 //配置文件后缀
 const CONFIG = '.conf.php';
 
-
+define("INDEX_CONTROLLER",'Index');                                 //默认的控制器
+define("INDEX_METHOD",'index');                                     //默认的方法
 define("UTF_8", true);                                              //开启utf8输出
 define('APP_PATH', PATH . '/' . APP_NAME . '/');                    //定义应用目录
 define('APP_INTI',APP_PATH.'init.php');                             //应用初始化加载
+define('APP_CONFIG','app_config');                                  //应用配置名
+define('APP_ROUTE',APP_PATH.'route/route.php');                     //应用路由配置
+
 define('CORE_PATH', PATH . '/Core/');                               //核心目录
 define('CORE_COMMON_PATH', CORE_PATH . 'common/');                  //公共目录
 define('SYS_CONFIG', 'system' . CONFIG);                            //系统配置文件名

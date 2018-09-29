@@ -17,7 +17,11 @@ function only_english_letter($str)
     return preg_match('#^[a-z]+$#i', $str) ? true : false;
 }
 
-
+/**
+ * 加载配置，但是没有正真的设置
+ * @param $filname
+ * @return mixed|null
+ */
 function load_config($filname)
 {
     return file_exists($filname) ? include $filname : null;
@@ -67,3 +71,64 @@ function config($name = null, $value = null, $default = null)
     return null; // 避免非法参数
 }
 
+/**
+ * 只有首字母大写
+ * @param $string
+ * @return string
+ */
+function uconlyfirst($string)
+{
+    return ucfirst(strtolower($string));
+}
+
+function route($c='', $m='')
+{
+    static $_route=[];
+    if (empty($c) || empty($m)) return $_route;
+
+    $ok = true;
+    do {
+        if (!file_exists(APP_ROUTE)) {
+            $ok = false;
+            break;
+        }
+        include APP_ROUTE;
+        if (isset($req))
+        {
+            $_route = $req;
+        }
+
+        if (empty($_route)) {
+            $ok = false;
+            break;
+        }
+        if (!is_array($_route)) {
+            $ok = false;
+            break;
+        }
+        if (!array_key_exists(REQUEST_METHOD,$_route))
+        {
+            $ok = false;
+            break;
+        }
+        if (!array_key_exists($c, $_route[REQUEST_METHOD])) {
+            $ok = false;
+            break;
+        }
+        if (!array_key_exists($m, $_route[REQUEST_METHOD][$c])) {
+            $ok = false;
+            break;
+        }
+    } while (0);
+
+    if (!$ok) {
+       return false;
+    }
+    return true;
+}
+
+function validate($param)
+{
+
+
+}
