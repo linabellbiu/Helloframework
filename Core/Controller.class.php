@@ -24,5 +24,8 @@ abstract class Controller
     private function paramValidate()
     {
         $req = Core::req();
+
+        //获取参数绑定的实例
+        RouteService::$validate;
     }
 }

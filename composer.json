@@ -7,8 +7,9 @@
       "Core/App.class.php",
       "Core/Error.class.php",
       "Core/Core.class.php",
-      "Core/Controller.class.php"
-
+      "Core/Controller.class.php",
+      "Core/RouteService.class.php",
+      "Core/Validate.class.php"
     ],
     "psr-4":{
       "core\\":"core/"

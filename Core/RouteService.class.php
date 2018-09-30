@@ -6,32 +6,102 @@
  * Time: 14:28
  */
 namespace Core;
+
 class RouteService
 {
+    /**
+     * 绑定的路由
+     * @var array
+     */
     static public $route = [];
 
-    static public function get($name = '',$dir = '')
+    /**
+     * 绑定的参数
+     * @var array
+     */
+    static public $validateData = [];
+
+    /**
+     * 验证类的对象
+     * @var
+     */
+    static public $validate;
+
+    /**
+     * @param string $name
+     * @param string $url
+     * @param $arg
+     * @return Validate
+     */
+    static public function get($name = '', $url = '', $arg)
     {
-        self::regRoute('get');
+        self::regRoute('GET', $name, $url);
+        return self::bindindParam($arg);
     }
 
-    static public function post($name = '',$dir = '')
+    /**
+     * @param string $name
+     * @param string $url
+     * @param $arg
+     * @return Validate
+     */
+    static public function post($name = '', $url = '', $arg)
     {
-        self::regRoute('post');
+        self::regRoute('POST', $name, $url);
+        return self::bindindParam($arg);
     }
 
-    static public function request($name = '',$dir = '')
+    /**
+     * @param string $name
+     * @param string $url
+     * @param $arg
+     * @return Validate
+     */
+    static public function request($name = '', $url = '', $arg)
     {
-        self::regRoute('request');
+        self::regRoute('REQUEST', $name, $url);
+        return self::bindindParam($arg);
     }
 
-    static public function regRoute($method = 'GET', $name, $byname = '')
+    /**
+     * 注册路由
+     * @param $method
+     * @param $name
+     * @param $url
+     */
+    static private function regRoute($method, $name, $url)
     {
-        if (strtolower($method) !=  strtolower(REQUEST_METHOD))
-        {
-            return null;
+        if (empty($name)) {
+            $name = INDEX_CONTROLLER . CONTROLLER_METHOD_DELIMIT . INDEX_METHOD;
+            $url = '/index';
         }
-        return Core::req();
+        try {
+            if (!is_string($name) && !is_string($url)) {
+                throw new Error('路由格式错误');
+            }
+            if (strpos($name, CONTROLLER_METHOD_DELIMIT)) {
+                throw new Error('路由  ' . CONTROLLER_METHOD_DELIMIT . ' 找不到');
+            }
+        } catch (Error $e) {
+            $e->getMessage();
+        }
+        self::$route[strtoupper($method)][uconlyfirst($url)] = $name;
     }
 
+    /**
+     * @param $arg
+     * @return Validate
+     */
+    static private function bindindParam($arg)
+    {
+        if (is_array($arg) && !empty($arg)) {
+            foreach ($arg as $k => $v) {
+                self::$validateData[$k] = $v;
+            }
+        }
+        if (!self::$validate) {
+            self::$validate = new Validate();
+        }
+        return self::$validate;
+    }
 }

@@ -11,8 +11,7 @@ class App
         define('REQUEST_URI', $_SERVER['REQUEST_URI']);
         define('IS_GET', REQUEST_METHOD == 'GET' ? true : false);
         define('IS_POST', REQUEST_METHOD == 'POST' ? true : false);
-        define('IS_PUT', REQUEST_METHOD == 'PUT' ? true : false);
-        define('IS_DELETE', REQUEST_METHOD == 'DELETE' ? true : false);
+        define('IS_REQUEST', REQUEST_METHOD == 'IS_REQUEST' ? true : false);
 
         //加载配置项
         self::load();
@@ -43,6 +42,14 @@ class App
             } else {
                 throw new Error('init.php 在', APP_PATH . ' 没有找到');
             }
+
+            //加载路由
+            if (file_exists(APP_ROUTE)) {
+                require APP_ROUTE;
+            } else {
+                throw new Error('route.php 在' . APP_ROUTE . ' 
+                没有找到');
+            }
         } catch (Error $e) {
             echo $e->getMessage();
         }
@@ -59,28 +66,33 @@ class App
      */
     public static function urlMapp()
     {
-        $c = INDEX_CONTROLLER;
-        $m = INDEX_METHOD;
 
-        $n = strpos(REQUEST_URI,'?');
-        $u = substr(REQUEST_URI,0,$n);
-        $res = preg_match('/' . MAIN_FILE . '/i', $u, $matches);
-        if ($res) {
-            $args = explode(MAIN_FILE, $u);
-        } else {
-            $args = explode('/', $u);
-        }
-
-        if($args[1] !== '?') {
-            if (!empty($args[1])) {
-                $c = uconlyfirst($args[1]);
-            }
-            if (!empty($args[2])) {
-                $m = strtolower($args[2]);
-            }
-        }
-
+        $request_url = trim(REQUEST_URI);
+        $n = strpos(REQUEST_URI, '?');
+        $c = 'emptygUSHJBNJXCKVUAMJsfdsaadfdff';
+        $m = 'emptyASDUMVZPDEIFASDFpabnHUASHJB';
         try {
+            if ($n) {
+                $request_url = trim(substr($request_url, 0, $n),'/');
+            }
+            foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
+                if (trim($request_url,'/') == trim($url,'/')) {
+                    $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
+                    if (empty($args[1])) {
+                        throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
+                    } else {
+                        $c = $args[0];
+                        $m = $args[1];
+                    }
+                }
+            }
+            if (empty($c)) {
+                throw new Error('控制器名是空的');
+            }
+            if (empty($m)) {
+                throw new Error('方法名是空的');
+            }
+
             if (!only_english_letter($c)) {
                 throw new Error("控制器名不合法,必须全部是英文字母");
             }
@@ -92,11 +104,6 @@ class App
             echo $e->errorMessage();
         }
 
-        if(!route($c, $m))
-        {
-            $c = INDEX_CONTROLLER;
-            $m = INDEX_METHOD;
-        }
         define("__M__", $m);
         define("__C__", $c);
     }
@@ -106,7 +113,7 @@ class App
      */
     public static function getController()
     {
-        $class = __C__ . 'Controller';
+        $class = __C__;
         $controllerDir = APP_PATH . 'controller/' . $class . EXT;
         define("__CONTROLLERDIR__", $controllerDir);
         define("__CLASSEXPLAME__", __CONTEROLLERINFO__ . $class);
