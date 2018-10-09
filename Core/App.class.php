@@ -11,7 +11,7 @@ class App
         define('REQUEST_URI', $_SERVER['REQUEST_URI']);
         define('IS_GET', REQUEST_METHOD == 'GET' ? true : false);
         define('IS_POST', REQUEST_METHOD == 'POST' ? true : false);
-        define('IS_REQUEST', REQUEST_METHOD == 'IS_REQUEST' ? true : false);
+        define('IS_REQUEST', REQUEST_METHOD == 'REQUEST' ? true : false);
 
         //加载配置项
         self::load();
@@ -29,7 +29,6 @@ class App
 
         //加载配置文件
         config(load_config(SYS_CONFIG_PATH));
-
         try {
             if (file_exists(APP_INTI)) {
                 foreach (include APP_INTI as $k => $v) {
@@ -50,6 +49,14 @@ class App
                 throw new Error('route.php 在' . APP_ROUTE . ' 
                 没有找到');
             }
+            //加载规则
+            if (file_exists(APP_RULE)) {
+                require APP_RULE;
+            } else {
+                throw new Error('rule.php 在' . APP_RULE . ' 
+                没有找到');
+            }
+
         } catch (Error $e) {
             echo $e->getMessage();
         }

@@ -13,4 +13,5 @@
 return
     [
         "ERR_DEBUG"=>APP_DEBUG,
+        "LANGUAGE" =>'en',
     ];

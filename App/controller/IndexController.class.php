@@ -9,11 +9,15 @@
 namespace App\controller;
 
 use Core\Controller;
+use Core\RouteService;
+use Core\Validate;
 
 class IndexController extends Controller
 {
+
+
     function index()
     {
-       var_dump(route());
+      echo $this->reqError();
     }
 }

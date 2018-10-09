@@ -22,12 +22,6 @@ class RouteService
     static public $validateData = [];
 
     /**
-     * 验证类的对象
-     * @var
-     */
-    static public $validate;
-
-    /**
      * @param string $name
      * @param string $url
      * @param $arg
@@ -36,7 +30,7 @@ class RouteService
     static public function get($name = '', $url = '', $arg)
     {
         self::regRoute('GET', $name, $url);
-        return self::bindindParam($arg);
+        return self::bindingParam($arg);
     }
 
     /**
@@ -48,7 +42,7 @@ class RouteService
     static public function post($name = '', $url = '', $arg)
     {
         self::regRoute('POST', $name, $url);
-        return self::bindindParam($arg);
+        return self::bindingParam($arg);
     }
 
     /**
@@ -60,7 +54,7 @@ class RouteService
     static public function request($name = '', $url = '', $arg)
     {
         self::regRoute('REQUEST', $name, $url);
-        return self::bindindParam($arg);
+        return self::bindingParam($arg);
     }
 
     /**
@@ -92,16 +86,8 @@ class RouteService
      * @param $arg
      * @return Validate
      */
-    static private function bindindParam($arg)
+    static public function bindingParam($arg)
     {
-        if (is_array($arg) && !empty($arg)) {
-            foreach ($arg as $k => $v) {
-                self::$validateData[$k] = $v;
-            }
-        }
-        if (!self::$validate) {
-            self::$validate = new Validate();
-        }
-        return self::$validate;
+        return Validate::getinstance()->rulesData($arg);
     }
 }

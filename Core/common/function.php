@@ -81,51 +81,7 @@ function uconlyfirst($string)
     return ucfirst(strtolower($string));
 }
 
-function route($c='', $m='')
-{
-    static $_route=[];
-    if (empty($c) || empty($m)) return $_route;
 
-    $ok = true;
-    do {
-        if (!file_exists(APP_ROUTE)) {
-            $ok = false;
-            break;
-        }
-        include APP_ROUTE;
-        if (isset($req))
-        {
-            $_route = $req;
-        }
-
-        if (empty($_route)) {
-            $ok = false;
-            break;
-        }
-        if (!is_array($_route)) {
-            $ok = false;
-            break;
-        }
-        if (!array_key_exists(REQUEST_METHOD,$_route))
-        {
-            $ok = false;
-            break;
-        }
-        if (!array_key_exists($c, $_route[REQUEST_METHOD])) {
-            $ok = false;
-            break;
-        }
-        if (!array_key_exists($m, $_route[REQUEST_METHOD][$c])) {
-            $ok = false;
-            break;
-        }
-    } while (0);
-
-    if (!$ok) {
-       return false;
-    }
-    return true;
-}
 
 function validate($param)
 {
