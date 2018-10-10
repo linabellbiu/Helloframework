@@ -45,7 +45,7 @@ class Validate
     public $bindingParamError = [];
 
 
-    public $Error = null;
+    public $erros;
 
     public $request;
 
@@ -67,7 +67,7 @@ class Validate
      * @param $arr
      * @return array|null
      */
-    public function paramError($arr)
+    public function bandingError($arr)
     {
         if (empty($arr)) {
             return self::$instance;
@@ -114,12 +114,11 @@ class Validate
     public function check()
     {
         //检查变量名
-        $this->checkName();
-
-        //检查cookie
-        $this->checkCookie();
-
-        return self::$instance;
+        if($this->checkName())
+        {
+            if ($this->checkCookie()) return true;
+        }
+        return false;
     }
 
 
@@ -134,7 +133,7 @@ class Validate
             $arr = array_flip(explode('|', $rule));
             if (empty($req) || !array_key_exists($name, $req)) {
                 if (!isset($arr['nullable'])) {
-                    $this->Error = $this->setError('isNull');
+                    $this->setError('isNull');
                     return false;
                 }
             }
@@ -160,13 +159,13 @@ class Validate
 
     private function checkCookie()
     {
-
+        return true;
     }
 
 
     private function setError($name)
     {
-        $this->Error = $this->bindingParamError[$name][config('language')];
+        $this->erros = $this->bindingParamError[$name][config('language')];
         return null;
     }
 

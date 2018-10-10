@@ -9,15 +9,17 @@
 namespace App\controller;
 
 use Core\Controller;
-use Core\RouteService;
-use Core\Validate;
-
 class IndexController extends Controller
 {
-
-
-    function index()
+    public function __construct()
     {
-      echo $this->reqError();
+        parent::__construct();
+    }
+
+    public function index()
+    {
+
+        $this->paramValidate();
+        echo $this->reqError();
     }
 }

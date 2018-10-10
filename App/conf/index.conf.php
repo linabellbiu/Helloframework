@@ -8,5 +8,4 @@
 
 return [
     'h'=>true,
-    'language'=>'zh',
 ];

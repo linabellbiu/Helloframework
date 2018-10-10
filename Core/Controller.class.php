@@ -17,9 +17,9 @@ abstract class Controller
     /**
      * Controller constructor.
      */
-    function __construct()
+    public function __construct()
     {
-        $this->paramValidate();
+       // $this->paramValidate();
     }
 
     /**
@@ -45,7 +45,7 @@ abstract class Controller
      */
     protected function reqError()
     {
-       return Validate::getinstance()->Error;
+       return Validate::getinstance()->erros;
     }
 
     protected function getCookie($name=null)
@@ -56,5 +56,20 @@ abstract class Controller
         }
 
         return Validate::getinstance()->cookie[$name];
+    }
+
+    protected function assgin()
+    {
+        return null;
+    }
+
+    protected function json($arr,$options=0)
+    {
+        echo json_encode($arr,$options);
+    }
+
+    private function response($code,$data,$err)
+    {
+        
     }
 }

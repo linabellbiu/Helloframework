@@ -16,8 +16,11 @@ define("UTF_8", true);                                                  //开启
 define('APP_PATH', PATH . '/' . APP_NAME . '/');                        //定义应用目录
 define('APP_INTI', APP_PATH . 'init.php');                              //应用初始化加载
 define('APP_CONFIG', 'app_config');                                     //应用配置名
+define('APP_CONFIG_PATH', APP_PATH.'conf/');                            //应用配置名路径
 define('APP_ROUTE', APP_PATH . 'rule/route.php');                       //应用路由配置
 define('APP_RULE', APP_PATH . 'rule/validate.php');                     //应用验证规则
+define('APP_LANGUAGE_PATH', APP_PATH . 'language/');                    //应用语言包路径
+define('APP_LANGUAGE',  'language');                                    //应用语言包配置名
 
 define('CORE_PATH', PATH . '/Core/');                                   //核心目录
 define('CORE_COMMON_PATH', CORE_PATH . 'common/');                      //公共目录

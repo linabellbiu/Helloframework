@@ -36,4 +36,10 @@ class Core
                 return null;
         }
     }
+
+    public static function listen()
+    {
+
+    }
+
 }

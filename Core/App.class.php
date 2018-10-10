@@ -28,13 +28,23 @@ class App
         include_once CORE_COMMON_PATH . 'function.php';
 
         //加载配置文件
-        config(load_config(SYS_CONFIG_PATH));
+        config(load_file(SYS_CONFIG_PATH));
         try {
             if (file_exists(APP_INTI)) {
                 foreach (include APP_INTI as $k => $v) {
+                    //加载配置
                     if ($k == APP_CONFIG) {
                         foreach ($v as $app_config) {
-                            config(load_config(APP_PATH . 'conf/' . $app_config . CONFIG));
+                            config(load_file(APP_CONFIG_PATH . $app_config . CONFIG));
+                        }
+                    }
+                    //加载语言包
+                    if ($k == APP_LANGUAGE)
+                    {
+                        foreach ($v as $language)
+                        {
+                            //加载
+                         Custom::getinstance()->setCustom($language,load_file(APP_LANGUAGE_PATH.$language.'.php'));
                         }
                     }
                 }
@@ -149,5 +159,11 @@ class App
         } catch (Error $e) {
             echo $e->errorMessage();
         }
+    }
+
+
+    public static function custom($mes)
+    {
+
     }
 }

@@ -18,11 +18,11 @@ function only_english_letter($str)
 }
 
 /**
- * 加载配置，但是没有正真的设置
+ * 加载文件，但是没有正真的设置
  * @param $filname
  * @return mixed|null
  */
-function load_config($filname)
+function load_file($filname)
 {
     return file_exists($filname) ? include $filname : null;
 }
@@ -71,6 +71,7 @@ function config($name = null, $value = null, $default = null)
     return null; // 避免非法参数
 }
 
+
 /**
  * 只有首字母大写
  * @param $string
@@ -79,12 +80,4 @@ function config($name = null, $value = null, $default = null)
 function uconlyfirst($string)
 {
     return ucfirst(strtolower($string));
-}
-
-
-
-function validate($param)
-{
-
-
 }
