@@ -20,26 +20,4 @@ class Core
     {
         self::start();
     }
-
-    public static function req()
-    {
-        switch (REQUEST_METHOD) {
-            case 'GET':
-                return $_GET;
-
-            case 'POST':
-                return $_POST;
-
-            case 'REQUEST':
-                return $_REQUEST;
-            default:
-                return null;
-        }
-    }
-
-    public static function listen()
-    {
-
-    }
-
 }

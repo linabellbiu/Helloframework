@@ -9,6 +9,9 @@
 namespace Core;
 
 
+use Core\Http\Cookie;
+use Core\Http\Request;
+
 class Validate
 {
     /**
@@ -50,7 +53,6 @@ class Validate
     public $request;
 
     public $cookie = [];
-
 
 
     /**声明一个静态变量（保存在类中唯一的一个实例）
@@ -114,8 +116,7 @@ class Validate
     public function check()
     {
         //检查变量名
-        if($this->checkName())
-        {
+        if ($this->checkName()) {
             if ($this->checkCookie()) return true;
         }
         return false;
@@ -128,7 +129,7 @@ class Validate
             //请求方式不正确
             return $this->bindingParamError;
         }
-        $req = Core::req();
+        $req = Request::req();
         foreach ($this->validateData as $name => $rule) {
             $arr = array_flip(explode('|', $rule));
             if (empty($req) || !array_key_exists($name, $req)) {
@@ -140,6 +141,10 @@ class Validate
         }
 
         $this->checkParam($req);
+
+        //成功
+        $this->request = $req;
+        $this->unsetReq();
         return true;
     }
 
@@ -150,15 +155,17 @@ class Validate
         //.....
         //
 
-        //成功
-        $this->request = $req;
-        $this->unsetReq(REQUEST_METHOD);
+
         return true;
     }
 
 
-    private function checkCookie()
+    private function checkCookie($name = null)
     {
+        if (!empty($name))
+        {
+            Cookie::getCookie($name);
+        }
         return true;
     }
 
@@ -169,29 +176,16 @@ class Validate
         return null;
     }
 
-    /**
-     * 销毁没有验证的请求数据
-     * @return null
-     */
-    private function unsetReq($method)
+    private function unsetReq($name =null)
     {
-        switch ($method) {
-            case 'GET':
-                $_GET = null;
-                break;
-
-            case 'POST':
-                $_POST = null;
-                break;
-            case 'REQUEST':
-                $REQUEST = null;
-                break;
-            case 'COOKIE':
-                $_COOKIE = null;
-                break;
-            default:
-                return null;
-        }
-        return null;
+      Request::delete();
     }
+
+
+    private function filter($value,$attr)
+    {
+
+    }
+
+
 }

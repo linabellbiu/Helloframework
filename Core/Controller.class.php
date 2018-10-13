@@ -19,7 +19,7 @@ abstract class Controller
      */
     public function __construct()
     {
-       // $this->paramValidate();
+        // $this->paramValidate();
     }
 
     /**
@@ -45,31 +45,53 @@ abstract class Controller
      */
     protected function reqError()
     {
-       return Validate::getinstance()->erros;
+        return Validate::getinstance()->erros;
     }
 
-    protected function getCookie($name=null)
+
+    /**
+     * @param null $name
+     * @return array
+     */
+    protected function getCookie($name = null)
     {
-        if (empty($name))
-        {
+        if (empty($name)) {
             return Validate::getinstance()->cookie;
         }
-
         return Validate::getinstance()->cookie[$name];
     }
 
+
+    /**
+     * @param $attributes
+     * @return null
+     */
+    protected function custom($attributes)
+    {
+        if (is_string($attributes)) {
+            return Custom::getinstance()->getCustom($attributes);
+        }
+        return null;
+    }
+
+
+    /**
+     * @return null
+     */
     protected function assgin()
     {
         return null;
     }
 
-    protected function json($arr,$options=0)
+
+    /**
+     * @param $arr
+     * @param int $options
+     */
+    protected function json($arr, $options = 0)
     {
-        echo json_encode($arr,$options);
+        echo json_encode($arr, $options);
     }
 
-    private function response($code,$data,$err)
-    {
-        
-    }
+
 }

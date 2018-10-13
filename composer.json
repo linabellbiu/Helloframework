@@ -10,10 +10,13 @@
       "Core/Controller.class.php",
       "Core/RouteService.class.php",
       "Core/Validate.class.php",
-      "Core/Custom.class.php"
+      "Core/Custom.class.php",
+      "Core/Http/Cookie.class.php",
+      "Core/Http/Request.class.php"
     ],
     "psr-4":{
-      "core\\":"core/"
+      "core\\":"core/",
+      "core\\Http\\":"core/http/"
     }
   }
 }

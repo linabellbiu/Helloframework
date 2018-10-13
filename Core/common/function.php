@@ -81,3 +81,16 @@ function uconlyfirst($string)
 {
     return ucfirst(strtolower($string));
 }
+
+
+
+function isEmail()
+{
+
+}
+
+function isStringHtml()
+{
+
+}
+
