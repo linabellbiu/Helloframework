@@ -83,14 +83,3 @@ function uconlyfirst($string)
 }
 
 
-
-function isEmail()
-{
-
-}
-
-function isStringHtml()
-{
-
-}
-

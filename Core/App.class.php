@@ -39,13 +39,9 @@ class App
                         }
                     }
                     //加载语言包
-                    if ($k == APP_LANGUAGE)
-                    {
-                        foreach ($v as $language)
-                        {
-                            //加载
-                         Custom::getinstance()->setCustom($language,load_file(APP_LANGUAGE_PATH.$language.'.php'));
-                        }
+                    if ($k == APP_LANGUAGE) {
+                        //加载语言包
+                        Custom::getinstance()->setCustom(load_file(APP_LANGUAGE_PATH . config('language') . '.php'));
                     }
                 }
             } else {
@@ -90,10 +86,10 @@ class App
         $m = 'emptyASDUMVZPDEIFASDFpabnHUASHJB';
         try {
             if ($n) {
-                $request_url = trim(substr($request_url, 0, $n),'/');
+                $request_url = trim(substr($request_url, 0, $n), '/');
             }
             foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
-                if (trim($request_url,'/') == trim($url,'/')) {
+                if (trim($request_url, '/') == trim($url, '/')) {
                     $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
                     if (empty($args[1])) {
                         throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
@@ -141,6 +137,8 @@ class App
      */
     public static function exec()
     {
+        Core::listen();
+
         try {
             if (!file_exists(__CONTROLLERDIR__)) {
                 throw new Error(__CONTROLLERDIR__ . "文件找不到");

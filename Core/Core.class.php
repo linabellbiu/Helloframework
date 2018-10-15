@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use Core\Lib\Filter;
+
 class Core
 {
     public static function start()
@@ -19,5 +21,12 @@ class Core
     public static function run()
     {
         self::start();
+    }
+
+    public static function listen()
+    {
+        Filter::getinstance();
+        Validate::getinstance();
+        Custom::getinstance();
     }
 }

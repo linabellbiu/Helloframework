@@ -11,6 +11,7 @@ namespace Core;
 
 use Core\Http\Cookie;
 use Core\Http\Request;
+use Core\Lib\Filter;
 
 class Validate
 {
@@ -116,57 +117,82 @@ class Validate
     public function check()
     {
         //检查变量名
-        if ($this->checkName()) {
-            if ($this->checkCookie()) return true;
+        if ($this->checkParam()) {
+            if (Cookie::cookie(['all'])) {
+                return true;
+            }else
+            {
+               $this->bindingParamError['all']='cookie is empty';
+            }
         }
         return false;
     }
 
 
-    private function checkName()
+    private function checkParam()
     {
         if (!array_key_exists(REQUEST_METHOD, RouteService::$route)) {
             //请求方式不正确
             return $this->bindingParamError;
         }
         $req = Request::req();
-        foreach ($this->validateData as $name => $rule) {
-            $arr = array_flip(explode('|', $rule));
-            if (empty($req) || !array_key_exists($name, $req)) {
-                if (!isset($arr['nullable'])) {
-                    $this->setError('isNull');
-                    return false;
-                }
-            }
-        }
 
-        $this->checkParam($req);
+        if (!$this->safe($this->validateData, $req)){
+            return false;
+        }
 
         //成功
         $this->request = $req;
+
+        //删除原来的
         $this->unsetReq();
         return true;
     }
 
-
-    private function checkParam($req)
+    /**
+     * 传入规则和请求数据调用安全库开始验证
+     * @param $vaild
+     * @param $value
+     * @return bool|mixed
+     */
+    public function safe($vaild, $value)
     {
-        //验证
-        //.....
-        //
 
-
-        return true;
-    }
-
-
-    private function checkCookie($name = null)
-    {
-        if (!empty($name))
-        {
-            Cookie::getCookie($name);
+        try {
+            if (!is_array($vaild)) throw new Error('验证规则因该是数组');
+            if (!is_array($value)) throw new Error('验证数据因该是数组');
+        } catch (Error $e) {
+            $e->errorMessage();
         }
-        return true;
+        foreach ($vaild as $name => $rule) {
+            $arr = array_flip(explode('|', $rule));
+
+            //验证是否允许是空的传值
+            if (empty($value) || !array_key_exists($name, $value)) {
+                if (!isset($arr['nullable'])) {
+                    $this->setError('isNull');
+                    return false;
+                }
+                continue;
+            }
+            foreach (array_flip($arr) as $index => $rules) {
+                if(Filter::getinstance()->filter($value[$name], $rules))
+                {
+                    return true;
+                }else
+                {
+                    if (empty($name))
+                    {
+                        $this->setError($rules);
+                    }else
+                    {
+                        $this->setError($name.'|'.$rules);
+                    }
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -176,16 +202,8 @@ class Validate
         return null;
     }
 
-    private function unsetReq($name =null)
+    private function unsetReq($name = null)
     {
-      Request::delete();
+        Request::delete();
     }
-
-
-    private function filter($value,$attr)
-    {
-
-    }
-
-
 }

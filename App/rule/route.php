@@ -6,7 +6,7 @@
 
 
 \Core\RouteService::get('IndexController@index', '/', [
-    'm' => 'string|mail|',
+    'm' => 'mail|nullable',
 ])->bandingError([
     'm_string' => ['zh'=>'中文错误','en'=>'english error'],
     'm_mail' => ['zh'=>'不是正确的邮箱','en'=>'this is not e-mail'],

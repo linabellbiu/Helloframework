@@ -64,14 +64,14 @@ class Custom
      * @param $arr
      * @return null
      */
-    public function setCustom($lang, $arr)
+    public function setCustom($arr)
     {
         if (empty($lang) || !is_array($arr)) {
             return null;
         }
         foreach ($arr as $attribute => $mes)
         {
-            $this->message[$lang][$attribute] = $mes;
+            $this->message[$attribute] = $mes;
         }
         return null;
     }
@@ -87,6 +87,6 @@ class Custom
         {
             return null;
         }
-        return $this->message[config('language')][$attribute];
+        return $this->message[$attribute];
     }
 }

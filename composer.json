@@ -12,11 +12,14 @@
       "Core/Validate.class.php",
       "Core/Custom.class.php",
       "Core/Http/Cookie.class.php",
-      "Core/Http/Request.class.php"
+      "Core/Http/Request.class.php",
+      "Core/Lib/Filter.class.php"
+
     ],
     "psr-4":{
       "core\\":"core/",
-      "core\\Http\\":"core/http/"
+      "core\\http\\":"core/http/",
+      "core\\lib\\":"core/lib/"
     }
   }
 }

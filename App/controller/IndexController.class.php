@@ -18,7 +18,7 @@ class IndexController extends Controller
 
     public function index()
     {
-
+        var_dump($this->request());
         $this->paramValidate();
         echo $this->reqError();
     }
