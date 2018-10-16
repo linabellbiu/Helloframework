@@ -29,29 +29,18 @@ class Cookie
         }
 
         if (is_string($name)){
-            return empty(self::$cookie[$name]) ? false : self::$cookie[$name];
-        }
-
-        if (is_array($name)) {
-            if (empty($_COOKIE))
+            if(empty(self::$cookie[$name]))
             {
-                return false;
-            }
-
-            $c = [];
-            foreach ($name as $k) {
-                 if($k == 'all')
-                 {
-                  array_push($c,$_COOKIE);
-                 }else
-                 {
-                     $c[$k] = $_COOKIE[$k];
-                 }
-            }
-            if (Validate::$instance->safe($name, $c)) {
-                self::$cookie = $c;
-                array_push(self::$cookie,$c);
-                return $c;
+                if(Validate::$instance->safe([$name=>Validate::$instance->validateCookie[$name]], [$name =>$_COOKIE[$name]]))
+                {
+                    self::$cookie[$name] = $_COOKIE[$name];
+                    return self::$cookie[$name];
+                }else
+                {
+                    return false;
+                }
+            } else {
+                self::$cookie[$name];
             }
         }
         return false;

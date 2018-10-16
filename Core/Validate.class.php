@@ -198,7 +198,10 @@ class Validate
 
     private function setError($name)
     {
-        $this->erros = $this->bindingParamError[$name][config('language')];
+        if (!empty($name))
+        {
+            $this->erros = $this->bindingParamError[$name][config('language')];
+        }
         return null;
     }
 

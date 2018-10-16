@@ -27,12 +27,19 @@ class App
         //加载公共函数
         include_once CORE_COMMON_PATH . 'function.php';
 
-        //加载配置文件
+        //加载系统配置文件
         config(load_file(SYS_CONFIG_PATH));
         try {
+            //加载路由
+            if (file_exists(APP_ROUTE)) {
+                require APP_ROUTE;
+            } else {
+                throw new Error('route.php 在' . APP_ROUTE . ' 
+                没有找到');
+            }
             if (file_exists(APP_INTI)) {
                 foreach (include APP_INTI as $k => $v) {
-                    //加载配置
+                    //加载应用配置
                     if ($k == APP_CONFIG) {
                         foreach ($v as $app_config) {
                             config(load_file(APP_CONFIG_PATH . $app_config . CONFIG));
@@ -48,13 +55,6 @@ class App
                 throw new Error('init.php 在', APP_PATH . ' 没有找到');
             }
 
-            //加载路由
-            if (file_exists(APP_ROUTE)) {
-                require APP_ROUTE;
-            } else {
-                throw new Error('route.php 在' . APP_ROUTE . ' 
-                没有找到');
-            }
             //加载规则
             if (file_exists(APP_RULE)) {
                 require APP_RULE;

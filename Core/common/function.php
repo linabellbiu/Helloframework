@@ -82,4 +82,10 @@ function uconlyfirst($string)
     return ucfirst(strtolower($string));
 }
 
+function dump($var=null)
+{
+    var_dump($var);
+    exit();
+}
+
 

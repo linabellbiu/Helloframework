@@ -45,7 +45,7 @@ class Request
         return null;
     }
 
-    public static function get()
+    public static function getReq($request)
     {
 
     }

@@ -18,8 +18,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        var_dump($this->request());
-        $this->paramValidate();
-        echo $this->reqError();
+        setcookie('language','834971685@qq.com');
+       var_dump(config('language'));
+      echo  $this->reqError();
     }
 }
