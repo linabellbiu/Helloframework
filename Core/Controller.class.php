@@ -8,6 +8,9 @@
 
 namespace Core;
 
+
+use Core\Http\Request;
+use Core\Http\Cookie;
 /**
  * Class Controller
  * @package Core
@@ -19,48 +22,8 @@ abstract class Controller
      */
     public function __construct()
     {
-        // $this->paramValidate();
+        Core::listen();
     }
-
-    /**
-     * 验证请求数据
-     */
-    protected function paramValidate()
-    {
-        return Validate::getinstance()->check();
-    }
-
-    /**
-     * 获取请求数据
-     * @return mixed
-     */
-    protected function request()
-    {
-        return Validate::getinstance()->request;
-    }
-
-    /**
-     * 获取请求数据错误信息
-     * @return null
-     */
-    protected function reqError()
-    {
-        return Validate::getinstance()->erros;
-    }
-
-
-    /**
-     * @param null $name
-     * @return array
-     */
-    protected function getCookie($name = null)
-    {
-        if (empty($name)) {
-            return Validate::getinstance()->cookie;
-        }
-        return Validate::getinstance()->cookie[$name];
-    }
-
 
     /**
      * @param $attributes
@@ -69,9 +32,15 @@ abstract class Controller
     protected function custom($attributes)
     {
         if (is_string($attributes)) {
-            return Custom::getinstance()->getCustom($attributes);
+            return Custom::getCustom($attributes);
         }
         return null;
+    }
+
+
+    protected function validateError()
+    {
+        return Validate::getinstance()->erros;
     }
 
 

@@ -51,10 +51,6 @@ class Validate
 
     public $erros;
 
-    public $request;
-
-    public $cookie = [];
-
 
     /**声明一个静态变量（保存在类中唯一的一个实例）
      * @return Validate
@@ -114,40 +110,6 @@ class Validate
         return self::$instance;
     }
 
-    public function check()
-    {
-        //检查变量名
-        if ($this->checkParam()) {
-            if (Cookie::cookie(['all'])) {
-                return true;
-            }else
-            {
-               $this->bindingParamError['all']='cookie is empty';
-            }
-        }
-        return false;
-    }
-
-
-    private function checkParam()
-    {
-        if (!array_key_exists(REQUEST_METHOD, RouteService::$route)) {
-            //请求方式不正确
-            return $this->bindingParamError;
-        }
-        $req = Request::req();
-
-        if (!$this->safe($this->validateData, $req)){
-            return false;
-        }
-
-        //成功
-        $this->request = $req;
-
-        //删除原来的
-        $this->unsetReq();
-        return true;
-    }
 
     /**
      * 传入规则和请求数据调用安全库开始验证
@@ -157,13 +119,17 @@ class Validate
      */
     public function safe($vaild, $value)
     {
-
         try {
             if (!is_array($vaild)) throw new Error('验证规则因该是数组');
             if (!is_array($value)) throw new Error('验证数据因该是数组');
         } catch (Error $e) {
             $e->errorMessage();
         }
+        if (empty($vaild))
+        {
+            return false;
+        }
+
         foreach ($vaild as $name => $rule) {
             $arr = array_flip(explode('|', $rule));
 
@@ -198,6 +164,7 @@ class Validate
 
     private function setError($name)
     {
+
         if (!empty($name))
         {
             $this->erros = $this->bindingParamError[$name][config('language')];

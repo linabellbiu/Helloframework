@@ -17,27 +17,7 @@ class Custom
     /**
      * @var
      */
-    private $message = [];
-
-
-    /**
-     * Custom constructor.
-     */
-    private function __construct()
-    {
-    }
-
-
-    /**
-     * @var
-     */
-    static $instance;
-
-    static public function getinstance()
-    {
-        if (!self::$instance) self::$instance = new self();
-        return self::$instance;
-    }
+    private static $message = [];
 
 
     /**
@@ -59,19 +39,17 @@ class Custom
     }*/
 
     /**
-     * 设置单个语言包
-     * @param $lang
      * @param $arr
      * @return null
      */
-    public function setCustom($arr)
+    static function setCustom($arr)
     {
         if (empty($lang) || !is_array($arr)) {
             return null;
         }
         foreach ($arr as $attribute => $mes)
         {
-            $this->message[$attribute] = $mes;
+            self::$message[$attribute] = $mes;
         }
         return null;
     }
@@ -81,12 +59,12 @@ class Custom
      * @param $attribute
      * @return null
      */
-    public function getCustom($attribute)
+    static public function getCustom($attribute)
     {
         if (empty($attribute) && !is_string($attribute))
         {
             return null;
         }
-        return $this->message[$attribute];
+        return self::$message[$attribute];
     }
 }

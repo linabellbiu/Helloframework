@@ -7,19 +7,25 @@
  */
 
 namespace Core\Http;
+
+use Core\Validate;
+
 class Request
 {
-    public static function req()
+
+    private static $request;
+
+    public static function request()
     {
         switch (REQUEST_METHOD) {
             case 'GET':
-                return $_GET;
+                return self::getReq($_GET);
 
             case 'POST':
-                return $_POST;
+                return self::getReq($_POST);
 
             case 'REQUEST':
-                return $_REQUEST;
+                return self::getReq($_REQUEST);
             default:
                 return null;
         }
@@ -45,8 +51,24 @@ class Request
         return null;
     }
 
-    public static function getReq($request)
+    /**
+     * @param $req
+     * @return array|bool
+     */
+    private static function getReq($req)
     {
+        if (!empty(self::$request)) {
+            return self::$request;
+        }
 
+        if (!is_array($req)) {
+            return null;
+        }
+
+        if (!Validate::getinstance()->safe(Validate::$instance->validateData, $req)) {
+            return null;
+        }
+        self::$request = $req;
+        return self::$request;
     }
 }

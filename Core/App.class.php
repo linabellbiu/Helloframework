@@ -23,12 +23,13 @@ class App
         if (UTF_8) {
             header("Content-type:text/html;charset=utf-8");
         }
-
-        //加载公共函数
         include_once CORE_COMMON_PATH . 'function.php';
 
         //加载系统配置文件
         config(load_file(SYS_CONFIG_PATH));
+
+        //加载公共函数
+
         try {
             //加载路由
             if (file_exists(APP_ROUTE)) {
@@ -37,6 +38,7 @@ class App
                 throw new Error('route.php 在' . APP_ROUTE . ' 
                 没有找到');
             }
+
             if (file_exists(APP_INTI)) {
                 foreach (include APP_INTI as $k => $v) {
                     //加载应用配置
@@ -48,7 +50,7 @@ class App
                     //加载语言包
                     if ($k == APP_LANGUAGE) {
                         //加载语言包
-                        Custom::getinstance()->setCustom(load_file(APP_LANGUAGE_PATH . config('language') . '.php'));
+                        Custom::setCustom(load_file(APP_LANGUAGE_PATH . config('language') . '.php'));
                     }
                 }
             } else {

@@ -9,6 +9,8 @@
 namespace App\controller;
 
 use Core\Controller;
+use Core\Http\Request;
+
 class IndexController extends Controller
 {
     public function __construct()
@@ -18,8 +20,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        setcookie('language','834971685@qq.com');
-       var_dump(config('language'));
-      echo  $this->reqError();
+        var_dump(Request::request());
+        echo $this->validateError();
     }
 }

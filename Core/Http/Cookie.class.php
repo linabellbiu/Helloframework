@@ -9,7 +9,9 @@
 namespace Core\Http;
 
 
+use Core\Error;
 use Core\Validate;
+
 class Cookie
 {
 
@@ -18,7 +20,7 @@ class Cookie
     static public function cookie($name = null, $value = null)
     {
         if (empty($value)) return self::getCookie($name);
-        if (!empty($name) && !empty($value)) return self::setCookie($name,$value);
+        if (!empty($name) && !empty($value)) return self::setCookie($name, $value);
         return null;
     }
 
@@ -27,23 +29,25 @@ class Cookie
         if (empty($name)) {
             return empty(self::$cookie) ? false : self::$cookie;
         }
-
-        if (is_string($name)){
-            if(empty(self::$cookie[$name]))
-            {
-                if(Validate::$instance->safe([$name=>Validate::$instance->validateCookie[$name]], [$name =>$_COOKIE[$name]]))
-                {
-                    self::$cookie[$name] = $_COOKIE[$name];
-                    return self::$cookie[$name];
-                }else
-                {
-                    return false;
+            if (is_string($name)) {
+                if (empty(self::$cookie[$name])) {
+                    if (empty(Validate::$instance->validateCookie[$name])) {
+                        return null;
+                    }
+                    if ($_COOKIE[$name]) {
+                        return null;
+                    }
+                    if (Validate::$instance->safe([$name => Validate::$instance->validateCookie[$name]], [$name => $_COOKIE[$name]])) {
+                        self::$cookie[$name] = $_COOKIE[$name];
+                        return self::$cookie[$name];
+                    } else {
+                        return null;
+                    }
+                } else {
+                    self::$cookie[$name];
                 }
-            } else {
-                self::$cookie[$name];
             }
-        }
-        return false;
+        return null;
     }
 
 
@@ -59,8 +63,7 @@ class Cookie
     static public function delete($name, $path = null)
     {
         if (is_string($name)) {
-            if(setcookie($name, null, time() - 24 * 3600, $path = null))
-            {
+            if (setcookie($name, null, time() - 24 * 3600, $path = null)) {
                 return true;
             }
         }

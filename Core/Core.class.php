@@ -2,7 +2,7 @@
 namespace Core;
 
 use Core\Lib\Filter;
-
+use Core\Http\Request;
 class Core
 {
     public static function start()
@@ -25,8 +25,6 @@ class Core
 
     public static function listen()
     {
-        Filter::getinstance();
-        Validate::getinstance();
-        Custom::getinstance();
+        Request::request();
     }
 }
