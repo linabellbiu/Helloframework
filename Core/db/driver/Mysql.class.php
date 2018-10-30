@@ -42,4 +42,9 @@ class Mysql extends Driver{
         }
         return $dsn;
     }
+
+    public function ec()
+    {
+        echo "hah";
+    }
 }

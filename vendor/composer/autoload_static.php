@@ -14,9 +14,12 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
         'e92e8202df57cc142b4ae755e497a19a' => __DIR__ . '/../..' . '/Core/RouteService.class.php',
         'eca56bef45cd00e8607347f868021189' => __DIR__ . '/../..' . '/Core/Validate.class.php',
         '9385ea0ecd4107560aa3a24c930a7ccf' => __DIR__ . '/../..' . '/Core/Custom.class.php',
+        '9448a80003b5149cea3f160ae232f430' => __DIR__ . '/../..' . '/Core/Model.class.php',
         '0ed3ef10cdae790d83e35e957926c842' => __DIR__ . '/../..' . '/Core/Http/Cookie.class.php',
         '1eef57ac56b3e03359b6a7d9db507f85' => __DIR__ . '/../..' . '/Core/Http/Request.class.php',
         '90ad7fe48dabc5a338cd11bd016868b3' => __DIR__ . '/../..' . '/Core/Lib/Filter.class.php',
+        '8048d3b7c2f0b725b18d8512298aa07b' => __DIR__ . '/../..' . '/Core/db/Driver.class.php',
+        '70ddf6da1e562da60565ccbc3c929fa0' => __DIR__ . '/../..' . '/Core/db/driver/Mysql.class.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -24,6 +27,8 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
         array (
             'core\\lib\\' => 9,
             'core\\http\\' => 10,
+            'core\\db\\driver\\' => 15,
+            'core\\db\\' => 8,
             'core\\' => 5,
         ),
     );
@@ -36,6 +41,14 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
         'core\\http\\' => 
         array (
             0 => __DIR__ . '/../..' . '/core/http',
+        ),
+        'core\\db\\driver\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core/db/driver',
+        ),
+        'core\\db\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core/db',
         ),
         'core\\' => 
         array (

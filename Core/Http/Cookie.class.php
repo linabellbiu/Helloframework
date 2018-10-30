@@ -34,9 +34,10 @@ class Cookie
                     if (empty(Validate::$instance->validateCookie[$name])) {
                         return null;
                     }
-                    if ($_COOKIE[$name]) {
+                    if (empty($_COOKIE[$name])) {
                         return null;
                     }
+
                     if (Validate::$instance->safe([$name => Validate::$instance->validateCookie[$name]], [$name => $_COOKIE[$name]])) {
                         self::$cookie[$name] = $_COOKIE[$name];
                         return self::$cookie[$name];

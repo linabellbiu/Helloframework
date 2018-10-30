@@ -11,15 +11,19 @@
       "Core/RouteService.class.php",
       "Core/Validate.class.php",
       "Core/Custom.class.php",
+      "Core/Model.class.php",
       "Core/Http/Cookie.class.php",
       "Core/Http/Request.class.php",
-      "Core/Lib/Filter.class.php"
-
+      "Core/Lib/Filter.class.php",
+      "Core/db/Driver.class.php",
+      "Core/db/driver/Mysql.class.php"
     ],
     "psr-4":{
       "core\\":"core/",
       "core\\http\\":"core/http/",
-      "core\\lib\\":"core/lib/"
+      "core\\lib\\":"core/lib/",
+      "core\\db\\":"core/db/",
+      "core\\db\\driver\\":"core/db/driver/"
     }
   }
 }
