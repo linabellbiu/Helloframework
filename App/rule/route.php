@@ -3,9 +3,7 @@
  * nullable 可选字段，可以不填，填了必须验证
  */
 
-
-
-\Core\RouteService::get('IndexController@index', '/', [
+\Core\RouteService::get('index/IndexController@index', '/', [
     'm' => 'mail|nullable',
 ])->rulesCookie([
     'language'=>'mail'

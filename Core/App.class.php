@@ -1,4 +1,5 @@
 <?php
+
 namespace Core;
 
 class App
@@ -81,11 +82,11 @@ class App
      */
     public static function urlMapp()
     {
-
         $request_url = trim(REQUEST_URI);
         $n = strpos(REQUEST_URI, '?');
         $c = 'emptygUSHJBNJXCKVUAMJsfdsaadfdff';
         $m = 'emptyASDUMVZPDEIFASDFpabnHUASHJB';
+        $web_dir = '';
         try {
             if ($n) {
                 $request_url = trim(substr($request_url, 0, $n), '/');
@@ -96,29 +97,36 @@ class App
                     if (empty($args[1])) {
                         throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
                     } else {
-                        $c = $args[0];
+                        $web = $args[0];
                         $m = $args[1];
+                        if (strpos($web, '/')) {
+                            list($web_dir, $c) = explode('/', $web);
+                        }
                     }
                 }
             }
+
             if (empty($c)) {
                 throw new Error('控制器名是空的');
             }
             if (empty($m)) {
                 throw new Error('方法名是空的');
             }
-
             if (!only_english_letter($c)) {
                 throw new Error("控制器名不合法,必须全部是英文字母");
             }
             if (!only_english_letter($m)) {
                 throw new Error("方法名不合法,必须全部是英文字母");
             }
-
+            if (!empty($web_dir)) {
+                if (!only_english_letter($web_dir)) {
+                    throw new Error("目录名名不合法,必须全部是英文字母");
+                }
+            }
         } catch (Error $e) {
             echo $e->errorMessage();
         }
-
+        define("__WEB_DIR__", $web_dir);
         define("__M__", $m);
         define("__C__", $c);
     }
@@ -129,9 +137,15 @@ class App
     public static function getController()
     {
         $class = __C__;
-        $controllerDir = APP_PATH . 'controller/' . $class . EXT;
+        $web_dir = '';
+        if (__WEB_DIR__ != '') {
+            $controllerDir = APP_PATH . 'controller/' . __WEB_DIR__ . '/' . $class . EXT;
+            define("__CLASSEXPLAME__", __CONTEROLLERINFO__ . __WEB_DIR__ . '\\' . $class);
+        } else {
+            $controllerDir = APP_PATH . 'controller/' . $class . EXT;
+            define("__CLASSEXPLAME__", __CONTEROLLERINFO__ . $class);
+        }
         define("__CONTROLLERDIR__", $controllerDir);
-        define("__CLASSEXPLAME__", __CONTEROLLERINFO__ . $class);
     }
 
     /**

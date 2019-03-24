@@ -67,17 +67,20 @@ class RouteService
     {
         if (empty($name)) {
             $name = INDEX_CONTROLLER . CONTROLLER_METHOD_DELIMIT . INDEX_METHOD;
+            if(!empty(WEB_INDEX) && WEB_INDEX !=''){
+                $name = WEB_INDEX.'\\'.$name;
+            }
             $url = '/index';
         }
         try {
             if (!is_string($name) && !is_string($url)) {
                 throw new Error('路由格式错误');
             }
-            if (strpos($name, CONTROLLER_METHOD_DELIMIT)) {
+            if (!strpos($name, CONTROLLER_METHOD_DELIMIT)) {
                 throw new Error('路由  ' . CONTROLLER_METHOD_DELIMIT . ' 找不到');
             }
         } catch (Error $e) {
-            $e->getMessage();
+            $e->errorMessage();
         }
         self::$route[strtoupper($method)][uconlyfirst($url)] = $name;
     }

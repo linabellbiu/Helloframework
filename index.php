@@ -22,6 +22,9 @@ define("PATH",__DIR__);
 //应用名
 define("APP_NAME",'App');
 
+//项目默认目录
+define("WEB_INDEX",'index');
+
 //主文件
 //要根据服务器配置决定
 define('MAIN_FILE','index.php');

@@ -18,5 +18,5 @@ if (!Cookie::cookie('language')) {
 
 return [
     'h' => true,
-    'language' => $language
+    'language' => $language,
 ];

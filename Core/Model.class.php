@@ -8,6 +8,8 @@
 
 namespace Core;
 
+use Core\db\Db;
+
 class Model
 {
     // 当前数据库操作对象
@@ -30,8 +32,7 @@ class Model
     protected $tableName = '';
     // 实际数据表名（包含表前缀）
     protected $trueTableName = '';
-    // 最近错误信息
-    protected $error = '';
+
     // 字段信息
     protected $fields = array();
     // 数据信息
@@ -41,19 +42,41 @@ class Model
     protected $methods = array('strict', 'order', 'alias', 'having', 'group', 'lock', 'distinct', 'auto', 'filter', 'validate', 'result', 'token', 'index', 'force', 'master');
 
 
-    private function __construct()
+    /**
+     * Model constructor.
+     * @param string $name 数据库名.表名
+     * @param string $connect 连接配置信息
+     * @param bool $force 是否强制重新连接
+     */
+    public function __construct($name, $connect = '', $force = false)
     {
+        try {
+            if (empty($name)) {
+                throw new Error("name不能为空");
+            }
+            if (!strpos($name, '.')) {
+                throw new Error("name应该是数据库名.表明");
+            }
+        } catch (Error $e) {
+            $e->errorMessage();
+        }
+        list($this->dbName, $this->name) = explode('.', $name);
+
+        //建立这个模型独有的连接信息
+        $this->db(0, empty($this->connection) ? $connect : $this->connection, $force = false);
     }
 
-    /**
-     * 类的对象
-     * @var
-     */
-    static private $instance;
-
-    static public function Db($name='',$tablePrefix = '', $connection = '')
+    private function Db($linkNum = '', $connection = '', $force = false)
     {
+        if ($linkNum === '' && $this->db) {
+            return $this->db;
+        }
 
+        $this->_db[$linkNum] = Db::getInstance($connection);
+        // 切换数据库连接
+        $this->db = $this->_db[$linkNum];
+
+        return $this;
     }
 
     /**
@@ -74,4 +97,60 @@ class Model
         return $this->name;
     }
 
+
+    public function select($sql)
+    {
+        return $this->db->mysqlSelect($sql, $this->name);
+    }
+
+    public function query($sql)
+    {
+
+    }
+
+    public function addAll($datalist)
+    {
+        return $this->db->insertAll($datalist, $this->name);
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function add($data = [])
+    {
+        return $this->db->insert($data, $this->name);
+    }
+
+    public function delete()
+    {
+
+    }
+
+
+    public function where()
+    {
+
+    }
+
+    public function limit()
+    {
+
+    }
+
+    public function group()
+    {
+
+    }
+
+    public function order()
+    {
+
+    }
+
+    public function error()
+    {
+        return $this->db->error;
+    }
 }

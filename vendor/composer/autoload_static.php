@@ -6,61 +6,29 @@ namespace Composer\Autoload;
 
 class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
 {
-    public static $files = array (
-        '7225149674513bfd81733772651323cf' => __DIR__ . '/../..' . '/Core/App.class.php',
-        '8d614610e17c8551ffe53e6c29e50cda' => __DIR__ . '/../..' . '/Core/Error.class.php',
-        'c23534033efc4860b1f6865a70106be4' => __DIR__ . '/../..' . '/Core/Core.class.php',
-        'a304236c639152c0950fe83719afe0eb' => __DIR__ . '/../..' . '/Core/Controller.class.php',
-        'e92e8202df57cc142b4ae755e497a19a' => __DIR__ . '/../..' . '/Core/RouteService.class.php',
-        'eca56bef45cd00e8607347f868021189' => __DIR__ . '/../..' . '/Core/Validate.class.php',
-        '9385ea0ecd4107560aa3a24c930a7ccf' => __DIR__ . '/../..' . '/Core/Custom.class.php',
-        '9448a80003b5149cea3f160ae232f430' => __DIR__ . '/../..' . '/Core/Model.class.php',
-        '0ed3ef10cdae790d83e35e957926c842' => __DIR__ . '/../..' . '/Core/Http/Cookie.class.php',
-        '1eef57ac56b3e03359b6a7d9db507f85' => __DIR__ . '/../..' . '/Core/Http/Request.class.php',
-        '90ad7fe48dabc5a338cd11bd016868b3' => __DIR__ . '/../..' . '/Core/Lib/Filter.class.php',
-        '8048d3b7c2f0b725b18d8512298aa07b' => __DIR__ . '/../..' . '/Core/db/Driver.class.php',
-        '70ddf6da1e562da60565ccbc3c929fa0' => __DIR__ . '/../..' . '/Core/db/driver/Mysql.class.php',
-    );
-
-    public static $prefixLengthsPsr4 = array (
-        'c' => 
-        array (
-            'core\\lib\\' => 9,
-            'core\\http\\' => 10,
-            'core\\db\\driver\\' => 15,
-            'core\\db\\' => 8,
-            'core\\' => 5,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'core\\lib\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/core/lib',
-        ),
-        'core\\http\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/core/http',
-        ),
-        'core\\db\\driver\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/core/db/driver',
-        ),
-        'core\\db\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/core/db',
-        ),
-        'core\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/core',
-        ),
+    public static $classMap = array (
+        'App\\controller\\index\\IndexController' => __DIR__ . '/../..' . '/App/controller/index/IndexController.class.php',
+        'App\\model\\index\\IndexModel' => __DIR__ . '/../..' . '/App/model/index/IndexModel.class.php',
+        'Core\\App' => __DIR__ . '/../..' . '/Core/App.class.php',
+        'Core\\Controller' => __DIR__ . '/../..' . '/Core/Controller.class.php',
+        'Core\\Core' => __DIR__ . '/../..' . '/Core/Core.class.php',
+        'Core\\Custom' => __DIR__ . '/../..' . '/Core/Custom.class.php',
+        'Core\\Error' => __DIR__ . '/../..' . '/Core/Error.class.php',
+        'Core\\Http\\Cookie' => __DIR__ . '/../..' . '/Core/Http/Cookie.class.php',
+        'Core\\Http\\Request' => __DIR__ . '/../..' . '/Core/Http/Request.class.php',
+        'Core\\Lib\\Filter' => __DIR__ . '/../..' . '/Core/lib/Filter.class.php',
+        'Core\\Model' => __DIR__ . '/../..' . '/Core/Model.class.php',
+        'Core\\RouteService' => __DIR__ . '/../..' . '/Core/RouteService.class.php',
+        'Core\\Validate' => __DIR__ . '/../..' . '/Core/Validate.class.php',
+        'Core\\db\\Db' => __DIR__ . '/../..' . '/Core/db/Db.class.php',
+        'Core\\db\\Driver' => __DIR__ . '/../..' . '/Core/db/Driver.class.php',
+        'Core\\db\\driver\\Mysql' => __DIR__ . '/../..' . '/Core/db/driver/Mysql.class.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5::$classMap;
 
         }, null, ClassLoader::class);
     }

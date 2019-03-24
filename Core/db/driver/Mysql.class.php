@@ -6,11 +6,24 @@
  * Time: 17:41
  */
 
-namespace Core\Db\driver;
+//mysql驱动
+namespace Core\db\driver;
 
-use Core\Db\Driver;
+use Core\db\Driver;
 
-class Mysql extends Driver{
+class Mysql extends Driver
+{
+    /**
+     * 数据库名
+     * @var string
+     */
+    public $dbName;
+
+    /**
+     * 表名
+     * @var string
+     */
+    public $tableName;
 
     //========================================================================================================================================================================================================================================================================
     //如果在DSN中指定了charset, 是否还需要执行set names <charset>呢？
@@ -26,7 +39,7 @@ class Mysql extends Driver{
      * @param array $config 连接信息
      * @return string
      */
-    protected function parseDsn($config)
+    public function parseDsn($config)
     {
         $dsn = 'mysql:dbname=' . $config['database'] . ';host=' . $config['hostname'];
         if (!empty($config['hostport'])) {
@@ -43,8 +56,74 @@ class Mysql extends Driver{
         return $dsn;
     }
 
-    public function ec()
+    /**
+     * 查询
+     * @param $sql
+     * @param $name
+     * @return mixed
+     */
+    public function mysqlSelect($sql, $name)
     {
-        echo "hah";
+        return $this->query($sql);
+    }
+
+    /**
+     * 执行批量插入
+     * @param $dataList
+     * @param $name
+     * @return bool|int
+     */
+    public function insertAll($dataList, $name)
+    {
+        if (empty($dataList) || empty($name))
+            return false;
+
+        $fields = array_keys($dataList[0]);
+        $place_holders = implode(',', array_fill(0, count($dataList[0]), '?'));
+
+        $values = [];
+        $vals = [];
+        foreach ($dataList as $index => $arr) {
+            foreach (array_values($arr) as $val) {
+                $vals [] = $val;
+            }
+
+            $values[] = '(' . $place_holders . ')';
+        }
+
+        $sql = 'INSERT INTO ' . $name . '(' . implode(',', $fields) . ') VALUES ' . implode(',', $values);
+
+        //TODO WANG 批量插入不允许外部绑定，内部会自动绑定
+        $this->bind = [];
+        return $this->execute($sql, $vals);
+    }
+
+    /**
+     * 执行插入
+     * @param array $data
+     * @param $name
+     * @return bool|int
+     */
+    public function insert($data = [], $name)
+    {
+        $keys = [];
+        if (!empty($data)) {
+            foreach ($data as $key => $val) {
+                $this->bindParam($key, $val);
+                $keys[] = ':' . $key;
+            }
+        }
+        $sql = 'INSERT INTO ' . $name . '(' . implode(',', array_keys($data)) . ') VALUES (' . implode(',', $keys) . ')';
+        return $this->execute($sql);
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function getError()
+    {
+
     }
 }

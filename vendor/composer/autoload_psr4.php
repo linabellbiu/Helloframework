@@ -6,9 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'core\\lib\\' => array($baseDir . '/core/lib'),
-    'core\\http\\' => array($baseDir . '/core/http'),
-    'core\\db\\driver\\' => array($baseDir . '/core/db/driver'),
-    'core\\db\\' => array($baseDir . '/core/db'),
-    'core\\' => array($baseDir . '/core'),
 );

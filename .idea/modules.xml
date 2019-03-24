@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/aexframework.iml" filepath="$PROJECT_DIR$/.idea/aexframework.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/framework.iml" filepath="$PROJECT_DIR$/.idea/framework.iml" />
+      <module fileurl="file://D:/thinkphp_3.2.3_full/.idea/thinkphp_3.2.3_full.iml" filepath="D:/thinkphp_3.2.3_full/.idea/thinkphp_3.2.3_full.iml" />
     </modules>
   </component>
 </project>
