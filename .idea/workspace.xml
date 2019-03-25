@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1be58e3a-a170-48e5-b9e4-3087f2007dee" name="默认" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/App/controller/index/IndexController.class.php" />
+    <list default="true" id="1be58e3a-a170-48e5-b9e4-3087f2007dee" name="默认" comment="可以添加多个模块">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/framework.iml" afterPath="$PROJECT_DIR$/.idea/framework.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/controller/index/IndexController.class.php" afterPath="$PROJECT_DIR$/App/controller/index/IndexController.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/model/index/IndexModel.class.php" afterPath="$PROJECT_DIR$/App/model/index/IndexModel.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/Model.class.php" afterPath="$PROJECT_DIR$/Core/Model.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/db/Driver.class.php" afterPath="$PROJECT_DIR$/Core/db/Driver.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/db/driver/Mysql.class.php" afterPath="$PROJECT_DIR$/Core/db/driver/Mysql.class.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,25 +22,74 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App/controller/IndexController.class.php">
+    <leaf>
+      <file leaf-file-name="Mysql.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Core/db/driver/Mysql.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="319">
+              <caret line="70" column="44" lean-forward="true" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
+              <folding>
+                <element signature="e#198#240#0#PHP" expanded="false" />
+                <element signature="e#266#306#0#PHP" expanded="false" />
+                <element signature="e#421#687#0#PHP" expanded="false" />
+                <element signature="e#1449#1558#0#PHP" expanded="false" />
+                <element signature="e#1563#2161#0#PHP" expanded="false" />
+                <element signature="e#1698#1898#0#PHP" expanded="false" />
+                <element signature="e#1795#1898#0#PHP" expanded="false" />
+                <element signature="e#1908#2134#0#PHP" expanded="false" />
+                <element signature="e#2167#2248#0#PHP" expanded="false" />
+                <element signature="e#2546#2826#0#PHP" expanded="false" />
+                <element signature="e#2731#2820#0#PHP" expanded="false" />
+                <element signature="e#2832#2925#0#PHP" expanded="false" />
+                <element signature="e#2930#3679#0#PHP" expanded="false" />
+                <element signature="e#3228#3428#0#PHP" expanded="false" />
+                <element signature="e#3280#3365#0#PHP" expanded="false" />
+                <element signature="e#3685#3778#0#PHP" expanded="false" />
+                <element signature="e#3783#4267#0#PHP" expanded="false" />
+                <element signature="e#3964#4083#0#PHP" expanded="false" />
+                <element signature="e#4273#4730#0#PHP" expanded="false" />
+                <element signature="e#4454#4583#0#PHP" expanded="false" />
+                <element signature="e#4736#4775#0#PHP" expanded="false" />
+                <element signature="e#4781#4816#0#PHP" expanded="false" />
+                <element signature="e#4822#5269#0#PHP" expanded="false" />
+                <element signature="e#4870#5201#0#PHP" expanded="false" />
+                <element signature="e#5071#5191#0#PHP" expanded="false" />
+                <marker date="1553528613226" expanded="false" signature="3446:3510" ph="INSERT INTO ${$name}... " />
+                <marker date="1553528613226" expanded="false" signature="4102:4205" ph="INSERT INTO ${$name}... " />
+                <marker date="1553528613226" expanded="false" signature="5327:5339" ph="DELETE FROM " />
+                <marker date="1553528613226" expanded="false" signature="5327:5353" ph="DELETE FROM " />
+                <marker date="1553528613226" expanded="false" signature="5327:5354" ph="DELETE FROM " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IndexModel.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/model/index/IndexModel.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="22" column="108" lean-forward="false" selection-start-line="22" selection-start-column="108" selection-end-line="22" selection-end-column="108" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/App/controller/index/IndexController.class.php">
+      <file leaf-file-name="Model.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/Model.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
-              <folding>
-                <marker date="1553404993850" expanded="true" signature="601:624" ph="select * fro... wang" />
-              </folding>
+            <state relative-caret-position="575">
+              <caret line="38" column="30" lean-forward="false" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Driver.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/db/Driver.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="498">
+              <caret line="275" column="36" lean-forward="false" selection-start-line="275" selection-start-column="36" selection-end-line="275" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,11 +106,16 @@
       <find>$_linkID</find>
       <find>bindParam</find>
       <find>var</find>
-      <find>insert</find>
       <find>insertAll</find>
       <find>var_dump</find>
       <find>add</find>
+      <find>insert</find>
+      <find>$fetchSql</find>
+      <find>null,</find>
     </findStrings>
+    <replaceStrings>
+      <replace>$this-&gt;fetchSql</replace>
+    </replaceStrings>
     <dirStrings>
       <dir>D:\xampp\htdocs\aexframework\App</dir>
       <dir>D:\xampp\htdocs\aexframework</dir>
@@ -74,7 +134,6 @@
         <option value="D:/thinkphp_3.2.3_full/ThinkPHP/Library/Think/Model.class.php" />
         <option value="$PROJECT_DIR$/App/model/IndexModel.class.php" />
         <option value="$PROJECT_DIR$/App/model/IndexModel.php" />
-        <option value="$PROJECT_DIR$/App/model/index/IndexModel.class.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/Core/db/Db.class.php" />
         <option value="$PROJECT_DIR$/App/conf/index.conf.php" />
@@ -96,8 +155,9 @@
         <option value="D:/thinkphp_3.2.3_full/ThinkPHP/Library/Think/Db/Driver/Mysql.class.php" />
         <option value="$PROJECT_DIR$/App/controller/index/IndexController.class.php" />
         <option value="$PROJECT_DIR$/Core/db/Driver.class.php" />
-        <option value="$PROJECT_DIR$/Core/db/driver/Mysql.class.php" />
+        <option value="$PROJECT_DIR$/App/model/index/IndexModel.class.php" />
         <option value="$PROJECT_DIR$/Core/Model.class.php" />
+        <option value="$PROJECT_DIR$/Core/db/driver/Mysql.class.php" />
       </list>
     </option>
   </component>
@@ -132,6 +192,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -149,13 +210,37 @@
               <item name="aexframework" type="b2602c69:ProjectViewProjectNode" />
               <item name="aexframework" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="App" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="model" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="aexframework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aexframework" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="App" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="model" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="index" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="aexframework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aexframework" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Core" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="aexframework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aexframework" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Core" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="db" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="aexframework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aexframework" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Core" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="db" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="driver" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -174,6 +259,121 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\xampp\htdocs\commlib" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments 以前" ActionInfo="更新(U)">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="从服务器更新" />
+        <option name="myStatusName" value="服务器上的更改" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="已更新" />
+          <option name="myStatusName" value="已改变" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/App/conf/db.conf.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/App/controller/index/IndexController.class.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/App/model/index/IndexModel.class.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Core/Model.class.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Core/db/Driver.class.php</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Core/db/driver/Mysql.class.php</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="已创建" />
+          <option name="myStatusName" value="已创建" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="已删除" />
+          <option name="myStatusName" value="已删除" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="已恢复" />
+          <option name="myStatusName" value="将被还原" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="已修改" />
+        <option name="myStatusName" value="已合并" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="已跳过" />
+        <option name="myStatusName" value="已跳过" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="合并冲突" />
+        <option name="myStatusName" value="合并会有冲突" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="合并目录冲突" />
+        <option name="myStatusName" value="合并目录冲突" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="合并属性冲突" />
+        <option name="myStatusName" value="合并属性会有冲突" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="已合并" />
+        <option name="myStatusName" value="将被合并" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="未在版本库中" />
+        <option name="myStatusName" value="未在版本库中" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="在本地添加" />
+        <option name="myStatusName" value="本地添加" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="在本地移除" />
+        <option name="myStatusName" value="本地移除" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="已切换" />
+        <option name="myStatusName" value="已切换" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -207,7 +407,8 @@
       <workItem from="1552484814215" duration="4896000" />
       <workItem from="1553345599353" duration="1988000" />
       <workItem from="1553347729625" duration="17274000" />
-      <workItem from="1553435377311" duration="286000" />
+      <workItem from="1553435377311" duration="569000" />
+      <workItem from="1553521646030" duration="4251000" />
     </task>
     <task id="LOCAL-00001" summary="修改应用目录，可以添加多个模块&#10;添加数据库模型">
       <created>1553345729288</created>
@@ -223,16 +424,38 @@
       <option name="project" value="LOCAL" />
       <updated>1553435545103</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="可以添加多个模块">
+      <created>1553435675513</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1553435675513</updated>
+    </task>
+    <task id="LOCAL-00004" summary="可以添加多个模块">
+      <created>1553435780180</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1553435780180</updated>
+    </task>
+    <task id="LOCAL-00005" summary="添加数据库配置文件和模型">
+      <created>1553435823496</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1553435823496</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88617000" />
+    <option name="totallyTimeSpent" value="93151000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17239584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17239584" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42316017" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -270,7 +493,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修改应用目录，可以添加多个模块&#10;添加数据库模型" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改应用目录，可以添加多个模块&#10;添加数据库模型" />
+    <MESSAGE value="可以添加多个模块" />
+    <MESSAGE value="添加数据库配置文件和模型" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加数据库配置文件和模型" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -279,20 +504,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Core/Http/Cookie.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="797">
-          <caret line="56" column="32" lean-forward="false" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Core/App.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2871">
-          <caret line="163" column="28" lean-forward="true" selection-start-line="163" selection-start-column="28" selection-end-line="163" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/thinkphp_3.2.3_full/ThinkPHP/Library/Think/Db/Lite.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -326,13 +537,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="4" column="41" lean-forward="true" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Core/AEX.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="32" column="34" lean-forward="false" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -435,13 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/App/model/index/IndexModel.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Core/RouteService.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1583">
@@ -531,14 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/db/Db.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Core/common/function.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="520">
@@ -550,7 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4420">
           <caret line="138" column="160" lean-forward="false" selection-start-line="138" selection-start-column="153" selection-end-line="138" selection-end-column="160" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -558,30 +746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9894">
           <caret line="299" column="67" lean-forward="false" selection-start-line="299" selection-start-column="67" selection-end-line="299" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Core/db/Driver.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7174">
-          <caret line="268" column="21" lean-forward="false" selection-start-line="268" selection-start-column="21" selection-end-line="268" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Core/Model.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Core/db/driver/Mysql.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -600,18 +764,111 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App/controller/IndexController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/db/Db.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="23" column="32" lean-forward="false" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/App/controller/index/IndexController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        <state relative-caret-position="544">
+          <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/lib/Filter.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-87">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/Error.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/AEX.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="32" column="34" lean-forward="false" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/db/Driver.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="275" column="36" lean-forward="false" selection-start-line="275" selection-start-column="36" selection-end-line="275" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/model/index/IndexModel.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="22" column="108" lean-forward="false" selection-start-line="22" selection-start-column="108" selection-end-line="22" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/Model.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="38" column="30" lean-forward="false" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/db/driver/Mysql.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="70" column="44" lean-forward="true" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
           <folding>
-            <marker date="1553404993850" expanded="true" signature="601:624" ph="select * fro... wang" />
+            <element signature="e#198#240#0#PHP" expanded="false" />
+            <element signature="e#266#306#0#PHP" expanded="false" />
+            <element signature="e#421#687#0#PHP" expanded="false" />
+            <element signature="e#1449#1558#0#PHP" expanded="false" />
+            <element signature="e#1563#2161#0#PHP" expanded="false" />
+            <element signature="e#1698#1898#0#PHP" expanded="false" />
+            <element signature="e#1795#1898#0#PHP" expanded="false" />
+            <element signature="e#1908#2134#0#PHP" expanded="false" />
+            <element signature="e#2167#2248#0#PHP" expanded="false" />
+            <element signature="e#2546#2826#0#PHP" expanded="false" />
+            <element signature="e#2731#2820#0#PHP" expanded="false" />
+            <element signature="e#2832#2925#0#PHP" expanded="false" />
+            <element signature="e#2930#3679#0#PHP" expanded="false" />
+            <element signature="e#3228#3428#0#PHP" expanded="false" />
+            <element signature="e#3280#3365#0#PHP" expanded="false" />
+            <element signature="e#3685#3778#0#PHP" expanded="false" />
+            <element signature="e#3783#4267#0#PHP" expanded="false" />
+            <element signature="e#3964#4083#0#PHP" expanded="false" />
+            <element signature="e#4273#4730#0#PHP" expanded="false" />
+            <element signature="e#4454#4583#0#PHP" expanded="false" />
+            <element signature="e#4736#4775#0#PHP" expanded="false" />
+            <element signature="e#4781#4816#0#PHP" expanded="false" />
+            <element signature="e#4822#5269#0#PHP" expanded="false" />
+            <element signature="e#4870#5201#0#PHP" expanded="false" />
+            <element signature="e#5071#5191#0#PHP" expanded="false" />
+            <marker date="1553528613226" expanded="false" signature="3446:3510" ph="INSERT INTO ${$name}... " />
+            <marker date="1553528613226" expanded="false" signature="4102:4205" ph="INSERT INTO ${$name}... " />
+            <marker date="1553528613226" expanded="false" signature="5327:5339" ph="DELETE FROM " />
+            <marker date="1553528613226" expanded="false" signature="5327:5353" ph="DELETE FROM " />
+            <marker date="1553528613226" expanded="false" signature="5327:5354" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>

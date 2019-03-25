@@ -11,6 +11,7 @@ namespace Core\db;
 use Core\Error;
 use PDO;
 
+//底层驱动,用来查询和执行sql
 abstract class Driver
 {
     // PDO操作实例
@@ -86,6 +87,14 @@ abstract class Driver
     }
 
     abstract function parseDsn($config);
+
+    abstract function insert($dataList, $name);
+
+    abstract function update($dataList, $name);
+
+    abstract function select($dataList, $name);
+
+    abstract function delete($name);
 
     /**
      * 连接数据库方法
@@ -264,7 +273,7 @@ abstract class Driver
 
 
     //执行sql语句
-    protected function execute($str, $vales = null, $fetchSql = false)
+    protected function execute($str, $fetchSql = false)
     {
         $this->initConnect();
         if (!$this->_linkID) {
@@ -282,7 +291,8 @@ abstract class Driver
             return $this->queryStr;
         }
 
-        if (!empty($this->PDOStatement)) $this->free();
+        if (!empty($this->PDOStatement))
+            $this->free();
 
         $this->executeTimes++;
 
@@ -318,6 +328,46 @@ abstract class Driver
         }
     }
 
+    //批量执行插入语句
+    protected function executeInsertAll($str, $vales, $fetchSql = false)
+    {
+        $this->initConnect();
+        if (!$this->_linkID) {
+            return false;
+        }
+        $this->queryStr = $str;
+
+        if ($fetchSql) {
+            return $this->queryStr;
+        }
+
+        if (!empty($this->PDOStatement))
+            $this->free();
+
+        $this->executeTimes++;
+
+        $this->PDOStatement = $this->_linkID->prepare($str);
+        if (false === $this->PDOStatement) {
+            $this->error();
+            return false;
+        }
+        try {
+            $result = $this->PDOStatement->execute($vales);
+            if (false === $result) {
+                $this->error();
+                return false;
+            } else {
+                $this->numRows = $this->PDOStatement->rowCount();
+                if (preg_match("/^\s*(INSERT\s+INTO|REPLACE\s+INTO)\s+/i", $str)) {
+                    $this->lastInsID = $this->_linkID->lastInsertId();
+                }
+                return $this->numRows;
+            }
+        } catch (\PDOException $e) {
+            $this->error();
+            return false;
+        }
+    }
     /**
      * 参数绑定分析
      * @access protected

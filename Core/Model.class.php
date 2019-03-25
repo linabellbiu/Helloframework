@@ -75,7 +75,6 @@ class Model
         $this->_db[$linkNum] = Db::getInstance($connection);
         // 切换数据库连接
         $this->db = $this->_db[$linkNum];
-
         return $this;
     }
 
@@ -98,9 +97,8 @@ class Model
     }
 
 
-    public function select($sql, $fetchSql = false)
+    public function select($sql)
     {
-        $this->db->fetchSql = $fetchSql;
         return $this->db->mysqlSelect($sql, $this->name);
     }
 
@@ -109,15 +107,13 @@ class Model
 
     }
 
-    public function addAll($datalist, $fetchSql = false)
+    public function addAll($datalist)
     {
-        $this->db->fetchSql = $fetchSql;
         return $this->db->insertAll($datalist, $this->name);
     }
 
-    public function save($data, $fetchSql = false)
+    public function save($data)
     {
-        $this->db->fetchSql = $fetchSql;
         return $this->db->update($data, $this->name);
     }
 

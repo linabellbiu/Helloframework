@@ -17,7 +17,11 @@ class IndexModel extends Model
         parent::__construct($name, $connect, $force);
     }
 
-    function echos(){
-        echo "model";
+    function exec()
+    {
+        $data['balance'] = 10000;
+        $result = $this->where("(coin=:coin1 or coin=:coin2) and user_id =:user_id", ['btc', 'eth', 1])->save($data);
+        var_dump($this->error());
+        var_dump($result);
     }
 }

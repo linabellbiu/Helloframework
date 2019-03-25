@@ -22,10 +22,6 @@ class IndexController extends Controller
     public function index()
     {
         $test = new IndexModel("t_user_balance_new", config('db_bitcc_money'));
-
-        $data['balance'] = 10000;
-        $result = $test->where("(coin=:coin1 or coin=:coin2) and user_id =:user_id", ['btc', 'eth', 1])->save($data,true);
-        var_dump($test->error());
-        var_dump($result);
+        $test->exec();
     }
 }

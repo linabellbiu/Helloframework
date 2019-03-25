@@ -25,9 +25,11 @@ class Mysql extends Driver
      */
     public $tableName;
 
-    public $where;
+    public $fetchSql = false;
 
-    public $fetchSql;
+    private $_where = '';
+
+    private $_field = '*';
 
     //========================================================================================================================================================================================================================================================================
     //如果在DSN中指定了charset, 是否还需要执行set names <charset>呢？
@@ -71,6 +73,25 @@ class Mysql extends Driver
         return $this->query($sql);
     }
 
+    public function select($dataList = null, $name)
+    {
+        $sql = 'SELECT ' . $this->_field . ' FROM ' . $name . ' ' . $this->_where;
+        return $this->execute($sql, $this->_field);
+    }
+
+    public function field($dataList)
+    {
+        if (empty($dataList))
+            $this->_field = '*';
+
+        if (is_string($dataList))
+            $this->_field = $dataList;
+
+        if (is_array($dataList)) {
+            $this->_field = implode(',', $dataList);
+        }
+    }
+
     /**
      * 执行批量插入
      * @param $dataList
@@ -99,7 +120,7 @@ class Mysql extends Driver
 
         //TODO WANG 批量插入不允许外部绑定，内部会自动绑定
         $this->bind = [];
-        return $this->execute($sql, $vals);
+        return $this->executeInsertAll($sql, $vals, $this->fetchSql);
     }
 
     /**
@@ -124,7 +145,7 @@ class Mysql extends Driver
 
 
         $sql = 'INSERT INTO ' . $name . '(' . implode(',', array_keys($data)) . ') VALUES (' . implode(',', $keys) . ')';
-        return $this->execute($sql, null, $this->fetchSql);
+        return $this->execute($sql, $this->fetchSql);
     }
 
     public function update($data, $name)
@@ -142,7 +163,7 @@ class Mysql extends Driver
 
         }
         $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . ' ' . $this->where;
-        return $this->execute($sql, null, $this->fetchSql);
+        return $this->execute($sql, $this->fetchSql);
     }
 
     public function getError()
@@ -171,5 +192,11 @@ class Mysql extends Driver
 
         $this->where = 'WHERE ' . $str;
         return true;
+    }
+
+    public function delete($name)
+    {
+        $sql = "DELETE FROM " . $name . ' ' . $this->_where;
+        return $this->execute($sql, $this->fetchSql);
     }
 }
