@@ -140,7 +140,8 @@ abstract class Driver
      * @param string $str sql指令
      * @param boolean $fetchSql 不执行只是获取SQL
      * @param boolean $master 是否在主服务器读操作
-     * @return mixed
+     * @return array|bool|string
+     * @throws Error
      */
     public function query($str, $fetchSql = false, $master = false)
     {
@@ -251,9 +252,8 @@ abstract class Driver
 
     /**
      * 初始化数据库连接
-     * @access protected
-     * @param boolean $master 主服务器
-     * @return void
+     * @param bool $master
+     * @throws Error
      */
     protected function initConnect($master = true)
     {

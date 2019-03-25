@@ -28,5 +28,12 @@ return [
         'slave_no' => '', // 指定从服务器序号
         'db_like_fields' => '',
     ],
-    'db2' => []
+    'db_bitcc_money' => [
+        'type' => 'mysql', // 数据库类型
+        'hostname' => '192.168.1.3', // 服务器地址
+        'database' => 'bitcc_money', // 数据库名
+        'username' => 'root', // 用户名
+        'password' => '&Testbtc38&..', // 密码
+        'hostport' => '3306', // 端口
+    ]
 ];

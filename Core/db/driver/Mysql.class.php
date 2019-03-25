@@ -25,6 +25,10 @@ class Mysql extends Driver
      */
     public $tableName;
 
+    public $where;
+
+    public $fetchSql;
+
     //========================================================================================================================================================================================================================================================================
     //如果在DSN中指定了charset, 是否还需要执行set names <charset>呢？
     //是的，不能省。set names <charset>其实有两个作用：
@@ -104,26 +108,68 @@ class Mysql extends Driver
      * @param $name
      * @return bool|int
      */
-    public function insert($data = [], $name)
+    public function insert($data, $name)
     {
         $keys = [];
-        if (!empty($data)) {
-            foreach ($data as $key => $val) {
-                $this->bindParam($key, $val);
-                $keys[] = ':' . $key;
-            }
+        if (empty($data))
+            return false;
+
+        if (!is_array($data))
+            return false;
+
+        foreach ($data as $key => $val) {
+            $this->bindParam($key, $val);
+            $keys[] = ':' . $key;
         }
+
+
         $sql = 'INSERT INTO ' . $name . '(' . implode(',', array_keys($data)) . ') VALUES (' . implode(',', $keys) . ')';
-        return $this->execute($sql);
+        return $this->execute($sql, null, $this->fetchSql);
     }
 
-    public function update()
+    public function update($data, $name)
     {
+        $keys = [];
+        if (empty($data))
+            return false;
 
+        if (!is_array($data))
+            return false;
+
+        foreach ($data as $key => $val) {
+            $this->bindParam($key, $val);
+            $keys[] = $key . '= :' . $key;
+
+        }
+        $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . ' ' . $this->where;
+        return $this->execute($sql, null, $this->fetchSql);
     }
 
     public function getError()
     {
 
+    }
+
+    public function bind()
+    {
+
+    }
+
+    public function where($str, $arr)
+    {
+        if (is_string($str) && is_array($arr)) {
+
+            preg_match_all('/:[a-zA-Z0-9_]+/', $str, $matches);
+
+            if (count($matches[0]) != count($arr))
+                return false;
+
+            foreach ($matches[0] as $index => $key) {
+                $this->bindParam(trim($key, ':'), $arr[$index]);
+            }
+        }
+
+        $this->where = 'WHERE ' . $str;
+        return true;
     }
 }

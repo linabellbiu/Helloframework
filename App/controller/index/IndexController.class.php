@@ -21,17 +21,11 @@ class IndexController extends Controller
 
     public function index()
     {
-        $test = new IndexModel("test.wang", config('db1'));
-        $dataList = [
-            'name'=>'go2', 'page'=>1,
-        ];
+        $test = new IndexModel("t_user_balance_new", config('db_bitcc_money'));
 
-       echo  $test->add($dataList);
-
-        echo $test->error();
-        $result = $test->select("select * from test.wang");
-
-
+        $data['balance'] = 10000;
+        $result = $test->where("(coin=:coin1 or coin=:coin2) and user_id =:user_id", ['btc', 'eth', 1])->save($data,true);
+        var_dump($test->error());
         var_dump($result);
     }
 }

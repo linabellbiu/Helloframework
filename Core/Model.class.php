@@ -45,17 +45,17 @@ class Model
     /**
      * Model constructor.
      * @param string $name 数据库名.表名
-     * @param string $connect 连接配置信息
+     * @param array $connect 连接配置信息
      * @param bool $force 是否强制重新连接
      */
-    public function __construct($name, $connect = '', $force = false)
+    public function __construct($name, $connect, $force = false)
     {
         try {
             if (empty($name)) {
                 throw new Error("name不能为空");
             }
             if (!strpos($name, '.')) {
-                throw new Error("name应该是数据库名.表明");
+                $name = $connect['database'] . '.' . $name;
             }
         } catch (Error $e) {
             $e->errorMessage();
@@ -98,8 +98,9 @@ class Model
     }
 
 
-    public function select($sql)
+    public function select($sql, $fetchSql = false)
     {
+        $this->db->fetchSql = $fetchSql;
         return $this->db->mysqlSelect($sql, $this->name);
     }
 
@@ -108,14 +109,16 @@ class Model
 
     }
 
-    public function addAll($datalist)
+    public function addAll($datalist, $fetchSql = false)
     {
+        $this->db->fetchSql = $fetchSql;
         return $this->db->insertAll($datalist, $this->name);
     }
 
-    public function update()
+    public function save($data, $fetchSql = false)
     {
-
+        $this->db->fetchSql = $fetchSql;
+        return $this->db->update($data, $this->name);
     }
 
     public function add($data = [])
@@ -129,9 +132,10 @@ class Model
     }
 
 
-    public function where()
+    public function where($str, $arr)
     {
-
+        $this->db->where($str, $arr);
+        return $this;
     }
 
     public function limit()

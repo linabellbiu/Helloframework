@@ -12,7 +12,7 @@ use \Core\Model;
 
 class IndexModel extends Model
 {
-    public function __construct($name, $connect = '', $force = false)
+    public function __construct($name, $connect, $force = false)
     {
         parent::__construct($name, $connect, $force);
     }
