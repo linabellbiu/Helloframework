@@ -29,7 +29,13 @@ class Mysql extends Driver
 
     private $_where = '';
 
-    private $_field = '*';
+    private $_field = ' * ';
+
+    private $_limit = '';
+
+    private $_groupBy = '';
+
+    private $_groupByList = [];
 
     //========================================================================================================================================================================================================================================================================
     //如果在DSN中指定了charset, 是否还需要执行set names <charset>呢？
@@ -73,22 +79,30 @@ class Mysql extends Driver
         return $this->query($sql);
     }
 
-    public function select($dataList = null, $name)
+    public function select($field, $name)
     {
-        $sql = 'SELECT ' . $this->_field . ' FROM ' . $name . ' ' . $this->_where;
+        if (!empty($field)) {
+            if (is_string($field)) {
+                $this->_field = $field;
+            }
+            if (is_array($field)) {
+                $this->_field = implode(',', $field);
+            }
+        }
+        $sql = 'SELECT' . $this->_field . 'FROM ' . $name . $this->_where . $this->_parseOrder();
         return $this->execute($sql, $this->_field);
     }
 
     public function field($dataList)
     {
         if (empty($dataList))
-            $this->_field = '*';
+            $this->_field = ' * ';
 
         if (is_string($dataList))
-            $this->_field = $dataList;
+            $this->_field = ' ' . $dataList . ' ';
 
         if (is_array($dataList)) {
-            $this->_field = implode(',', $dataList);
+            $this->_field = ' ' . implode(',', $dataList) . ' ';
         }
     }
 
@@ -162,7 +176,13 @@ class Mysql extends Driver
             $keys[] = $key . '= :' . $key;
 
         }
-        $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . ' ' . $this->where;
+        $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . $this->where;
+        return $this->execute($sql, $this->fetchSql);
+    }
+
+    public function delete($name)
+    {
+        $sql = 'DELETE FROM ' . $name . $this->_where . $this->_limit;
         return $this->execute($sql, $this->fetchSql);
     }
 
@@ -174,6 +194,45 @@ class Mysql extends Driver
     public function bind()
     {
 
+    }
+
+    public function groupBy($dataList, $sort = '')
+    {
+        if (empty($dataList))
+            return false;
+        if (is_array($dataList)) {
+            foreach ($dataList as $data) {
+                if (!is_array($data))
+                    continue;
+                if (count($data) > 2)
+                    continue;
+                $field = $data[0];
+                $sort = is_string($sort) ? $sort : 'ASC';
+                $this->_groupByList[] = ' ' . $field . ' ' . $sort;
+            }
+        }
+        if (is_string($dataList)) {
+            $this->_groupByList[] = ' ' . $dataList . ' ' . is_string($sort) ? $sort . ' ' : 'ASC';
+        }
+        return true;
+    }
+
+    /**
+     * 解析groupby句子
+     * @return string
+     */
+    private function _parseOrder()
+    {
+        if (empty($this->_groupByList)) {
+            return '';
+        }
+        if (!is_array($this->_groupByList)) {
+            return '';
+        }
+        if (count($this->_groupByList) <= 0) {
+            return '';
+        }
+        return ' GROUP BY ' . implode(',', $this->_groupByList) . ' ';
     }
 
     public function where($str, $arr)
@@ -190,13 +249,12 @@ class Mysql extends Driver
             }
         }
 
-        $this->where = 'WHERE ' . $str;
+        $this->_where = ' WHERE ' . $str . ' ';
         return true;
     }
 
-    public function delete($name)
+    public function limit($start = 1, $lenth = 0)
     {
-        $sql = "DELETE FROM " . $name . ' ' . $this->_where;
-        return $this->execute($sql, $this->fetchSql);
+        $this->_limit = ' LIMIT ' . $start . ',' . $lenth;
     }
 }

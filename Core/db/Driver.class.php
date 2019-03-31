@@ -311,7 +311,7 @@ abstract class Driver
         $this->bind = array();
 
         try {
-            $result = $this->PDOStatement->execute($vales);
+            $result = $this->PDOStatement->execute();
             if (false === $result) {
                 $this->error();
                 return false;

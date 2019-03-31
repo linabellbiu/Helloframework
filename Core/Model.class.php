@@ -6,6 +6,7 @@
  * Time: 11:18
  */
 
+//模型层，用来方便的链式操作,不需要实现很复杂的逻辑
 namespace Core;
 
 use Core\db\Db;
@@ -32,11 +33,6 @@ class Model
     protected $tableName = '';
     // 实际数据表名（包含表前缀）
     protected $trueTableName = '';
-
-    // 字段信息
-    protected $fields = array();
-    // 数据信息
-    protected $data = array();
 
     // 链操作方法列表
     protected $methods = array('strict', 'order', 'alias', 'having', 'group', 'lock', 'distinct', 'auto', 'filter', 'validate', 'result', 'token', 'index', 'force', 'master');
@@ -96,10 +92,9 @@ class Model
         return $this->name;
     }
 
-
-    public function select($sql)
+    public function find($field = null)
     {
-        return $this->db->mysqlSelect($sql, $this->name);
+        return $this->db->select($field, $this->name);
     }
 
     public function query($sql)
@@ -124,7 +119,7 @@ class Model
 
     public function delete()
     {
-
+        return $this->db->delete($this->name);
     }
 
 
@@ -134,20 +129,22 @@ class Model
         return $this;
     }
 
-    public function limit()
+    public function limit($start = 1, $lenth = 0)
+    {
+        $this->db->limit($start, $lenth);
+    }
+
+    public function group($dataList, $sort)
     {
 
     }
 
-    public function group()
+    public function order($dataList, $sort = '')
     {
-
+        $this->db->orderBy($dataList, $sort);
+        return $this;
     }
 
-    public function order()
-    {
-
-    }
 
     public function error()
     {
