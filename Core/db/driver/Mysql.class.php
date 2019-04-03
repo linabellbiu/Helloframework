@@ -33,7 +33,7 @@ class Mysql extends Driver
 
     private $_limit = '';
 
-    private $_groupBy = '';
+    private $_orderByList = [];
 
     private $_groupByList = [];
 
@@ -72,7 +72,8 @@ class Mysql extends Driver
      * 查询
      * @param $sql
      * @param $name
-     * @return mixed
+     * @return array|bool|string
+     * @throws \Core\Error
      */
     public function mysqlSelect($sql, $name)
     {
@@ -89,20 +90,24 @@ class Mysql extends Driver
                 $this->_field = implode(',', $field);
             }
         }
-        $sql = 'SELECT' . $this->_field . 'FROM ' . $name . $this->_where . $this->_parseOrder();
+        $sql = 'SELECT ' . $this->_field . ' FROM ' . $name . ' ' .
+            $this->_where . ' ' .
+            $this->_parseOrder() . ' ' .
+            $this->_parseGroup() . ' ' .
+            $this->_limit;
         return $this->execute($sql, $this->_field);
     }
 
     public function field($dataList)
     {
         if (empty($dataList))
-            $this->_field = ' * ';
+            $this->_field = '*';
 
         if (is_string($dataList))
-            $this->_field = ' ' . $dataList . ' ';
+            $this->_field = $dataList;
 
         if (is_array($dataList)) {
-            $this->_field = ' ' . implode(',', $dataList) . ' ';
+            $this->_field = implode(',', $dataList);
         }
     }
 
@@ -157,7 +162,6 @@ class Mysql extends Driver
             $keys[] = ':' . $key;
         }
 
-
         $sql = 'INSERT INTO ' . $name . '(' . implode(',', array_keys($data)) . ') VALUES (' . implode(',', $keys) . ')';
         return $this->execute($sql, $this->fetchSql);
     }
@@ -176,7 +180,7 @@ class Mysql extends Driver
             $keys[] = $key . '= :' . $key;
 
         }
-        $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . $this->where;
+        $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . $this->_where;
         return $this->execute($sql, $this->fetchSql);
     }
 
@@ -196,7 +200,40 @@ class Mysql extends Driver
 
     }
 
-    public function groupBy($dataList, $sort = '')
+    public function groupBy($dataList)
+    {
+        if (empty($dataList))
+            return false;
+        if (is_array($dataList)) {
+            foreach ($dataList as $data) {
+                $this->_groupByList[] = $data;
+            }
+        }
+        if (is_string($dataList)) {
+            $this->_groupByList[] = $dataList;
+        }
+        return true;
+    }
+
+    /**
+     * 解析groupby句子
+     * @return string
+     */
+    private function _parseGroup()
+    {
+        if (empty($this->_groupByList)) {
+            return '';
+        }
+        if (!is_array($this->_groupByList)) {
+            return '';
+        }
+        if (count($this->_groupByList) <= 0) {
+            return '';
+        }
+        return 'GROUP BY' . implode(',', $this->_groupByList);
+    }
+
+    public function orderBy($dataList, $sort = '')
     {
         if (empty($dataList))
             return false;
@@ -208,32 +245,33 @@ class Mysql extends Driver
                     continue;
                 $field = $data[0];
                 $sort = is_string($sort) ? $sort : 'ASC';
-                $this->_groupByList[] = ' ' . $field . ' ' . $sort;
+                $this->_orderByList[] = ' ' . $field . ' ' . $sort;
             }
         }
         if (is_string($dataList)) {
-            $this->_groupByList[] = ' ' . $dataList . ' ' . is_string($sort) ? $sort . ' ' : 'ASC';
+            $this->_orderByList[] = $dataList . ' ' . is_string($sort) ? $sort : 'ASC';
         }
         return true;
     }
 
     /**
-     * 解析groupby句子
+     * 解析orderby句子
      * @return string
      */
     private function _parseOrder()
     {
-        if (empty($this->_groupByList)) {
+        if (empty($this->_orderByList)) {
             return '';
         }
-        if (!is_array($this->_groupByList)) {
+        if (!is_array($this->_orderByList)) {
             return '';
         }
-        if (count($this->_groupByList) <= 0) {
+        if (count($this->_orderByList) <= 0) {
             return '';
         }
-        return ' GROUP BY ' . implode(',', $this->_groupByList) . ' ';
+        return 'ORDER BY ' . implode(',', $this->_orderByList);
     }
+
 
     public function where($str, $arr)
     {
@@ -249,12 +287,12 @@ class Mysql extends Driver
             }
         }
 
-        $this->_where = ' WHERE ' . $str . ' ';
+        $this->_where = 'WHERE ' . $str;
         return true;
     }
 
     public function limit($start = 1, $lenth = 0)
     {
-        $this->_limit = ' LIMIT ' . $start . ',' . $lenth;
+        $this->_limit = 'LIMIT ' . $start . ',' . $lenth;
     }
 }

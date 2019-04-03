@@ -134,9 +134,10 @@ class Model
         $this->db->limit($start, $lenth);
     }
 
-    public function group($dataList, $sort)
+    public function group($dataList)
     {
-
+        $this->db->groupBy($dataList);
+        return $this;
     }
 
     public function order($dataList, $sort = '')
