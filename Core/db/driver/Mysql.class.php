@@ -69,17 +69,21 @@ class Mysql extends Driver
     }
 
     /**
-     * 查询
+     * 执行查询
      * @param $sql
-     * @param $name
      * @return array|bool|string
-     * @throws \Core\Error
      */
-    public function mysqlSelect($sql, $name)
+    public function executeQuery($sql)
     {
-        return $this->query($sql);
+        return $this->query($sql, $this->fetchSql);
     }
 
+    /**
+     * 查询
+     * @param $field
+     * @param $name
+     * @return bool|int
+     */
     public function select($field, $name)
     {
         if (!empty($field)) {
@@ -95,9 +99,12 @@ class Mysql extends Driver
             $this->_parseOrder() . ' ' .
             $this->_parseGroup() . ' ' .
             $this->_limit;
-        return $this->execute($sql, $this->_field);
+        return $this->execute($sql, $this->fetchSql);
     }
 
+    /**
+     * @param $dataList
+     */
     public function field($dataList)
     {
         if (empty($dataList))
@@ -166,6 +173,12 @@ class Mysql extends Driver
         return $this->execute($sql, $this->fetchSql);
     }
 
+    /**
+     * 更新
+     * @param $data
+     * @param $name
+     * @return bool|int
+     */
     public function update($data, $name)
     {
         $keys = [];
@@ -184,6 +197,11 @@ class Mysql extends Driver
         return $this->execute($sql, $this->fetchSql);
     }
 
+    /**
+     * 删除
+     * @param $name
+     * @return bool|int
+     */
     public function delete($name)
     {
         $sql = 'DELETE FROM ' . $name . $this->_where . $this->_limit;
@@ -192,14 +210,35 @@ class Mysql extends Driver
 
     public function getError()
     {
-
+        return $this->error;
     }
 
-    public function bind()
+    /**
+     * 绑定字段
+     * @param $dataList
+     * @param $value
+     * @return bool
+     */
+    public function bind($dataList, $value)
     {
-
+        if (is_array($dataList)) {
+            foreach ($dataList as $key => $val) {
+                if (is_string($key) && !empty($val)) {
+                    $this->bindParam($key, $val);
+                }
+            }
+        }
+        if (is_string($dataList) && !empty($value)) {
+            $this->bindParam($dataList, $value);
+        }
+        return true;
     }
 
+    /**
+     * group by
+     * @param $dataList
+     * @return bool
+     */
     public function groupBy($dataList)
     {
         if (empty($dataList))
@@ -233,6 +272,12 @@ class Mysql extends Driver
         return 'GROUP BY' . implode(',', $this->_groupByList);
     }
 
+    /**
+     * order by
+     * @param $dataList
+     * @param string $sort
+     * @return bool
+     */
     public function orderBy($dataList, $sort = '')
     {
         if (empty($dataList))
@@ -273,6 +318,12 @@ class Mysql extends Driver
     }
 
 
+    /**
+     * where
+     * @param $str
+     * @param $arr
+     * @return bool
+     */
     public function where($str, $arr)
     {
         if (is_string($str) && is_array($arr)) {
@@ -291,6 +342,11 @@ class Mysql extends Driver
         return true;
     }
 
+    /**
+     * limit
+     * @param int $start
+     * @param int $lenth
+     */
     public function limit($start = 1, $lenth = 0)
     {
         $this->_limit = 'LIMIT ' . $start . ',' . $lenth;

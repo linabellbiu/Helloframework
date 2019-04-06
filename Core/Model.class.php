@@ -99,7 +99,7 @@ class Model
 
     public function query($sql)
     {
-
+        return $this->db->executeQuery($sql);
     }
 
     public function addAll($datalist)
@@ -146,9 +146,14 @@ class Model
         return $this;
     }
 
+    public function bindParam($dataList, $value = '')
+    {
+        $this->db->bind($dataList, $value);
+    }
+
 
     public function error()
     {
-        return $this->db->error;
+        return $this->db->getError();
     }
 }

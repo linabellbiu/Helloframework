@@ -29,7 +29,7 @@ abstract class Driver
     // 事务指令数
     protected $transTimes = 0;
     // 错误信息
-    public $error = '';
+    protected $error = '';
     // 数据库连接ID 支持多个连接
     protected $linkID = array();
     // 当前连接ID
