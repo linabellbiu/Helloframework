@@ -21,7 +21,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        $test = new IndexModel("t_user_balance_new", config('db_bitcc_money'));
+        $test = new IndexModel("wang", config('db1'));
         $test->exec();
     }
 }

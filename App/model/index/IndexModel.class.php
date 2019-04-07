@@ -19,8 +19,10 @@ class IndexModel extends Model
 
     function exec()
     {
-        $data['balance'] = 10000;
-        $result = $this->where("(coin=:coin1 or coin=:coin2) and user_id =:user_id", ['btc', 'eth', 1])->save($data);
+        $data['page'] = 10000;
+
+        $result = $this->fetchSql()->where("page = :page and work = :work",1,'it')->find();
+
         var_dump($this->error());
         var_dump($result);
     }

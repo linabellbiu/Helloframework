@@ -99,7 +99,8 @@ class Mysql extends Driver
             $this->_parseOrder() . ' ' .
             $this->_parseGroup() . ' ' .
             $this->_limit;
-        return $this->execute($sql, $this->fetchSql);
+
+        return $this->query($sql, $this->fetchSql);
     }
 
     /**
@@ -193,7 +194,7 @@ class Mysql extends Driver
             $keys[] = $key . '= :' . $key;
 
         }
-        $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . $this->_where;
+        $sql = 'UPDATE ' . $name . ' SET ' . implode(',', $keys) . " " . $this->_where;
         return $this->execute($sql, $this->fetchSql);
     }
 
@@ -321,23 +322,11 @@ class Mysql extends Driver
     /**
      * where
      * @param $str
-     * @param $arr
+     * @param $parse
      * @return bool
      */
-    public function where($str, $arr)
+    public function where($str, $parse  = null)
     {
-        if (is_string($str) && is_array($arr)) {
-
-            preg_match_all('/:[a-zA-Z0-9_]+/', $str, $matches);
-
-            if (count($matches[0]) != count($arr))
-                return false;
-
-            foreach ($matches[0] as $index => $key) {
-                $this->bindParam(trim($key, ':'), $arr[$index]);
-            }
-        }
-
         $this->_where = 'WHERE ' . $str;
         return true;
     }

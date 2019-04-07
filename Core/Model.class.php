@@ -59,7 +59,7 @@ class Model
         list($this->dbName, $this->name) = explode('.', $name);
 
         //建立这个模型独有的连接信息
-        $this->db(0, empty($this->connection) ? $connect : $this->connection, $force = false);
+        return $this->db(0, empty($this->connection) ? $connect : $this->connection, $force = false);
     }
 
     private function Db($linkNum = '', $connection = '', $force = false)
@@ -123,9 +123,30 @@ class Model
     }
 
 
-    public function where($str, $arr)
+    public function where($str, $parse = null)
     {
-        $this->db->where($str, $arr);
+        if (is_string($str) && '' != $str) {
+            do {
+                if (is_null($parse))
+                    break;
+
+                if (is_array($parse)) {
+                    foreach ($parse as $key => $val) {
+                        $this->bindParam($key, $val);
+                    }
+                    break;
+                }
+                $parse = func_get_args();
+                array_shift($parse);
+                preg_match_all(' /:[a-zA-Z0-9_]+/', $str, $matches);
+                foreach ($matches[0] as $index => $key) {
+                    $this->bindParam(trim($key, ':'), $parse[$index]);
+                }
+                break;
+            } while (0);
+
+            $this->db->where($str);
+        }
         return $this;
     }
 
@@ -151,9 +172,14 @@ class Model
         $this->db->bind($dataList, $value);
     }
 
-
     public function error()
     {
         return $this->db->getError();
+    }
+
+    public function fetchSql($fetchSql = false)
+    {
+        $this->db->fetchSql = $fetchSql;
+        return $this;
     }
 }
