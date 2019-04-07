@@ -9,5 +9,7 @@
     <orderEntry type="module" module-name="thinkphp_3.2.3_full" />
     <orderEntry type="module" module-name="framework" />
     <orderEntry type="module" module-name="v17" />
+    <orderEntry type="module" module-name="laravel" />
+    <orderEntry type="module" module-name="blade-5.4" />
   </component>
 </module>

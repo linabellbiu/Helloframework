@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/aexframework.iml" filepath="$PROJECT_DIR$/.idea/aexframework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../blade-5.4/.idea/blade-5.4.iml" filepath="$PROJECT_DIR$/../blade-5.4/.idea/blade-5.4.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/framework.iml" filepath="$PROJECT_DIR$/.idea/framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../laravel/.idea/laravel.iml" filepath="$PROJECT_DIR$/../laravel/.idea/laravel.iml" />
       <module fileurl="file://D:/thinkphp_3.2.3_full/.idea/thinkphp_3.2.3_full.iml" filepath="D:/thinkphp_3.2.3_full/.idea/thinkphp_3.2.3_full.iml" />
       <module fileurl="file://D:/work/bitcc_inter/wang/v17/.idea/v17.iml" filepath="D:/work/bitcc_inter/wang/v17/.idea/v17.iml" />
     </modules>

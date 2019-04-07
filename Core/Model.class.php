@@ -102,6 +102,10 @@ class Model
         return $this->db->executeQuery($sql);
     }
 
+    public function execute($sql)
+    {
+        return $this->executeSave($sql);
+    }
     public function addAll($datalist)
     {
         return $this->db->insertAll($datalist, $this->name);
@@ -181,5 +185,21 @@ class Model
     {
         $this->db->fetchSql = $fetchSql;
         return $this;
+    }
+
+    /**
+     * 获取插入自增id
+     * @return mixed
+     */
+    public function getLastInsID() {
+        return $this->db->getLastInsID();
+    }
+
+    /**
+     * 获取音响行数
+     * @return mixed
+     */
+    public function getNumRows(){
+        return $this->db->getNumRows();
     }
 }

@@ -398,6 +398,16 @@ abstract class Driver
         return false;
     }
 
+    protected function getLastInsID()
+    {
+        return $this->lastInsID;
+    }
+
+    private function getNumRows()
+    {
+        return $this->numRows;
+    }
+
     /**
      * 析构方法
      * @access public

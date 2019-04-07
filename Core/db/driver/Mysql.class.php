@@ -79,6 +79,16 @@ class Mysql extends Driver
     }
 
     /**
+     * 更新和插入操作
+     * @param $sql
+     * @return bool|int
+     */
+    public function executeSave($sql)
+    {
+        return $this->execute($sql, $this->fetchSql);
+    }
+
+    /**
      * 查询
      * @param $field
      * @param $name
