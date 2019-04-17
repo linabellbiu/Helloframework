@@ -23,6 +23,8 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
         'Core\\db\\Db' => __DIR__ . '/../..' . '/Core/db/Db.class.php',
         'Core\\db\\Driver' => __DIR__ . '/../..' . '/Core/db/Driver.class.php',
         'Core\\db\\driver\\Mysql' => __DIR__ . '/../..' . '/Core/db/driver/Mysql.class.php',
+        'Factory\\Factory' => __DIR__ . '/../..' . '/View/Factory.php',
+        'View\\View' => __DIR__ . '/../..' . '/View/View.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

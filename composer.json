@@ -6,7 +6,8 @@
     "classmap": [
       "Core/",
       "App/controller",
-      "App/model"
+      "App/model",
+      "View/"
     ]
   }
 }

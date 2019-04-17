@@ -11,6 +11,8 @@ namespace App\controller\index;
 use Core\Controller;
 use Core\Http\Request;
 use App\model\index\IndexModel;
+use Factory\Factory;
+use View\View;
 
 class IndexController extends Controller
 {
@@ -21,7 +23,10 @@ class IndexController extends Controller
 
     public function index()
     {
-        $test = new IndexModel("wang", config('db1'));
-        $test->exec();
+//        $test = new IndexModel("wang", config('db1'));
+//        $test->exec();
+
+       new View();
+
     }
 }

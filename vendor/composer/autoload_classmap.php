@@ -22,4 +22,6 @@ return array(
     'Core\\db\\Db' => $baseDir . '/Core/db/Db.class.php',
     'Core\\db\\Driver' => $baseDir . '/Core/db/Driver.class.php',
     'Core\\db\\driver\\Mysql' => $baseDir . '/Core/db/driver/Mysql.class.php',
+    'Factory\\Factory' => $baseDir . '/View/Factory.php',
+    'View\\View' => $baseDir . '/View/View.php',
 );
