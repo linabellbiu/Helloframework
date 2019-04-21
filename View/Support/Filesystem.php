@@ -6,7 +6,9 @@
  * Time: 20:59
  */
 
-namespace View;
+namespace View\Support;
+
+use Exception;
 
 class Filesystem
 {
@@ -23,5 +25,19 @@ class Filesystem
     public static function normalize($name)
     {
         return str_replace('.', '/', $name);
+    }
+
+    public function get($path)
+    {
+        if (is_file($path)) {
+            return file_get_contents($path);
+        }
+
+        throw new Exception("File does not exist at path {$path}");
+    }
+
+    public function put($path, $contents, $lock = false)
+    {
+        file_put_contents($path, $contents, $lock ? $lock : 0);
     }
 }
