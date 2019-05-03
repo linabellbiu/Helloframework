@@ -82,15 +82,67 @@ function uconlyfirst($string)
     return ucfirst(strtolower($string));
 }
 
-function dump($var = null)
+function view($args = null)
 {
-    var_dump($var);
-    exit();
-}
+    $count = func_num_args();
+    $varArray = func_get_args();
 
+    $view = APP_MODULE . '.' . __M__;
+    $value = [];
+    switch ($count) {
+        case 0:
+            break;
+        case 1:
+            $data = $varArray[0];
+            do {
+                if (is_array($data)) {
+                    $value = $data;
+                    break;
+                }
+                if (strpos($data, '.') === false) {
+                    $view = APP_MODULE . '.' . $data;
+                }
+                break;
+            } while (0);
+            break;
+        case 2:
+            $name = $varArray[0];
+            $data = $varArray[1];
+            if (is_array($data)) {
+                if (is_string($name)) {
+                    if (strpos($name, '.') === false) {
+                        $value[$name] = $data;
+                    } elseif (strpos($name, '.') !== false) {
+                        $view = $name;
+                        $value = $data;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                if (is_string($name)) {
+                    $value[$name] = $data;
+                }
+            }
+            break;
+        case 3:
+            $view = $varArray[0];
+            $name = $varArray[1];
+            $data = $varArray[2];
+            if (strpos($view, '.') === false) {
+                $view = APP_MODULE . '.' . $view;
+            }
+            if (is_array($name)) {
+                $value = $name;
+            } elseif (is_string($name)) {
+                $value[$name] = $data;
+            }
+            break;
+        default:
+    }
 
-function view($view, $data)
-{
-    exit(\View\Factory::make('View')->make(strtolower($view), $data)->render());
+    exit(\View\Factory::make('View')->make(strtolower($view), $value)->render());
 }
 

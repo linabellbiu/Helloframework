@@ -16,7 +16,7 @@ define('UTF_8', true);                                                  //开启
 define('APP_PATH', PATH . '/' . APP_NAME . '/');                        //定义应用目录
 define('APP_INTI', APP_PATH . 'init.php');                              //应用初始化加载
 define('APP_CONFIG', 'app_config');                                     //应用配置名
-define('APP_CONFIG_PATH', APP_PATH . 'conf/');                            //应用配置名路径
+define('APP_CONFIG_PATH', APP_PATH . 'conf/');                           //应用配置名路径
 define('APP_ROUTE', APP_PATH . 'rule/route.php');                       //应用路由配置
 define('APP_RULE', APP_PATH . 'rule/validate.php');                     //应用验证规则
 define('APP_LANGUAGE_PATH', APP_PATH . 'language/');                    //应用语言包路径
@@ -28,7 +28,7 @@ define('SYS_CONFIG', 'system' . CONFIG);                                //系统
 define('SYS_CONFIG_PATH', CORE_PATH . 'conf/' . SYS_CONFIG);            //系统配置文件
 
 define('CONTROLLER_METHOD_DELIMIT', '@');                               //控制器和方法的分隔符
-define('__CONTEROLLERINFO__', '\\' . APP_NAME . '\\controller\\');      //控制器的命名空间
+define('CONTEROLLER_INFO', '\\' . APP_NAME . '\\controller\\');      //控制器的命名空间
 
 define('__VIEW__', PATH . '/View');      //模板引擎位置
 

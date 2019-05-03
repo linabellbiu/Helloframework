@@ -134,9 +134,9 @@ class App
         } catch (Error $e) {
             echo $e->errorMessage();
         }
-        define("__WEB_DIR__", $web_dir);
-        define("__M__", $m);
-        define("__C__", $c);
+        define('APP_MODULE', $web_dir);
+        define('__M__', $m);
+        define('__C__', $c);
     }
 
     /**
@@ -146,14 +146,14 @@ class App
     {
         $class = __C__;
         $web_dir = '';
-        if (__WEB_DIR__ != '') {
-            $controllerDir = APP_PATH . 'controller/' . __WEB_DIR__ . '/' . $class . EXT;
-            define("__CLASSEXPLAME__", __CONTEROLLERINFO__ . __WEB_DIR__ . '\\' . $class);
+        if (APP_MODULE != '') {
+            $controllerDir = APP_PATH . 'controller/' . APP_MODULE . '/' . $class . EXT;
+            define("CLASS_EXPLAME", CONTEROLLER_INFO . APP_MODULE . '\\' . $class);
         } else {
             $controllerDir = APP_PATH . 'controller/' . $class . EXT;
-            define("__CLASSEXPLAME__", __CONTEROLLERINFO__ . $class);
+            define("CLASS_EXPLAME", CONTEROLLER_INFO . $class);
         }
-        define("__CONTROLLERDIR__", $controllerDir);
+        define("CONTROLLER_DIR", $controllerDir);
     }
 
     /**
@@ -164,18 +164,18 @@ class App
         Core::listen();
 
         try {
-            if (!file_exists(__CONTROLLERDIR__)) {
-                throw new Error(__CONTROLLERDIR__ . "文件找不到");
+            if (!file_exists(CONTROLLER_DIR)) {
+                throw new Error(CONTROLLER_DIR . "文件找不到");
             }
-            require_once __CONTROLLERDIR__;
-            if (!class_exists(__CLASSEXPLAME__)) {
-                throw new Error(__CONTROLLERDIR__ . " 类:" . __CLASSEXPLAME__ . "找不到");
+            require_once CONTROLLER_DIR;
+            if (!class_exists(CLASS_EXPLAME)) {
+                throw new Error(CONTROLLER_DIR . " 类:" . CLASS_EXPLAME . "找不到");
             }
-            $class = __CLASSEXPLAME__;
+            $class = CLASS_EXPLAME;
             $explame = new $class();
             $method = __M__;
             if (!method_exists($explame, $method)) {
-                throw new Error(__CONTROLLERDIR__ . " 在" . __CLASSEXPLAME__ . "类,找不到" . $method . "方法");
+                throw new Error(CONTROLLER_DIR . " 在" . CLASS_EXPLAME . "类,找不到" . $method . "方法");
             }
             $explame->$method();
         } catch (Error $e) {

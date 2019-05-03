@@ -27,6 +27,6 @@ class IndexController extends Controller
 //        $test->exec();
         $arr['pagetitle'] = '测试';
         $arr['test'] = '测试内容';
-       view('index',$arr);
+        view('index.index','pagetitle','测试');
     }
 }

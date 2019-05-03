@@ -50,13 +50,16 @@ class AexCompiler extends Compiler implements CompilerInterface
     {
         return preg_replace_callback(
             '/\B@(@?\w+(?:::\w+)?)([ \t]*)(\( ( (?>[^()]+) | (?3) )* \))?/x', function ($match) {
-            return $this->compileStatement($match);
+            return '<?php ' . $this->compileStatement($match) . ' ?>';
         }, $value
         );
     }
 
     protected function compileStatement($match)
     {
+        if (isset($match[3])) {
+            $match[3] = $this->addPhpControlStructures($match[1], $match[3]);
+        }
         return isset($match[3]) ? $match[1] . $match[3] : $match[1];
     }
 
@@ -71,5 +74,23 @@ class AexCompiler extends Compiler implements CompilerInterface
             $content = $this->{"compile{$type}"}($content);
         }
         return $content;
+    }
+
+    protected function addPhpControlStructures($param1, $param2)
+    {
+        switch (strtolower($param1)) {
+            case 'if':
+                break;
+            case 'for':
+                break;
+            case 'foreach':
+                break;
+            case 'while':
+                break;
+            default:
+                return $param2;
+        }
+
+        return $param2 . ':';
     }
 }
