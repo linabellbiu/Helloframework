@@ -7,12 +7,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1be58e3a-a170-48e5-b9e4-3087f2007dee" name="默认" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App/controller/index/IndexController.class.php" afterPath="$PROJECT_DIR$/App/controller/index/IndexController.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/AEX.php" afterPath="$PROJECT_DIR$/Core/AEX.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/App.class.php" afterPath="$PROJECT_DIR$/Core/App.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/common/function.php" afterPath="$PROJECT_DIR$/Core/common/function.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/conf/system.conf.php" afterPath="$PROJECT_DIR$/Core/conf/system.conf.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View/Compiled/AexCompiler.php" afterPath="$PROJECT_DIR$/View/Compiled/AexCompiler.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,8 +36,8 @@
       <file leaf-file-name="function.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Core/common/function.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-951">
-              <caret line="88" column="4" lean-forward="false" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
+            <state relative-caret-position="375">
+              <caret line="133" column="47" lean-forward="true" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -338,7 +332,7 @@
       <workItem from="1555516519536" duration="1935000" />
       <workItem from="1555730346623" duration="23301000" />
       <workItem from="1555950792057" duration="748000" />
-      <workItem from="1556862788742" duration="21947000" />
+      <workItem from="1556862788742" duration="22092000" />
     </task>
     <task id="LOCAL-00001" summary="修改应用目录，可以添加多个模块&#10;添加数据库模型">
       <created>1553345729288</created>
@@ -445,11 +439,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556889916088</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="修改view,变得强大">
+      <created>1556897913017</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1556897913017</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195118000" />
+    <option name="totallyTimeSpent" value="195263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -525,7 +526,8 @@
     <MESSAGE value="完成模板引擎" />
     <MESSAGE value="模板引擎接入控制器" />
     <MESSAGE value="增加模板引擎过期判断" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加模板引擎过期判断" />
+    <MESSAGE value="修改view,变得强大" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改view,变得强大" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -956,8 +958,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Core/common/function.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-951">
-          <caret line="88" column="4" lean-forward="false" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
+        <state relative-caret-position="375">
+          <caret line="133" column="47" lean-forward="true" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
           <folding />
         </state>
       </provider>
