@@ -6,7 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1be58e3a-a170-48e5-b9e4-3087f2007dee" name="默认" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/aexframework.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/framework.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -250,7 +254,7 @@
       <workItem from="1555516519536" duration="1935000" />
       <workItem from="1555730346623" duration="23301000" />
       <workItem from="1555950792057" duration="748000" />
-      <workItem from="1556862788742" duration="22442000" />
+      <workItem from="1556862788742" duration="22550000" />
     </task>
     <task id="LOCAL-00001" summary="修改应用目录，可以添加多个模块&#10;添加数据库模型">
       <created>1553345729288</created>
@@ -406,11 +410,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556898350617</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="修改view">
+      <created>1556898420432</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1556898420432</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195613000" />
+    <option name="totallyTimeSpent" value="195721000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
@@ -486,7 +497,8 @@
     <MESSAGE value="模板引擎接入控制器" />
     <MESSAGE value="增加模板引擎过期判断" />
     <MESSAGE value="修改view,变得强大" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改view,变得强大" />
+    <MESSAGE value="修改view" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改view" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
