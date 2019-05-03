@@ -82,10 +82,15 @@ function uconlyfirst($string)
     return ucfirst(strtolower($string));
 }
 
-function dump($var=null)
+function dump($var = null)
 {
     var_dump($var);
     exit();
 }
 
+
+function view($view, $data)
+{
+    exit(\View\Factory::make('View')->make(strtolower($view), $data)->render());
+}
 

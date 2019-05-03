@@ -14,7 +14,7 @@ class Filesystem
 {
     const HINT_PATH_DELIMITER = '.';
 
-    public static function isFileExist($file)
+    public static function fileExist($file)
     {
         if (!file_exists($file)) {
             return false;
@@ -39,5 +39,10 @@ class Filesystem
     public function put($path, $contents, $lock = false)
     {
         file_put_contents($path, $contents, $lock ? $lock : 0);
+    }
+
+    public function lastModified($path)
+    {
+        return filemtime($path);
     }
 }

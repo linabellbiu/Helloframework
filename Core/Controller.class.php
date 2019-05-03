@@ -22,8 +22,6 @@ abstract class Controller
 
     private $temp_data = [];
 
-    private $temp_view = '';
-
     /**
      * Controller constructor.
      */
@@ -59,7 +57,8 @@ abstract class Controller
         echo json_encode($arr, $options);
     }
 
-    protected function view($name = null)
+
+    protected function render($name = null)
     {
         $view = Factory::make('View');
 
@@ -68,6 +67,7 @@ abstract class Controller
         }
         exit($view->make(strtolower($name), $this->temp_data)->render());
     }
+
 
     protected function assgin($param = null, $param2 = null)
     {
@@ -78,5 +78,6 @@ abstract class Controller
                 $this->temp_data[$param] = $param2;
             }
         }
+        return $this;
     }
 }

@@ -35,11 +35,15 @@ class AexCompiler extends Compiler implements CompilerInterface
             $this->setPath($path);
         }
 
-        $result = $this->compileStatements(($this->files->get($path)));
+        //缓存过期重新编译
+        if ($this->isExpired($path)) {
 
-        $result = $this->compileContents($result);
+            $result = $this->compileStatements(($this->files->get($path)));
 
-        $this->files->put($this->getCompiledPath($this->path), $result);
+            $result = $this->compileContents($result);
+
+            $this->files->put($this->getCompiledPath($this->path), $result);
+        }
     }
 
     protected function compileStatements($value)

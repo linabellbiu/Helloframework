@@ -25,8 +25,8 @@ class IndexController extends Controller
     {
 //        $test = new IndexModel("wang", config('db1'));
 //        $test->exec();
-
-        $this->view();
-
+        $arr['pagetitle'] = '测试';
+        $arr['test'] = '测试内容';
+       view('index',$arr);
     }
 }

@@ -25,6 +25,21 @@ abstract class Compiler
 
     public function getCompiledPath($path)
     {
-        return $this->cachePath.'/'.sha1($path).'.php';
+        return $this->cachePath . '/' . sha1($path) . '.php';
+    }
+
+    public function isExpired($path)
+    {
+        $compiled = $this->getCompiledPath($path);
+
+        if (!$this->files->fileExist($compiled)) {
+            return true;
+        }
+
+        if ($this->files->lastModified($path) >
+            $this->files->lastModified($compiled)) {
+            return true;
+        }
+        return false;
     }
 }
