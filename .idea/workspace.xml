@@ -309,7 +309,7 @@
       <workItem from="1555516519536" duration="1935000" />
       <workItem from="1555730346623" duration="23301000" />
       <workItem from="1555950792057" duration="748000" />
-      <workItem from="1556862788742" duration="22380000" />
+      <workItem from="1556862788742" duration="22394000" />
     </task>
     <task id="LOCAL-00001" summary="修改应用目录，可以添加多个模块&#10;添加数据库模型">
       <created>1553345729288</created>
@@ -451,11 +451,18 @@
       <option name="project" value="LOCAL" />
       <updated>1556898297416</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="修改view,变得强大">
+      <created>1556898337363</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1556898337363</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195551000" />
+    <option name="totallyTimeSpent" value="195565000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
