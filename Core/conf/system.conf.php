@@ -12,6 +12,8 @@
 
 return
     [
-        "ERR_DEBUG"=>APP_DEBUG,
-        "LANGUAGE" =>'en',
+        'ERR_DEBUG' => APP_DEBUG,
+        'LANGUAGE' => 'en',
+        'templet_cache_path' => __VIEW__ . '/view/',
+        'template_path' => __VIEW__ . '/view/'
     ];

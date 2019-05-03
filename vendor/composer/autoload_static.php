@@ -23,7 +23,17 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
         'Core\\db\\Db' => __DIR__ . '/../..' . '/Core/db/Db.class.php',
         'Core\\db\\Driver' => __DIR__ . '/../..' . '/Core/db/Driver.class.php',
         'Core\\db\\driver\\Mysql' => __DIR__ . '/../..' . '/Core/db/driver/Mysql.class.php',
-        'Factory\\Factory' => __DIR__ . '/../..' . '/View/Factory.php',
+        'View\\AexEngine' => __DIR__ . '/../..' . '/View/Engine/AexEngine.php',
+        'View\\Compiled\\AexCompiler' => __DIR__ . '/../..' . '/View/Compiled/AexCompiler.php',
+        'View\\Compiled\\Compiler' => __DIR__ . '/../..' . '/View/Compiled/Compiler.php',
+        'View\\Compiled\\CompilerInterface' => __DIR__ . '/../..' . '/View/Compiled/CompilerInterface.php',
+        'View\\Compiled\\Concerns\\CompilesEchos' => __DIR__ . '/../..' . '/View/Compiled/Concerns/CompilesEchos.php',
+        'View\\Engine\\CompilerEngine' => __DIR__ . '/../..' . '/View/Engine/CompilerEngine.php',
+        'View\\Engine\\EngineInterface' => __DIR__ . '/../..' . '/View/Engine/EngineInterface.php',
+        'View\\Factory' => __DIR__ . '/../..' . '/View/Factory.php',
+        'View\\FileViewFinder' => __DIR__ . '/../..' . '/View/FileViewFinder.php',
+        'View\\Support\\Filesystem' => __DIR__ . '/../..' . '/View/Support/Filesystem.php',
+        'View\\Support\\Str' => __DIR__ . '/../..' . '/View/Support/Str.php',
         'View\\View' => __DIR__ . '/../..' . '/View/View.php',
     );
 

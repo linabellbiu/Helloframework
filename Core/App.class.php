@@ -2,6 +2,14 @@
 
 namespace Core;
 
+use View\Compiled\AexCompiler;
+use View\Factory;
+use View\FileViewFinder;
+use View\Engine\CompilerEngine;
+use View\Support\Filesystem;
+use View\Compiled;
+use View\View;
+
 class App
 {
     static public function init()
@@ -175,9 +183,38 @@ class App
         }
     }
 
-
-    public static function custom($mes)
+    public static function template_load()
     {
+        //绑定模板系统文件助手
+        Factory::bind('Filesystem', function () {
+            return new Filesystem();
+        });
 
+        //绑定编译器
+        Factory::bind('AexCompiler', function () {
+            return new AexCompiler(Factory::make('Filesystem'), config('templet_cache_path'));
+        });
+
+        //绑定编译引擎
+        Factory::bind('CompilerEngine', function () {
+            return new CompilerEngine(Factory::make('AexCompiler'));
+        });
+
+        //绑定模板文件阅读器
+        Factory::bind('FileViewFinder', function () {
+            $FileViewFinder = new FileViewFinder(Factory::make('CompilerEngine'), Factory::make('AexCompiler'));
+            $FileViewFinder->path = config('template_path');
+            return $FileViewFinder;
+        });
+
+        //绑定模板工厂
+        Factory::bind('Factory', function () {
+            return new Factory(Factory::make('FileViewFinder'));
+        });
+
+        //绑定视图
+        Factory::bind('View', function () {
+            return new View(Factory::make('Factory'), Factory::make('CompilerEngine'));
+        });
     }
 }

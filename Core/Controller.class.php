@@ -11,12 +11,19 @@ namespace Core;
 
 use Core\Http\Request;
 use Core\Http\Cookie;
+use View\Factory;
+
 /**
  * Class Controller
  * @package Core
  */
 abstract class Controller
 {
+
+    private $temp_data = [];
+
+    private $temp_view = '';
+
     /**
      * Controller constructor.
      */
@@ -43,16 +50,6 @@ abstract class Controller
         return Validate::getinstance()->erros;
     }
 
-
-    /**
-     * @return null
-     */
-    protected function assgin()
-    {
-        return null;
-    }
-
-
     /**
      * @param $arr
      * @param int $options
@@ -62,5 +59,24 @@ abstract class Controller
         echo json_encode($arr, $options);
     }
 
+    protected function view($name = null)
+    {
+        $view = Factory::make('View');
 
+        if (empty($name)) {
+            list($name,) = explode('Controller', __C__);
+        }
+        exit($view->make(strtolower($name), $this->temp_data)->render());
+    }
+
+    protected function assgin($param = null, $param2 = null)
+    {
+        if (is_array($param)) {
+            $this->temp_data = $param;
+        } else {
+            if (is_string($param)) {
+                $this->temp_data[$param] = $param2;
+            }
+        }
+    }
 }

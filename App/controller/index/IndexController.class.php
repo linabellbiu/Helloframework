@@ -26,7 +26,7 @@ class IndexController extends Controller
 //        $test = new IndexModel("wang", config('db1'));
 //        $test->exec();
 
-       new View();
+        $this->view();
 
     }
 }
