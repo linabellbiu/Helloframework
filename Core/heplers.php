@@ -1,0 +1,40 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: wangxdong
+ * Date: 2019/5/4
+ * Time: 13:20
+ */
+
+namespace Core;
+
+class Heplers
+{
+
+    /**
+     * @param null $url
+     * @return array
+     */
+    public static function originalUrlControllerAndMothed($url = null)
+    {
+        $urlarr = explode('?', $url);
+
+        $c = INDEX_CONTROLLER;
+        $m = INDEX_METHOD;
+
+        if (empty($urlarr[1])) {
+            return [$c, $m];
+        }
+
+        $request = \Core\Http\Request::request();
+
+        if (isset($request['c'])) {
+            $c = $request['c'] . CONTEROLLER_POSTFIX;
+        }
+        if (isset($request['m'])) {
+            $m = $request['m'];
+        }
+
+        return [$c, $m];
+    }
+}

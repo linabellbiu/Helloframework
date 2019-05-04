@@ -22,7 +22,7 @@ class FileViewFinder
 
     public $templetPath;
 
-    protected $extensions = ['aex.html', 'html', 'aex.php', 'php'];
+    protected $extensions = ['hello.html', 'html', 'hello.php', 'php'];
 
     private $engine;
 

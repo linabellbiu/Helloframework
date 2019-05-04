@@ -82,6 +82,10 @@ function uconlyfirst($string)
     return ucfirst(strtolower($string));
 }
 
+/**
+ * 输出视图
+ * @param null $args
+ */
 function view($args = null)
 {
     $count = func_num_args();
@@ -146,3 +150,16 @@ function view($args = null)
     exit(\View\Factory::make('View')->make(strtolower($view), $value)->render());
 }
 
+function debug_var($val){
+    var_dump($val);
+    exit;
+}
+
+//获取当前请求的url
+function getReqUrl(){
+    return REQUEST_URI;
+}
+
+function htmlencode($string,$flags){
+    return htmlentities($string,$flags);
+}

@@ -2,13 +2,14 @@
 
 namespace Core;
 
-use View\Compiled\AexCompiler;
-use View\Factory;
-use View\FileViewFinder;
-use View\Engine\CompilerEngine;
-use View\Support\Filesystem;
-use View\Compiled;
 use View\View;
+use View\Factory;
+use View\Compiled;
+use View\FileViewFinder;
+use View\Support\Filesystem;
+use View\Compiled\HelloCompiler;
+use View\Engine\CompilerEngine;
+
 
 class App
 {
@@ -28,24 +29,30 @@ class App
 
     static public function load()
     {
-
         if (UTF_8) {
             header("Content-type:text/html;charset=utf-8");
         }
+
+        //加载公共函数
         include_once CORE_COMMON_PATH . 'function.php';
+
+        //加载系统文件助手函数
+        include_once CORE_PATH . 'heplers.php';
+
 
         //加载系统配置文件
         config(load_file(SYS_CONFIG_PATH));
 
         //加载公共函数
-
         try {
+
             //加载路由
             if (file_exists(APP_ROUTE)) {
+
                 require APP_ROUTE;
+
             } else {
-                throw new Error('route.php 在' . APP_ROUTE . ' 
-                没有找到');
+                throw new Error('route.php 在' . APP_ROUTE . ' 没有找到');
             }
 
             if (file_exists(APP_INTI)) {
@@ -68,7 +75,13 @@ class App
 
             //加载规则
             if (file_exists(APP_RULE)) {
+
+                //加载系统的请求规则
+                require CORE_COMMON_PATH . 'validate.php';
+
+                //加载自定义规则
                 require APP_RULE;
+
             } else {
                 throw new Error('rule.php 在' . APP_RULE . ' 
                 没有找到');
@@ -96,23 +109,31 @@ class App
         $m = 'emptyASDUMVZPDEIFASDFpabnHUASHJB';
         $web_dir = '';
         try {
+
             if ($n) {
                 $request_url = trim(substr($request_url, 0, $n), '/');
             }
-            foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
-                if (trim($request_url, '/') == trim($url, '/')) {
-                    $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
-                    if (empty($args[1])) {
-                        throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
-                    } else {
-                        $web = $args[0];
-                        $m = $args[1];
-                        if (strpos($web, '/')) {
-                            list($web_dir, $c) = explode('/', $web);
+            do {
+                if (empty(RouteService::$route)) {
+                    list($c, $m) = Heplers::originalUrlControllerAndMothed(REQUEST_URI);
+                    break;
+                }
+                foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
+                    if (trim($request_url, '/') == trim($url, '/')) {
+                        $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
+                        if (empty($args[1])) {
+                            throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
+                        } else {
+                            $c =  $web = $args[0];
+                            $m = $args[1];
+                            if (strpos($web, '.')) {
+                                list($web_dir, $c) = explode('.', $web);
+                            }
                         }
                     }
                 }
-            }
+                break;
+            } while (0);
 
             if (empty($c)) {
                 throw new Error('控制器名是空的');
@@ -191,18 +212,18 @@ class App
         });
 
         //绑定编译器
-        Factory::bind('AexCompiler', function () {
-            return new AexCompiler(Factory::make('Filesystem'), config('templet_cache_path'));
+        Factory::bind('HelloCompiler', function () {
+            return new HelloCompiler(Factory::make('Filesystem'), config('templet_cache_path'));
         });
 
         //绑定编译引擎
         Factory::bind('CompilerEngine', function () {
-            return new CompilerEngine(Factory::make('AexCompiler'));
+            return new CompilerEngine(Factory::make('HelloCompiler'));
         });
 
         //绑定模板文件阅读器
         Factory::bind('FileViewFinder', function () {
-            $FileViewFinder = new FileViewFinder(Factory::make('CompilerEngine'), Factory::make('AexCompiler'));
+            $FileViewFinder = new FileViewFinder(Factory::make('CompilerEngine'), Factory::make('HelloCompiler'));
             $FileViewFinder->path = config('template_path');
             return $FileViewFinder;
         });

@@ -13,7 +13,6 @@ use Core\Error;
 class Filter
 {
 
-
     static public $instance;
 
     private function __construct()
@@ -32,7 +31,6 @@ class Filter
     static private function lib($string)
     {
         switch ($string) {
-
             case 'mail':                    //邮箱验证
                 return FILTER_VALIDATE_EMAIL;
             case 'ipv6':                    //ipv6验证
@@ -56,7 +54,7 @@ class Filter
     static public function filter($string, $filter)
     {
         $valid = self::lib($filter);
-        if ($filter == FILTER_CALLBACK) {
+        if ($valid == FILTER_CALLBACK) {
             try {
                 if (!function_exists('__' . $filter)) throw new Error('__' . $filter . '找不到');
             } catch (Error $e) {
@@ -77,3 +75,5 @@ class Filter
         return false;
     }
 }
+
+require_once 'filter.php';

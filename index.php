@@ -30,4 +30,4 @@ define("WEB_INDEX",'index');
 define('MAIN_FILE','index.php');
 
 // 引入入口文件
-require_once PATH . "/Core/AEX.php";
+require_once PATH . "/Core/Hello.php";
