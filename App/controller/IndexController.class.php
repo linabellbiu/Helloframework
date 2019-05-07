@@ -22,6 +22,11 @@ class IndexController extends Controller
         echo $this->validateError();
 //        $test = new IndexModel("wang", config('db1'));
 //        $test->exec();
-        view('welcome','test', 'Hello word');
+        view('welcome', 'test', 'Hello word');
+    }
+
+    public function login()
+    {
+        view('index.login');
     }
 }

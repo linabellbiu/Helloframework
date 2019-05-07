@@ -93,6 +93,7 @@ function view($args = null)
 
     $view = APP_MODULE . '.' . __M__;
     $value = [];
+
     switch ($count) {
         case 0:
             break;
@@ -103,6 +104,7 @@ function view($args = null)
                     $value = $data;
                     break;
                 }
+                $view = $data;
                 if (strpos($data, '.') === false) {
                     $view = APP_MODULE . '.' . $data;
                 }
@@ -147,7 +149,7 @@ function view($args = null)
         default:
     }
 
-    exit(\Core\Factory::make('View')->make(strtolower($view), $value)->render());
+    exit(\Core\Factory::make('View')->make(trim(strtolower($view), '.'), $value)->render());
 }
 
 function debug_var($val)

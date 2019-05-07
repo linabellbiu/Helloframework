@@ -28,7 +28,7 @@ class RouteService
      * @param array $arg
      * @return Validate
      */
-    static public function get($name = '', $url = '', $arg)
+    static public function get($name = '', $url = '', $arg=null)
     {
         self::regRoute('GET', $name, $url);
         return self::bindingParam($arg);
