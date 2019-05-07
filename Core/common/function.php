@@ -24,7 +24,7 @@ function only_english_letter($str)
  */
 function load_file($filname)
 {
-    return file_exists($filname) ? include $filname : null;
+    return file_exists($filname) ? include_once $filname : null;
 }
 
 
@@ -147,7 +147,7 @@ function view($args = null)
         default:
     }
 
-    exit(\View\Factory::make('View')->make(strtolower($view), $value)->render());
+    exit(\Core\Factory::make('View')->make(strtolower($view), $value)->render());
 }
 
 function debug_var($val){

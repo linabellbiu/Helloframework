@@ -5,6 +5,7 @@
  * Date: 2018/9/29
  * Time: 14:28
  */
+
 namespace Core;
 
 class RouteService
@@ -24,7 +25,7 @@ class RouteService
     /**
      * @param string $name
      * @param string $url
-     * @param $arg
+     * @param array $arg
      * @return Validate
      */
     static public function get($name = '', $url = '', $arg)
@@ -67,8 +68,8 @@ class RouteService
     {
         if (empty($name)) {
             $name = INDEX_CONTROLLER . CONTROLLER_METHOD_DELIMIT . INDEX_METHOD;
-            if(!empty(WEB_INDEX) && WEB_INDEX !=''){
-                $name = WEB_INDEX.'\\'.$name;
+            if (!empty(WEB_INDEX) && WEB_INDEX != '') {
+                $name = WEB_INDEX . '\\' . $name;
             }
             $url = '/index';
         }

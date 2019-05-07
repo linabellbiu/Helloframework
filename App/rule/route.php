@@ -1,10 +1,7 @@
 <?php
-/**
- * nullable 可选字段，可以不填，填了必须验证
- */
 
 //\Core\RouteService::get('IndexController@index', '/', [
-//    'm' => 'mail|nullable',
+//    'm' => 'mail|null',
 //])->rulesCookie([
 //    'language' => 'mail'
 //])->bandingError([

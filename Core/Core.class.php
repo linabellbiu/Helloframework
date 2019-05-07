@@ -2,7 +2,6 @@
 
 namespace Core;
 
-use Core\Lib\Filter;
 use Core\Http\Request;
 
 
@@ -15,9 +14,6 @@ class Core
 
         //映射url到控制器
         App::dispatch();
-
-        //加载模板引擎
-        App::template_load();
 
         //执行应用程序
         App::exec();

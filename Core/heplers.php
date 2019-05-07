@@ -37,4 +37,17 @@ class Heplers
 
         return [$c, $m];
     }
+
+    public static function loadFile($file)
+    {
+        $files = null;
+        try {
+            if (!$files = load_file($file)) {
+                throw new Error($file . '没有找到');
+            }
+        } catch (Error $e) {
+            echo $e->getMessage();
+        }
+        return $files;
+    }
 }

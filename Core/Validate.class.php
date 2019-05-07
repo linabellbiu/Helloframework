@@ -11,7 +11,7 @@ namespace Core;
 
 use Core\Http\Cookie;
 use Core\Http\Request;
-use Core\Lib\Filter;
+use Core\Filter;
 
 class Validate
 {
@@ -97,7 +97,7 @@ class Validate
 
     /**
      * 添加请求数据的验证规则
-     * @param $vail
+     * @param array $vail 验证规则
      * @return mixed
      */
     public function rulesData($vail)
@@ -113,8 +113,8 @@ class Validate
 
     /**
      * 传入规则和请求数据调用安全库开始验证
-     * @param $vaild
-     * @param $value
+     * @param $vaild array 验证规则
+     * @param $value array 验证参数
      * @return bool|mixed
      */
     public function safe($vaild, $value)
@@ -125,8 +125,7 @@ class Validate
         } catch (Error $e) {
             $e->errorMessage();
         }
-        if (empty($vaild))
-        {
+        if (empty($vaild)) {
             return false;
         }
 
@@ -135,24 +134,20 @@ class Validate
 
             //验证是否允许是空的传值
             if (empty($value) || !array_key_exists($name, $value)) {
-                if (!isset($arr['nullable'])) {
-                    $this->setError('isNull');
+                if (!isset($arr['null'])) {
+                    $this->setError('SYS_ROUTE_REQ_IS_NULL');
                     return false;
                 }
                 continue;
             }
             foreach (array_flip($arr) as $index => $rules) {
-                if(Filter::getinstance()->filter($value[$name], $rules))
-                {
+                if (Filter::getinstance()->filter($value[$name], $rules)) {
                     return true;
-                }else
-                {
-                    if (empty($name))
-                    {
+                } else {
+                    if (empty($name)) {
                         $this->setError($rules);
-                    }else
-                    {
-                        $this->setError($name.'|'.$rules);
+                    } else {
+                        $this->setError($name . '|' . $rules);
                     }
                     return false;
                 }
@@ -164,9 +159,7 @@ class Validate
 
     private function setError($name)
     {
-
-        if (!empty($name))
-        {
+        if (!empty($name)) {
             $this->erros = $this->bindingParamError[$name][config('language')];
         }
         return null;

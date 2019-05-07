@@ -24,6 +24,7 @@ define('APP_LANGUAGE', 'language');                                    //应用�
 
 define('CORE_PATH', PATH . '/Core/');                                   //核心目录
 define('CORE_COMMON_PATH', CORE_PATH . 'common/');                      //公共目录
+define('CORE_LIB', CORE_PATH . 'lib/');                      //系统库文件
 define('SYS_CONFIG', 'system' . CONFIG);                                //系统配置文件名
 define('SYS_CONFIG_PATH', CORE_PATH . 'conf/' . SYS_CONFIG);            //系统配置文件
 

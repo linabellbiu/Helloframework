@@ -24,3 +24,5 @@ Time per request:       327.481 [ms] (mean)
 Time per request:       3.275 [ms] (mean, across all concurrent requests)
 Transfer rate:          527.52 [Kbytes/sec] received
 ```
+
+路由null 是可以为空字段，可选，不填null 是必检查

@@ -6,7 +6,7 @@
  * Date: 2018/10/15
  * Time: 10:09
  */
-namespace Core\Lib;
+namespace Core;
 
 use Core\Error;
 
@@ -75,5 +75,3 @@ class Filter
         return false;
     }
 }
-
-require_once 'filter.php';

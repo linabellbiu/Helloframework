@@ -11,7 +11,7 @@ namespace Core;
 
 use Core\Http\Request;
 use Core\Http\Cookie;
-use View\Factory;
+use Core\Factory;
 
 /**
  * Class Controller
