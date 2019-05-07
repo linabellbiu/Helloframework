@@ -58,6 +58,7 @@ class Validate
         return self::$instance;
     }
 
+
     /**
      * 添加错误提示
      * @param $arr
@@ -77,6 +78,7 @@ class Validate
         return self::$instance;
     }
 
+
     /**
      * 添加cookie的验证规则
      * @param $vail
@@ -91,6 +93,7 @@ class Validate
         }
         return self::$instance;
     }
+
 
     /**
      * 添加请求数据的验证规则
@@ -173,8 +176,9 @@ class Validate
         return $this->bindingParamError[$name] ? $this->bindingParamError[$name] : null;
     }
 
+
     private function unsetReq($name = null)
     {
-        Request::delete();
+        Request::delete($name);
     }
 }

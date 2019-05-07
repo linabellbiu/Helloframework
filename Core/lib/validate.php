@@ -13,4 +13,4 @@ Validate::getinstance()->Data(
     [
         'c' => 'controller|null',
         'm' => 'mothed|null'
-    ])->Cookie(['language' => 'string']);
+    ]);

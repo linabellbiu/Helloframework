@@ -17,6 +17,9 @@ class IndexController extends Controller
 {
     public function index()
     {
+        Request::request();
+
+        echo $this->validateError();
 //        $test = new IndexModel("wang", config('db1'));
 //        $test->exec();
         view('welcome','test', 'Hello word');
