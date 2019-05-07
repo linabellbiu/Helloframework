@@ -42,11 +42,11 @@ class Heplers
     {
         $files = null;
         try {
-            if (!$files = load_file($file)) {
+            if (($files = load_file($file)) === false) {
                 throw new Error($file . '没有找到');
             }
         } catch (Error $e) {
-            echo $e->getMessage();
+            $e->errorMessage();
         }
         return $files;
     }

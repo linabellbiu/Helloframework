@@ -58,7 +58,7 @@ class Filter
             try {
                 if (!function_exists('__' . $filter)) throw new Error('__' . $filter . '找不到');
             } catch (Error $e) {
-                $e->getMessage();
+                $e->errorMessage();
             }
 
             return filter_var($string, FILTER_CALLBACK, [

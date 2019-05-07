@@ -24,7 +24,7 @@ function only_english_letter($str)
  */
 function load_file($filname)
 {
-    return file_exists($filname) ? include_once $filname : null;
+    return file_exists($filname) ? include_once $filname : false;
 }
 
 
@@ -150,16 +150,19 @@ function view($args = null)
     exit(\Core\Factory::make('View')->make(strtolower($view), $value)->render());
 }
 
-function debug_var($val){
+function debug_var($val)
+{
     var_dump($val);
     exit;
 }
 
 //获取当前请求的url
-function getReqUrl(){
+function get_req_url()
+{
     return REQUEST_URI;
 }
 
-function htmlencode($string,$flags){
-    return htmlentities($string,$flags);
+function htmlencode($string, $flags)
+{
+    return htmlentities($string, $flags);
 }

@@ -92,6 +92,6 @@ class RouteService
      */
     static public function bindingParam($arg)
     {
-        return Validate::getinstance()->rulesData($arg);
+        return Validate::getinstance()->Data($arg);
     }
 }

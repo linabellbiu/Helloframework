@@ -12,7 +12,7 @@
  */
 function __controller($string)
 {
-    return is_string($string) ? htmlencode(trim($string),ENT_QUOTES) : false;
+    return is_string($string) ? htmlencode(trim($string), ENT_QUOTES) : false;
 }
 
 
@@ -22,5 +22,10 @@ function __controller($string)
  */
 function __mothed($string)
 {
-    return is_string($string) ? htmlencode(trim($string),ENT_QUOTES) : false;
+    return is_string($string) ? htmlencode(trim($string), ENT_QUOTES) : false;
+}
+
+function __string($string)
+{
+    return is_string($string) ? htmlencode(is_string($string), ENT_QUOTES) : false;
 }

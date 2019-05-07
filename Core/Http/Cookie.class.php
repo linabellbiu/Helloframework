@@ -34,6 +34,7 @@ class Cookie
                     if (empty(Validate::$instance->validateCookie[$name])) {
                         return null;
                     }
+
                     if (empty($_COOKIE[$name])) {
                         return null;
                     }
@@ -52,11 +53,11 @@ class Cookie
     }
 
 
-    static private function setCookie($name, $value = null, $expire = null, $path = null, $domain = null, $secure = null, $httponly = null)
+    static private function setCookie($name, $value = null, $expire = 0, $path = '/', $domain = null, $secure = null, $httponly = false)
     {
         if (is_string($name) && is_string($value)) {
-            setcookie($name, $value = null, $expire = null, $path = null, $domain = null, $secure = null, $httponly = null);
-            return true;
+            setcookie($name, $value, $expire, $path , $domain, $secure, $httponly = false);
+            return $value;
         }
         return false;
     }

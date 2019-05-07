@@ -24,17 +24,20 @@ class BuildFile implements LoadInterFace
         'loadSystemCommon',
         'loadSystemConf',
         'loadSystemLib',
-        'loadAppValidate',
-        'loadRoute',
+        'loadAppRoute',
         'loadAppInt',
     ];
 
 
+    /**
+     * 加载lib
+     */
     private function loadSystemLib()
     {
         Heplers::loadFile(CORE_LIB . 'filter.php');
         Heplers::loadFile(CORE_LIB . 'validate.php');
     }
+
 
     /**
      * 加载系统配置文件
@@ -44,6 +47,10 @@ class BuildFile implements LoadInterFace
         config(Heplers::loadFile(SYS_CONFIG_PATH));
     }
 
+
+    /**
+     * 加载公共文件
+     */
     private function loadSystemCommon()
     {
         $function_file = CORE_COMMON_PATH . 'function.php';
@@ -54,30 +61,35 @@ class BuildFile implements LoadInterFace
                 throw new Error(CORE_COMMON_PATH . 'function.php 找不到');
             }
         } catch (Error $e) {
-            echo $e->getMessage();
+            $e->errorMessage();
         }
     }
 
+
+    /**
+     * 加载路由
+     */
     private function loadAppRoute()
     {
         Heplers::loadFile(APP_ROUTE);
     }
 
-    private function loadAppValidate()
-    {
-        Heplers::loadFile(APP_RULE);
-    }
 
+    /**
+     * 加载应用初始化模块
+     */
     private function loadAppInt()
     {
-        foreach (Heplers::loadFile(APP_INTI) as $name => $mod) {
-
-            if ($name == APP_CONFIG) $this->loadAppConfig($mod);
-
-            if ($name == APP_LANGUAGE) $this->loadAppLanguage();
-        }
+        foreach (Heplers::loadFile(APP_INTI) as $name => $mod)
+            foreach ($mod as $conf)
+                Heplers::loadFile(APP_PATH . $name . '/' . $conf . '.php');
     }
 
+
+    /**
+     * 加载app配置文件
+     * @param $file
+     */
     private function loadAppConfig($file)
     {
         foreach ($file as $app_config) {
@@ -85,10 +97,15 @@ class BuildFile implements LoadInterFace
         }
     }
 
+
+    /**
+     * 加载语言包
+     */
     private function loadAppLanguage()
     {
         Custom::setCustom(Heplers::loadFile(APP_LANGUAGE_PATH . config('language') . '.php'));
     }
+
 
     public function load()
     {
@@ -101,8 +118,7 @@ class BuildFile implements LoadInterFace
                 }
             }
         } catch (Error $e) {
-            $e->getMessage();
+            $e->errorMessage();
         }
-
     }
 }

@@ -106,7 +106,6 @@ class App
     public static function getController()
     {
         $class = __C__;
-        $web_dir = '';
         if (APP_MODULE != '') {
             $controllerDir = APP_PATH . 'controller/' . APP_MODULE . '/' . $class . EXT;
             define("CLASS_EXPLAME", CONTEROLLER_INFO . APP_MODULE . '\\' . $class);

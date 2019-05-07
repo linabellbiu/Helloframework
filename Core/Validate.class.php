@@ -8,10 +8,7 @@
 
 namespace Core;
 
-
-use Core\Http\Cookie;
 use Core\Http\Request;
-use Core\Filter;
 
 class Validate
 {
@@ -85,7 +82,7 @@ class Validate
      * @param $vail
      * @return mixed
      */
-    public function rulesCookie($vail)
+    public function Cookie($vail)
     {
         if (is_array($vail) && !empty($vail)) {
             foreach ($vail as $name => $rule) {
@@ -100,7 +97,7 @@ class Validate
      * @param array $vail 验证规则
      * @return mixed
      */
-    public function rulesData($vail)
+    public function Data($vail)
     {
         if (is_array($vail) && !empty($vail)) {
             foreach ($vail as $name => $rule) {
@@ -128,14 +125,17 @@ class Validate
         if (empty($vaild)) {
             return false;
         }
-
         foreach ($vaild as $name => $rule) {
             $arr = array_flip(explode('|', $rule));
 
             //验证是否允许是空的传值
             if (empty($value) || !array_key_exists($name, $value)) {
                 if (!isset($arr['null'])) {
-                    $this->setError('SYS_ROUTE_REQ_IS_NULL');
+                    if (empty($this->getError($name . '|null'))) {
+                        $this->setError('SYS_ROUTE_REQ_IS_NULL');
+                    } else {
+                        $this->setError($name . '|null');
+                    }
                     return false;
                 }
                 continue;
@@ -159,10 +159,18 @@ class Validate
 
     private function setError($name)
     {
-        if (!empty($name)) {
+        if (empty($this->bindingParamError[$name][config('language')])) {
+            $this->erros = $this->bindingParamError[$name];
+        } else {
             $this->erros = $this->bindingParamError[$name][config('language')];
         }
-        return null;
+        return;
+    }
+
+
+    private function getError($name)
+    {
+        return $this->bindingParamError[$name] ? $this->bindingParamError[$name] : null;
     }
 
     private function unsetReq($name = null)

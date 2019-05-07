@@ -30,7 +30,7 @@ abstract class Factory
                 throw new Error('make err');
             }
         } catch (Error $e) {
-            echo $e->getMessage();
+            $e->errorMessage();
         }
     }
 }
