@@ -28,6 +28,13 @@ class App
             header("Content-type:text/html;charset=utf-8");
         }
 
+        $function_file = CORE_COMMON_PATH . 'function.php';
+
+        if (!file_exists($function_file))
+            throw new Error(CORE_COMMON_PATH . 'function.php 找不到');
+
+        require_once $function_file;
+
         SystemBuild::run();
 
     }
@@ -48,56 +55,54 @@ class App
         $c = 'emptygUSHJBNJXCKVUAMJsfdsaadfdff';
         $m = 'emptyASDUMVZPDEIFASDFpabnHUASHJB';
         $web_dir = '';
-        try {
 
-            if ($n) {
-                $request_url = trim(substr($request_url, 0, $n), '/');
+
+        if ($n) {
+            $request_url = trim(substr($request_url, 0, $n), '/');
+        }
+        do {
+            if (empty(RouteService::$route)) {
+                list($c, $m) = Heplers::originalUrlControllerAndMothed(REQUEST_URI);
+                break;
             }
-            do {
-                if (empty(RouteService::$route)) {
-                    list($c, $m) = Heplers::originalUrlControllerAndMothed(REQUEST_URI);
-                    break;
-                }
-                foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
-                    if (trim($request_url, '/') == trim($url, '/')) {
-                        $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
-                        if (empty($args[1])) {
-                            throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
-                        } else {
-                            $c = $web = $args[0];
-                            $m = $args[1];
-                            if (strpos($web, '.')) {
-                                list($web_dir, $c) = explode('.', $web);
-                            }
-
-                            define('APP_ROUTE_NAME', $control);
-                            break;
+            foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
+                if (trim($request_url, '/') == trim($url, '/')) {
+                    $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
+                    if (empty($args[1])) {
+                        throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
+                    } else {
+                        $c = $web = $args[0];
+                        $m = $args[1];
+                        if (strpos($web, '.')) {
+                            list($web_dir, $c) = explode('.', $web);
                         }
+
+                        define('APP_ROUTE_NAME', $control);
+                        break;
                     }
                 }
-                break;
-            } while (0);
+            }
+            break;
+        } while (0);
 
-            if (empty($c)) {
-                throw new Error('控制器名是空的');
-            }
-            if (empty($m)) {
-                throw new Error('方法名是空的');
-            }
-            if (!only_english_letter($c)) {
-                throw new Error("控制器名不合法,必须全部是英文字母");
-            }
-            if (!only_english_letter($m)) {
-                throw new Error("方法名不合法,必须全部是英文字母");
-            }
-            if (!empty($web_dir)) {
-                if (!only_english_letter($web_dir)) {
-                    throw new Error("目录名名不合法,必须全部是英文字母");
-                }
-            }
-        } catch (Error $e) {
-            echo $e->errorMessage();
+        if (empty($c)) {
+            throw new Error('控制器名是空的');
         }
+        if (empty($m)) {
+            throw new Error('方法名是空的');
+        }
+        if (!only_english_letter($c)) {
+            throw new Error("控制器名不合法,必须全部是英文字母");
+        }
+        if (!only_english_letter($m)) {
+            throw new Error("方法名不合法,必须全部是英文字母");
+        }
+        if (!empty($web_dir)) {
+            if (!only_english_letter($web_dir)) {
+                throw new Error("目录名名不合法,必须全部是英文字母");
+            }
+        }
+
         define('APP_MODULE', $web_dir);
         define('__M__', $m);
         define('__C__', $c);

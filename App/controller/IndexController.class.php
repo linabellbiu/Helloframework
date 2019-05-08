@@ -17,7 +17,9 @@ class IndexController extends Controller
 {
     public function index()
     {
-        Request::request();
+        if (!Request::request()) {
+            echo $this->getReqError();
+        }
 
 //        echo $this->validateError();
 //        $test = new IndexMode l("wang", config('db1'));

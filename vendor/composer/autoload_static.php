@@ -9,6 +9,7 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
     public static $classMap = array (
         'App\\controller\\IndexController' => __DIR__ . '/../..' . '/App/controller/IndexController.class.php',
         'App\\model\\index\\IndexModel' => __DIR__ . '/../..' . '/App/model/index/IndexModel.class.php',
+        'Auth' => __DIR__ . '/../..' . '/Core/Hello/Auth/Auth.class.php',
         'Core\\App' => __DIR__ . '/../..' . '/Core/App.class.php',
         'Core\\Controller' => __DIR__ . '/../..' . '/Core/Controller.class.php',
         'Core\\Core' => __DIR__ . '/../..' . '/Core/Core.class.php',
@@ -16,6 +17,7 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
         'Core\\Error' => __DIR__ . '/../..' . '/Core/Error.class.php',
         'Core\\Factory' => __DIR__ . '/../..' . '/Core/Factory.class.php',
         'Core\\Filter' => __DIR__ . '/../..' . '/Core/Filter.class.php',
+        'Core\\Hello\\Build\\BuildComponent' => __DIR__ . '/../..' . '/Core/Hello/Build/BuildComponent.class.php',
         'Core\\Hello\\Build\\BuildFile' => __DIR__ . '/../..' . '/Core/Hello/Build/BuildFile.class.php',
         'Core\\Hello\\Build\\BuildView' => __DIR__ . '/../..' . '/Core/Hello/Build/BuildView.class.php',
         'Core\\Hello\\Build\\Load' => __DIR__ . '/../..' . '/Core/Hello/Load.class.php',
@@ -27,6 +29,7 @@ class ComposerStaticInita4bd6f758a3b839e4031e4badafba7e5
         'Core\\Model' => __DIR__ . '/../..' . '/Core/Model.class.php',
         'Core\\RouteService' => __DIR__ . '/../..' . '/Core/RouteService.class.php',
         'Core\\Validate' => __DIR__ . '/../..' . '/Core/Validate.class.php',
+        'Core\\ValidateInterface' => __DIR__ . '/../..' . '/Core/ValidateInterface.php',
         'Core\\db\\Db' => __DIR__ . '/../..' . '/Core/db/Db.class.php',
         'Core\\db\\Driver' => __DIR__ . '/../..' . '/Core/db/Driver.class.php',
         'Core\\db\\driver\\Mysql' => __DIR__ . '/../..' . '/Core/db/driver/Mysql.class.php',

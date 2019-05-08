@@ -22,15 +22,11 @@ abstract class Factory
 
     public static function make($name)
     {
-        try {
-            if (isset(static::$registry[$name])) {
-                $resolver = static::$registry[$name];
-                return $resolver();
-            } else {
-                throw new Error('make err');
-            }
-        } catch (Error $e) {
-            $e->errorMessage();
+        if (isset(static::$registry[$name])) {
+            $resolver = static::$registry[$name];
+            return $resolver();
+        } else {
+            throw new Error('make err');
         }
     }
 }

@@ -71,24 +71,26 @@ class RouteService
      */
     private $validate;
 
-
     /**
      * RouteService constructor.
-     * @param Validate $validate
+     * @param ValidateInterface $validate
      */
-    public function __construct(Validate $validate)
+    public function __construct(ValidateInterface $validate)
     {
         $this->validate = $validate;
+
+        self::$instance = $this;
     }
 
+
+    /**
+     * @return RouteService|object
+     */
     static public function getinstance()
     {
-        if (!self::$instance) {
-
-            self::$instance = new self(new Validate());
-        }
         return self::$instance;
     }
+
 
     /**
      * @param $name
@@ -98,7 +100,6 @@ class RouteService
      */
     static public function get($name, $url, callable $callable = null)
     {
-
         self::regRoute(__GET__, $name, $url, $callable);
 
         return self::getinstance();
@@ -111,7 +112,7 @@ class RouteService
      * @param callable|null $callable
      * @return RouteService|object
      */
-    static public function post($name = '', $url = '', callable $callable = null)
+    static public function post($name, $url, callable $callable = null)
     {
 
         self::regRoute(__POST__, $name, $url, $callable);
@@ -126,7 +127,7 @@ class RouteService
      * @param callable|null $callable
      * @return RouteService|object
      */
-    static public function request($name = '', $url = '', callable $callable = null)
+    static public function request($name, $url, callable $callable = null)
     {
 
         self::regRoute(__REQUEST__, $name, $url, $callable);
@@ -141,47 +142,38 @@ class RouteService
      * @param $name
      * @param $url
      * @param $callable
+     * @throws Error
      */
     private static function regRoute($method, $name, $url, $callable)
     {
-        if (empty($name)) {
+        if (!is_string($name) && !is_string($url))
+            throw new Error('路由格式错误');
 
-            $name = Heplers::defaultRouteName();
 
-            if (!empty(WEB_INDEX) && WEB_INDEX != '') {
-                $name = WEB_INDEX . '\\' . $name;
-            }
-            $url = '/index';
-        }
-        try {
-            if (!is_string($name) && !is_string($url)) {
-                throw new Error('路由格式错误');
-            }
-            if (!strpos($name, CONTROLLER_METHOD_DELIMIT)) {
-                throw new Error('路由  ' . CONTROLLER_METHOD_DELIMIT . ' 找不到');
-            }
-        } catch (Error $e) {
-            $e->errorMessage();
-        }
+        if (!strpos($name, CONTROLLER_METHOD_DELIMIT))
+            throw new Error('路由名称格式错误,e.g. controller@method');
 
-        self::setRouteParam($method, $name, $url, $callable);
-
-        self::bandingcallable();
 
         self::$route[strtoupper($method)][uconlyfirst($url)] = $name;
+
+
+        //设置路由参数
+        self::setRouteParam($method, $name, $url, $callable);
+
+
+        //绑定路由的回调函数
+        self::bandingcallable();
     }
 
 
     /**
      * 绑定路由需要验证的请求参数
-     * @param $method
-     * @param $name
      * @param $arg
      * @return RouteService|object
      */
-    static private function bindingParam($method, $name, $arg)
+    public function bindingParam($arg)
     {
-        self::$validateData[$method][$name] = $arg;
+        self::$validateData[self::$method][self::$name] = $arg;
 
         return self::getinstance();
     }
@@ -287,5 +279,10 @@ class RouteService
             return false;
         }
         return $callable();
+    }
+
+    public function getError()
+    {
+        return $this->validate->errors;
     }
 }

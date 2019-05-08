@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\controller\\IndexController' => $baseDir . '/App/controller/IndexController.class.php',
     'App\\model\\index\\IndexModel' => $baseDir . '/App/model/index/IndexModel.class.php',
+    'Auth' => $baseDir . '/Core/Hello/Auth/Auth.class.php',
     'Core\\App' => $baseDir . '/Core/App.class.php',
     'Core\\Controller' => $baseDir . '/Core/Controller.class.php',
     'Core\\Core' => $baseDir . '/Core/Core.class.php',
@@ -15,6 +16,7 @@ return array(
     'Core\\Error' => $baseDir . '/Core/Error.class.php',
     'Core\\Factory' => $baseDir . '/Core/Factory.class.php',
     'Core\\Filter' => $baseDir . '/Core/Filter.class.php',
+    'Core\\Hello\\Build\\BuildComponent' => $baseDir . '/Core/Hello/Build/BuildComponent.class.php',
     'Core\\Hello\\Build\\BuildFile' => $baseDir . '/Core/Hello/Build/BuildFile.class.php',
     'Core\\Hello\\Build\\BuildView' => $baseDir . '/Core/Hello/Build/BuildView.class.php',
     'Core\\Hello\\Build\\Load' => $baseDir . '/Core/Hello/Load.class.php',
@@ -26,6 +28,7 @@ return array(
     'Core\\Model' => $baseDir . '/Core/Model.class.php',
     'Core\\RouteService' => $baseDir . '/Core/RouteService.class.php',
     'Core\\Validate' => $baseDir . '/Core/Validate.class.php',
+    'Core\\ValidateInterface' => $baseDir . '/Core/ValidateInterface.php',
     'Core\\db\\Db' => $baseDir . '/Core/db/Db.class.php',
     'Core\\db\\Driver' => $baseDir . '/Core/db/Driver.class.php',
     'Core\\db\\driver\\Mysql' => $baseDir . '/Core/db/driver/Mysql.class.php',

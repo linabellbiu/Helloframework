@@ -9,18 +9,19 @@ use \Core\Validate;
 
 RouteService::get('IndexController@index', '/', function () {
 //   view('welcome','test','call');
-});
+})->bindingParam([
+    'mail' => 'mail',
+    'pwd' => 'pwd',
+    'ggkey' => 'int',
+]);
 
 //RouteService::get('IndexController@index', '/index');
 //RouteService::get('IndexController@index', '/index.php');
 //
-//RouteService::get('IndexController@login', '/login');
+RouteService::get('IndexController@login', '/login');
 //
-//RouteService::post('IndexController@postLogin', '/login', [
-//    'mail' => 'mail',
-//    'pwd' => 'pwd',
-//    'ggkey' => 'int|null',
-//])->bandingError([
+RouteService::post('IndexController@postLogin', '/login');
+//    ->bandingError([
 //    'mail|null' => ['zh' => '输入不能为空', 'en' => 'english error'],
 //    'mail|mail' => ['zh' => '不是正确的邮箱', 'en' => 'this is not e-mail'],
 //    'pwd|null' => ['zh' => '输入不能为空', 'en' => 'english error'],

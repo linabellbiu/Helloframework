@@ -6,7 +6,6 @@
  * Time: 15:30
  */
 
-//加载所需要的文件
 
 namespace Core\Hello\Build;
 
@@ -15,13 +14,18 @@ use Core\Error;
 use Core\Hello\LoadInterFace;
 use Core\Heplers;
 
+/**
+ * 加载所需要的文件
+ * 这里面的文件最好不要是类，因为类本身可以自动加载
+ * Class BuildFile
+ * @package Core\Hello\Build
+ */
 class BuildFile implements LoadInterFace
 {
 
     //需要加载的系统配置或者库文件
     //请严格按照顺序加载
     private $need_load_file = [
-        'loadSystemCommon',
         'loadSystemConf',
         'loadSystemLib',
         'loadAppRoute',
@@ -35,6 +39,7 @@ class BuildFile implements LoadInterFace
     private function loadSystemLib()
     {
         Heplers::loadFile(CORE_LIB . 'filter.php');
+
         Heplers::loadFile(CORE_LIB . 'validate.php');
     }
 
@@ -45,24 +50,6 @@ class BuildFile implements LoadInterFace
     private function loadSystemConf()
     {
         config(Heplers::loadFile(SYS_CONFIG_PATH));
-    }
-
-
-    /**
-     * 加载公共文件
-     */
-    private function loadSystemCommon()
-    {
-        $function_file = CORE_COMMON_PATH . 'function.php';
-        try {
-            if (file_exists($function_file)) {
-                require_once $function_file;
-            } else {
-                throw new Error(CORE_COMMON_PATH . 'function.php 找不到');
-            }
-        } catch (Error $e) {
-            $e->errorMessage();
-        }
     }
 
 
@@ -109,16 +96,11 @@ class BuildFile implements LoadInterFace
 
     public function load()
     {
-        try {
-            foreach ($this->need_load_file as $package) {
-                if (method_exists($this, $package)) {
-                    $this->{$package}();
-                } else {
-                    throw new Error('方法' . $package . '在' . get_class() . '找不到');
-                }
-            }
-        } catch (Error $e) {
-            $e->errorMessage();
+        foreach ($this->need_load_file as $package) {
+            if (!method_exists($this, $package))
+                throw new Error('方法' . $package . '在' . get_class() . '找不到');
+
+            $this->{$package}();
         }
     }
 }

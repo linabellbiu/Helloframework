@@ -16,6 +16,8 @@ class Request
 
     private static $request;
 
+    public static $error;
+
     public static function request()
     {
         switch (REQUEST_METHOD) {
@@ -62,15 +64,12 @@ class Request
             return self::$request;
         }
 
-        if (!is_array($req)) {
-            return null;
-        }
+        $req = empty($req) ? null : (array)$req;
 
-        $req = empty($req) ? null : $req;
+        if (!RouteService::getinstance()->validate($req)) {
 
+            self::$error = RouteService::getinstance()->getError();
 
-        $route = new RouteService(new Validate());
-        if (!$route->validate($req)) {
             return null;
         }
 

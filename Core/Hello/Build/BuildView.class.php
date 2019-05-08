@@ -17,6 +17,11 @@ use Core\Hello\LoadInterFace;
 use View\Compiled\HelloCompiler;
 use View\Engine\CompilerEngine;
 
+/**
+ * 加载模板文件
+ * Class BuildView
+ * @package Core\Hello\Build
+ */
 class BuildView implements LoadInterFace
 {
 

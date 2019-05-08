@@ -22,7 +22,11 @@ class Core
 
     public static function run()
     {
-        self::start();
+        try {
+            self::start();
+        } catch (Error $e) {
+            $e->errorMessage();
+        }
     }
 
     public static function listen()

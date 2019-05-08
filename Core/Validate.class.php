@@ -10,7 +10,7 @@ namespace Core;
 
 use Core\Http\Request;
 
-class Validate
+class Validate implements ValidateInterface
 {
     /**
      * @var array
@@ -30,7 +30,7 @@ class Validate
     public $bindingParamError = [];
 
 
-    public $erros;
+    public $errors;
 
 
     /**
@@ -87,59 +87,58 @@ class Validate
 
     /**
      * 传入规则和请求数据调用安全库开始验证
-     * @param $vaild array 验证规则
+     * @param $valid array 验证规则
      * @param $value array 验证参数
      * @return bool|mixed
      */
-    public function safe($vaild, $value)
+    public function safe($valid, $value)
     {
-        try {
-            if (!is_array($vaild)) throw new Error('验证规则因该是数组');
-            if (!is_array($value)) throw new Error('验证数据因该是数组');
-        } catch (Error $e) {
-            $e->errorMessage();
-        }
-        if (empty($vaild)) {
-            return false;
-        }
-        foreach ($vaild as $name => $rule) {
-            $arr = array_flip(explode('|', $rule));
+        $valid = (array)$valid;
+        $value = (array)$value;
 
-            //验证是否允许是空的传值
-            if (empty($value) || !array_key_exists($name, $value)) {
-                if (!isset($arr['null'])) {
-                    if (empty($this->getError($name . '|null'))) {
-                        $this->setError('SYS_ROUTE_REQ_IS_NULL');
-                    } else {
-                        $this->setError($name . '|null');
-                    }
-                    return false;
+        foreach ($valid as $name => $rule) {
+
+            $rules = array_flip(explode('|', $rule));
+
+            //首先检查这个参数是否为空，如果是允许空值并且是空值那就进行下一个参数检查，否则继续下一项检查
+            if (empty($value) || !array_key_exists($name, $value) || count($value) == 0) {
+                if (isset($rules['null'])) {
+                    unset($rules['null']);
+                    continue;
                 }
-                continue;
+
+                //没有设置空设置错误信息
+                if (empty($this->getError($name . '|null'))) {
+                    $this->errors = $name . ' not is null';
+                } else {
+                    $this->setError($name . '|null');
+                }
+                return false;
             }
-            foreach (array_flip($arr) as $index => $rules) {
-                if (Filter::getinstance()->filter($value[$name], $rules)) {
-                    return true;
+
+            foreach (array_flip($rules) as $ruleType) {
+                if (Filter::getinstance()->filter($value[$name], $ruleType)) {
+                    continue;
                 } else {
                     if (empty($name)) {
-                        $this->setError($rules);
+                        $this->setError($ruleType);
                     } else {
-                        $this->setError($name . '|' . $rules);
+                        $this->setError($name . '|' . $ruleType);
                     }
                     return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
 
     private function setError($name)
     {
         if (empty($this->bindingParamError[$name][config('language')])) {
-            $this->erros = $this->bindingParamError[$name];
+            $this->errors = $this->bindingParamError[$name];
         } else {
-            $this->erros = $this->bindingParamError[$name][config('language')];
+            $this->errors = $this->bindingParamError[$name][config('language')];
         }
         return;
     }
@@ -147,7 +146,7 @@ class Validate
 
     private function getError($name)
     {
-        return $this->bindingParamError[$name] ? $this->bindingParamError[$name] : null;
+        return empty($this->bindingParamError[$name]) ? null : $this->bindingParamError[$name];
     }
 
 

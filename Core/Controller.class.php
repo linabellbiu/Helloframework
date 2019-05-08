@@ -45,6 +45,8 @@ abstract class Controller
 
     protected function validateError()
     {
+        debug_var(Factory::make('Validate'));
+        return Factory::make('Validate')->errors;
         //return Validate::getinstance()->erros;
     }
 
@@ -79,5 +81,9 @@ abstract class Controller
             }
         }
         return $this;
+    }
+
+    protected function getReqError(){
+        return Request::$error;
     }
 }
