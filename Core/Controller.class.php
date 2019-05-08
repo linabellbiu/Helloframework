@@ -45,7 +45,7 @@ abstract class Controller
 
     protected function validateError()
     {
-        return Validate::getinstance()->erros;
+        //return Validate::getinstance()->erros;
     }
 
     /**

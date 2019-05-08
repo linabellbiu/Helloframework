@@ -10,6 +10,12 @@ const EXT = '.class.php';
 //配置文件后缀
 const CONFIG = '.conf.php';
 
+define('__POST__', 'POST');
+define('__GET__', 'GET');
+define('__DELETE__', 'DELETE');
+define('__PUT__', 'PUT');
+define('__REQUEST__', 'REQUEST');
+
 define('INDEX_CONTROLLER', 'IndexController');                          //默认的控制器
 define('INDEX_METHOD', 'index');                                        //默认的方法
 define('UTF_8', true);                                                  //开启utf8输出

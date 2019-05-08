@@ -19,8 +19,8 @@ class IndexController extends Controller
     {
         Request::request();
 
-        echo $this->validateError();
-//        $test = new IndexModel("wang", config('db1'));
+//        echo $this->validateError();
+//        $test = new IndexMode l("wang", config('db1'));
 //        $test->exec();
         view('welcome', 'test', 'Hello word');
     }
@@ -28,5 +28,10 @@ class IndexController extends Controller
     public function login()
     {
         view('index.login');
+    }
+
+    public function postLogin()
+    {
+        var_dump(Request::request());
     }
 }

@@ -69,6 +69,9 @@ class App
                             if (strpos($web, '.')) {
                                 list($web_dir, $c) = explode('.', $web);
                             }
+
+                            define('APP_ROUTE_NAME', $control);
+                            break;
                         }
                     }
                 }
@@ -98,6 +101,12 @@ class App
         define('APP_MODULE', $web_dir);
         define('__M__', $m);
         define('__C__', $c);
+
+        RouteService::setName(APP_ROUTE_NAME);
+
+        RouteService::setMethod(REQUEST_METHOD);
+
+        RouteService::routeCallable(REQUEST_METHOD, APP_ROUTE_NAME);
     }
 
     /**

@@ -8,6 +8,8 @@
 
 namespace Core;
 
+use \Core\Http\Request;
+
 class Heplers
 {
 
@@ -26,7 +28,7 @@ class Heplers
             return [$c, $m];
         }
 
-        $request = \Core\Http\Request::request();
+        $request = Request::request();
 
         if (isset($request['c'])) {
             $c = $request['c'] . CONTEROLLER_POSTFIX;
@@ -49,5 +51,10 @@ class Heplers
             $e->errorMessage();
         }
         return $files;
+    }
+
+    public static function defaultRouteName()
+    {
+        return INDEX_CONTROLLER . CONTROLLER_METHOD_DELIMIT . INDEX_METHOD;
     }
 }

@@ -23,22 +23,6 @@ class Validate
      */
     public $validateCookie = [];
 
-
-    /**
-     * 声明私有构造方法为了防止外部代码使用new来创建对象
-     * Validate constructor.
-     */
-    private function __construct()
-    {
-    }
-
-
-    /**
-     * @var
-     */
-    static public $instance;
-
-
     /**
      * 绑定参数的错误信息
      * @var
@@ -49,40 +33,30 @@ class Validate
     public $erros;
 
 
-    /**声明一个静态变量（保存在类中唯一的一个实例）
-     * @return Validate
-     */
-    static public function getinstance()
-    {
-        if (!self::$instance) self::$instance = new self();
-        return self::$instance;
-    }
-
-
     /**
      * 添加错误提示
      * @param $arr
-     * @return array|null
+     * @return $this
      */
     public function bandingError($arr)
     {
         if (empty($arr)) {
-            return self::$instance;
+            return $this;
         }
         if (!is_array($arr)) {
-            return self::$instance;
+            return $this;
         }
         foreach ($arr as $k => $v) {
             $this->bindingParamError[$k] = $v;
         }
-        return self::$instance;
+        return $this;
     }
 
 
     /**
      * 添加cookie的验证规则
      * @param $vail
-     * @return mixed
+     * @return $this
      */
     public function Cookie($vail)
     {
@@ -91,7 +65,7 @@ class Validate
                 $this->validateCookie[$name] = $rule;
             }
         }
-        return self::$instance;
+        return $this;
     }
 
 
@@ -107,7 +81,7 @@ class Validate
                 $this->validateData[$name] = $rule;
             }
         }
-        return self::$instance;
+        return $this;
     }
 
 

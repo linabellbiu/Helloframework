@@ -8,6 +8,7 @@
 
 namespace Core\Http;
 
+use Core\RouteService;
 use Core\Validate;
 
 class Request
@@ -65,9 +66,14 @@ class Request
             return null;
         }
 
-        if (!Validate::getinstance()->safe(Validate::$instance->validateData, $req)) {
+        $req = empty($req) ? null : $req;
+
+
+        $route = new RouteService(new Validate());
+        if (!$route->validate($req)) {
             return null;
         }
+
         self::$request = $req;
         return self::$request;
     }

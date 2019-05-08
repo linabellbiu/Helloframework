@@ -60,8 +60,11 @@
 <body>
 <div class="flex-center position-ref full-height">
     <div class="content">
-        <input type="text">
-
+        <form action="/login" method="post">
+            账号:<input type="text" name="account">
+            密码:<input type="text" name="pwd">
+            <input type="submit" value="提交">
+        </form>
         <div class="links">
             <a href="https://github.com/wangxudong123/aexframework">GitHub</a>
         </div>
