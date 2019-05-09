@@ -1,4 +1,10 @@
-# Helloframework v1.0
+# Helloframework v0.1
+
+
+- 2019-05-04 
+```
+ v0.1 (测试版) 测试版可以试运行但是有些功能待完善，不保证没有bug
+```
 ### PHPmvc框架
 
 ```
