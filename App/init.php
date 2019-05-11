@@ -1,6 +1,4 @@
 <?php
-use Core\Http\Cookie;
-
 //加载应用
 return [
     //应用配置

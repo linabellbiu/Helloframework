@@ -8,9 +8,4 @@
 //自定义规则函数
 //e.g. function __rule_name(){}
 
-function __pwd()
-{
-
-}
-
 

@@ -6,5 +6,5 @@
  * Time: 9:25
  */
 return [
-    'inputerr'=>'input err',
+
 ];

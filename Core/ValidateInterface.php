@@ -18,8 +18,4 @@ interface ValidateInterface
      * @return mixed
      */
     public function safe($vaild, $value);
-
-    public function bindingError($arg);
-
-    public function bindingParam();
 }

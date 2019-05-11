@@ -9,5 +9,5 @@
 
 
 return [
-    'inputerr'=>'输入错误',
+
 ];

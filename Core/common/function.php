@@ -6,7 +6,6 @@
  * Time: 11:56
  */
 
-use \Core\Http\Cookie;
 
 /**
  * 只允许英文字母字母

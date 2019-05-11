@@ -14,7 +14,7 @@ use Core\Http\Cookie;
 return
     [
         'ERR_DEBUG' => APP_DEBUG,
-        'LANGUAGE' => DEFAULT_LANGUAGE,
+        'LANGUAGE' => DEFAULT_LANGUAGE,             //默认语言
         'templet_cache_path' => __VIEW__ . '/cache/',
         'template_path' => APP_PATH . '/view/'
     ];

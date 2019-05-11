@@ -21,25 +21,24 @@ class Validate implements ValidateInterface
     /**
      * @var array
      */
-    private $validateCookie = [];
+    public $validateCookie = [];
 
     /**
      * 绑定参数的错误信息
      * @var
      */
-    private $bindingParamError = [];
+    public $bindingParamError = [];
 
 
     public $errors;
 
-    private $fieldNull = 'null';
 
     /**
      * 添加错误提示
      * @param $arr
      * @return $this
      */
-    public function bindingError($arr)
+    public function bandingError($arr)
     {
         if (empty($arr)) {
             return $this;
@@ -53,10 +52,22 @@ class Validate implements ValidateInterface
         return $this;
     }
 
-    public function bindingParam()
+
+    /**
+     * 添加cookie的验证规则
+     * @param $vail
+     * @return $this
+     */
+    public function Cookie($vail)
     {
-        // TODO: Implement bindingParam() method.
+        if (is_array($vail) && !empty($vail)) {
+            foreach ($vail as $name => $rule) {
+                $this->validateCookie[$name] = $rule;
+            }
+        }
+        return $this;
     }
+
 
     /**
      * 添加请求数据的验证规则
@@ -73,21 +84,11 @@ class Validate implements ValidateInterface
         return $this;
     }
 
-    /**
-     * 设置字段可以为空的标记
-     * @param $sign
-     */
-    public function filedNull($sign)
-    {
-        if (is_string($sign)) {
-            $this->fieldNull = $sign;
-        }
-    }
 
     /**
      * 传入规则和请求数据调用安全库开始验证
-     * @param $valid array 验证规则 array[参数名=>规则]
-     * @param $value array 验证的值
+     * @param $valid array 验证规则
+     * @param $value array 验证参数
      * @return bool|mixed
      */
     public function safe($valid, $value)
@@ -107,10 +108,10 @@ class Validate implements ValidateInterface
                 }
 
                 //没有设置空设置错误信息
-                if (empty($this->getError($name . '|' . $this->fieldNull))) {
-                    $this->errors = $name . ' is null';
+                if (empty($this->getError($name . '|null'))) {
+                    $this->errors = $name . ' not is null';
                 } else {
-                    $this->setError($name . '|' . $this->fieldNull);
+                    $this->setError($name . '|null');
                 }
                 return false;
             }
@@ -135,8 +136,7 @@ class Validate implements ValidateInterface
     private function setError($name)
     {
         if (empty($this->bindingParamError[$name][config('language')])) {
-            list($name,) = explode('|', $name);
-            $this->errors = empty($this->bindingParamError[$name]) ? 'field: '.$name . ' error' : $this->bindingParamError[$name];
+            $this->errors = $this->bindingParamError[$name];
         } else {
             $this->errors = $this->bindingParamError[$name][config('language')];
         }

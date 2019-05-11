@@ -30,13 +30,6 @@ class RouteService
 
 
     /**
-     * 绑定参数错误
-     * @var array
-     */
-    static public $validateError = [];
-
-
-    /**
      * 绑定的路由回调函数
      * @var array
      */
@@ -187,19 +180,6 @@ class RouteService
 
 
     /**
-     * 绑定路由参数验证的错误提示
-     * @param $arg
-     * @return RouteService|object
-     */
-    public function bindingError($arg)
-    {
-        self::$validateError[self::$method][self::$name] = $arg;
-
-        return self::getinstance();
-    }
-
-
-    /**
      * 验证请求参数是否安全合法
      * @param $req
      * @return bool|mixed
@@ -207,11 +187,6 @@ class RouteService
     public function validate($req)
     {
         if (empty(self::$validateData[self::$method][self::$name])) return true;
-
-        if (!empty(self::$validateError[self::$method][self::$name]))
-        {
-            $this->validate->bindingError(self::$validateError[self::$method][self::$name]);
-        }
 
         return $this->validate->safe(self::$validateData[self::$method][self::$name], $req);
     }
