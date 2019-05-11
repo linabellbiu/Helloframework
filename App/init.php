@@ -1,12 +1,6 @@
 <?php
 use Core\Http\Cookie;
 
-Cookie::cookie('language') ? Cookie::cookie('language') : Cookie::cookie('language', config('language'));
-
-
-
-
-
 //加载应用
 return [
     //应用配置
