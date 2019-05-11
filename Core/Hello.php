@@ -10,6 +10,12 @@ const EXT = '.class.php';
 //配置文件后缀
 const CONFIG = '.conf.php';
 
+define('__POST__', 'POST');
+define('__GET__', 'GET');
+define('__DELETE__', 'DELETE');
+define('__PUT__', 'PUT');
+define('__REQUEST__', 'REQUEST');
+
 define('INDEX_CONTROLLER', 'IndexController');                          //默认的控制器
 define('INDEX_METHOD', 'index');                                        //默认的方法
 define('UTF_8', true);                                                  //开启utf8输出
@@ -24,6 +30,7 @@ define('APP_LANGUAGE', 'language');                                    //应用�
 
 define('CORE_PATH', PATH . '/Core/');                                   //核心目录
 define('CORE_COMMON_PATH', CORE_PATH . 'common/');                      //公共目录
+define('CORE_LIB', CORE_PATH . 'lib/');                      //系统库文件
 define('SYS_CONFIG', 'system' . CONFIG);                                //系统配置文件名
 define('SYS_CONFIG_PATH', CORE_PATH . 'conf/' . SYS_CONFIG);            //系统配置文件
 

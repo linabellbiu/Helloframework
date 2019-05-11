@@ -3,7 +3,7 @@
 namespace View;
 
 use View\Engine\EngineInterface;
-use View\Factory;
+use View\ViewFactory;
 
 class View
 {
@@ -13,7 +13,7 @@ class View
     private $data;
     private $path;
 
-    function __construct(Factory $factory, EngineInterface $engine)
+    function __construct(ViewFactory $factory, EngineInterface $engine)
     {
         $this->factory = $factory;
         $this->engine = $engine;

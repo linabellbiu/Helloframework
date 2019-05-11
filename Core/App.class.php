@@ -2,14 +2,9 @@
 
 namespace Core;
 
-use View\View;
-use View\Factory;
-use View\Compiled;
-use View\FileViewFinder;
-use View\Support\Filesystem;
-use View\Compiled\HelloCompiler;
-use View\Engine\CompilerEngine;
 
+use Core\Hello\Build\SystemBuild;
+use function PHPSTORM_META\type;
 
 class App
 {
@@ -33,63 +28,15 @@ class App
             header("Content-type:text/html;charset=utf-8");
         }
 
-        //加载公共函数
-        include_once CORE_COMMON_PATH . 'function.php';
+        $function_file = CORE_COMMON_PATH . 'function.php';
 
-        //加载系统文件助手函数
-        include_once CORE_PATH . 'heplers.php';
+        if (!file_exists($function_file))
+            throw new Error(CORE_COMMON_PATH . 'function.php 找不到');
 
+        require_once $function_file;
 
-        //加载系统配置文件
-        config(load_file(SYS_CONFIG_PATH));
+        SystemBuild::run();
 
-        //加载公共函数
-        try {
-
-            //加载路由
-            if (file_exists(APP_ROUTE)) {
-
-                require APP_ROUTE;
-
-            } else {
-                throw new Error('route.php 在' . APP_ROUTE . ' 没有找到');
-            }
-
-            if (file_exists(APP_INTI)) {
-                foreach (include APP_INTI as $k => $v) {
-                    //加载应用配置
-                    if ($k == APP_CONFIG) {
-                        foreach ($v as $app_config) {
-                            config(load_file(APP_CONFIG_PATH . $app_config . CONFIG));
-                        }
-                    }
-                    //加载语言包
-                    if ($k == APP_LANGUAGE) {
-                        //加载语言包
-                        Custom::setCustom(load_file(APP_LANGUAGE_PATH . config('language') . '.php'));
-                    }
-                }
-            } else {
-                throw new Error('init.php 在', APP_PATH . ' 没有找到');
-            }
-
-            //加载规则
-            if (file_exists(APP_RULE)) {
-
-                //加载系统的请求规则
-                require CORE_COMMON_PATH . 'validate.php';
-
-                //加载自定义规则
-                require APP_RULE;
-
-            } else {
-                throw new Error('rule.php 在' . APP_RULE . ' 
-                没有找到');
-            }
-
-        } catch (Error $e) {
-            echo $e->getMessage();
-        }
     }
 
     public static function dispatch()
@@ -108,56 +55,63 @@ class App
         $c = 'emptygUSHJBNJXCKVUAMJsfdsaadfdff';
         $m = 'emptyASDUMVZPDEIFASDFpabnHUASHJB';
         $web_dir = '';
-        try {
 
-            if ($n) {
-                $request_url = trim(substr($request_url, 0, $n), '/');
+
+        if ($n) {
+            $request_url = trim(substr($request_url, 0, $n), '/');
+        }
+        do {
+            if (empty(RouteService::$route)) {
+                list($c, $m) = Heplers::originalUrlControllerAndMothed(REQUEST_URI);
+                break;
             }
-            do {
-                if (empty(RouteService::$route)) {
-                    list($c, $m) = Heplers::originalUrlControllerAndMothed(REQUEST_URI);
-                    break;
-                }
-                foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
-                    if (trim($request_url, '/') == trim($url, '/')) {
-                        $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
-                        if (empty($args[1])) {
-                            throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
-                        } else {
-                            $c =  $web = $args[0];
-                            $m = $args[1];
-                            if (strpos($web, '.')) {
-                                list($web_dir, $c) = explode('.', $web);
-                            }
+            foreach (RouteService::$route[REQUEST_METHOD] as $url => $control) {
+                if (trim($request_url, '/') == trim($url, '/')) {
+                    $args = explode(CONTROLLER_METHOD_DELIMIT, $control);
+                    if (empty($args[1])) {
+                        throw new Error('找不到' . CONTROLLER_METHOD_DELIMIT);
+                    } else {
+                        $c = $web = $args[0];
+                        $m = $args[1];
+                        if (strpos($web, '.')) {
+                            list($web_dir, $c) = explode('.', $web);
                         }
+
+                        define('APP_ROUTE_NAME', $control);
+                        break;
                     }
                 }
-                break;
-            } while (0);
+            }
+            break;
+        } while (0);
 
-            if (empty($c)) {
-                throw new Error('控制器名是空的');
-            }
-            if (empty($m)) {
-                throw new Error('方法名是空的');
-            }
-            if (!only_english_letter($c)) {
-                throw new Error("控制器名不合法,必须全部是英文字母");
-            }
-            if (!only_english_letter($m)) {
-                throw new Error("方法名不合法,必须全部是英文字母");
-            }
-            if (!empty($web_dir)) {
-                if (!only_english_letter($web_dir)) {
-                    throw new Error("目录名名不合法,必须全部是英文字母");
-                }
-            }
-        } catch (Error $e) {
-            echo $e->errorMessage();
+        if (empty($c)) {
+            throw new Error('控制器名是空的');
         }
+        if (empty($m)) {
+            throw new Error('方法名是空的');
+        }
+        if (!only_english_letter($c)) {
+            throw new Error("控制器名不合法,必须全部是英文字母");
+        }
+        if (!only_english_letter($m)) {
+            throw new Error("方法名不合法,必须全部是英文字母");
+        }
+        if (!empty($web_dir)) {
+            if (!only_english_letter($web_dir)) {
+                throw new Error("目录名名不合法,必须全部是英文字母");
+            }
+        }
+
         define('APP_MODULE', $web_dir);
         define('__M__', $m);
         define('__C__', $c);
+
+        RouteService::setName(APP_ROUTE_NAME);
+
+        RouteService::setMethod(REQUEST_METHOD);
+
+        RouteService::routeCallable(REQUEST_METHOD, APP_ROUTE_NAME);
     }
 
     /**
@@ -166,7 +120,6 @@ class App
     public static function getController()
     {
         $class = __C__;
-        $web_dir = '';
         if (APP_MODULE != '') {
             $controllerDir = APP_PATH . 'controller/' . APP_MODULE . '/' . $class . EXT;
             define("CLASS_EXPLAME", CONTEROLLER_INFO . APP_MODULE . '\\' . $class);
@@ -202,40 +155,5 @@ class App
         } catch (Error $e) {
             echo $e->errorMessage();
         }
-    }
-
-    public static function template_load()
-    {
-        //绑定模板系统文件助手
-        Factory::bind('Filesystem', function () {
-            return new Filesystem();
-        });
-
-        //绑定编译器
-        Factory::bind('HelloCompiler', function () {
-            return new HelloCompiler(Factory::make('Filesystem'), config('templet_cache_path'));
-        });
-
-        //绑定编译引擎
-        Factory::bind('CompilerEngine', function () {
-            return new CompilerEngine(Factory::make('HelloCompiler'));
-        });
-
-        //绑定模板文件阅读器
-        Factory::bind('FileViewFinder', function () {
-            $FileViewFinder = new FileViewFinder(Factory::make('CompilerEngine'), Factory::make('HelloCompiler'));
-            $FileViewFinder->path = config('template_path');
-            return $FileViewFinder;
-        });
-
-        //绑定模板工厂
-        Factory::bind('Factory', function () {
-            return new Factory(Factory::make('FileViewFinder'));
-        });
-
-        //绑定视图
-        Factory::bind('View', function () {
-            return new View(Factory::make('Factory'), Factory::make('CompilerEngine'));
-        });
     }
 }

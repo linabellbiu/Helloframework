@@ -6,6 +6,7 @@
  * Time: 11:56
  */
 
+use \Core\Http\Cookie;
 
 /**
  * 只允许英文字母字母
@@ -24,7 +25,7 @@ function only_english_letter($str)
  */
 function load_file($filname)
 {
-    return file_exists($filname) ? include $filname : null;
+    return file_exists($filname) ? include_once $filname : false;
 }
 
 
@@ -93,6 +94,7 @@ function view($args = null)
 
     $view = APP_MODULE . '.' . __M__;
     $value = [];
+
     switch ($count) {
         case 0:
             break;
@@ -103,6 +105,7 @@ function view($args = null)
                     $value = $data;
                     break;
                 }
+                $view = $data;
                 if (strpos($data, '.') === false) {
                     $view = APP_MODULE . '.' . $data;
                 }
@@ -147,19 +150,22 @@ function view($args = null)
         default:
     }
 
-    exit(\View\Factory::make('View')->make(strtolower($view), $value)->render());
+    exit(\Core\Factory::make('View')->make(trim(strtolower($view), '.'), $value)->render());
 }
 
-function debug_var($val){
+function debug_var($val)
+{
     var_dump($val);
     exit;
 }
 
 //获取当前请求的url
-function getReqUrl(){
+function get_req_url()
+{
     return REQUEST_URI;
 }
 
-function htmlencode($string,$flags){
-    return htmlentities($string,$flags);
+function htmlencode($string, $flags)
+{
+    return htmlentities($string, $flags);
 }

@@ -1,10 +1,12 @@
 <?php
+use Core\Http\Cookie;
+
 //加载应用
 return [
     //应用配置
-    "app_config"=>[
-        'index',
-        'db',
+    "conf"=>[
+        'index.conf',
+        'db.conf',
     ],
 
 

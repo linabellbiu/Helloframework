@@ -1,14 +1,38 @@
 <?php
-/**
- * nullable 可选字段，可以不填，填了必须验证
- */
 
-//\Core\RouteService::get('IndexController@index', '/', [
-//    'm' => 'mail|nullable',
-//])->rulesCookie([
-//    'language' => 'mail'
-//])->bandingError([
-//    'm|string' => ['zh' => '中文错误', 'en' => 'english error'],
-//    'm|mail' => ['zh' => '不是正确的邮箱', 'en' => 'this is not e-mail'],
-//    'language|mail' => ['zh' => '不是正确的邮箱', 'en' => 'this is not e-mail'],
+use \Core\RouteService;
+use \Core\Validate;
+
+//Validate::getinstance()->Cookie(['language' => 'string'])->bandingError(
+//    ['language|string' => 'language_error']
+//);
+
+RouteService::get('IndexController@index', '/', function () {
+//   view('welcome','test','call');
+    \Core\Http\Cookie::bindingParam(['language' => 'string']);
+})->bindingParam([
+    'mail' => 'mail',
+    'pwd' => 'pwd',
+    'ggkey' => 'int',
+]);
+    /*->bindingError([
+    'mail|null' => ['zh' => '输入不能为空', 'en' => 'english error'],
+    'mail|mail' => ['zh' => '不是正确的邮箱', 'en' => 'this is not e-mail'],
+    'pwd|null' => ['zh' => '输入不能为空', 'en' => 'english error'],
+    'pwd|pwd' => ['zh' => '输入不能为空', 'en' => 'english error'],
+    'ggkey|int' => ['zh' => '输入不能为空', 'en' => 'english error'],
+]);*/
+
+//RouteService::get('IndexController@index', '/index');
+//RouteService::get('IndexController@index', '/index.php');
+//
+RouteService::get('IndexController@login', '/login');
+//
+RouteService::post('IndexController@postLogin', '/login');
+//    ->bandingError([
+//    'mail|null' => ['zh' => '输入不能为空', 'en' => 'english error'],
+//    'mail|mail' => ['zh' => '不是正确的邮箱', 'en' => 'this is not e-mail'],
+//    'pwd|null' => ['zh' => '输入不能为空', 'en' => 'english error'],
+//    'pwd|pwd' => ['zh' => '输入不能为空', 'en' => 'english error'],
+//    'ggkey|int' => ['zh' => '输入不能为空', 'en' => 'english error'],
 //]);

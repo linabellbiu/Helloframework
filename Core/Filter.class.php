@@ -6,7 +6,7 @@
  * Date: 2018/10/15
  * Time: 10:09
  */
-namespace Core\Lib;
+namespace Core;
 
 use Core\Error;
 
@@ -58,9 +58,8 @@ class Filter
             try {
                 if (!function_exists('__' . $filter)) throw new Error('__' . $filter . '找不到');
             } catch (Error $e) {
-                $e->getMessage();
+                $e->errorMessage();
             }
-
             return filter_var($string, FILTER_CALLBACK, [
                 'options' => '__' . $filter
             ]);
@@ -75,5 +74,3 @@ class Filter
         return false;
     }
 }
-
-require_once 'filter.php';

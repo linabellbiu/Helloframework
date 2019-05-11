@@ -8,12 +8,15 @@
 
 namespace Core\Http;
 
+use Core\RouteService;
 use Core\Validate;
 
 class Request
 {
 
     private static $request;
+
+    public static $error;
 
     public static function request()
     {
@@ -61,13 +64,15 @@ class Request
             return self::$request;
         }
 
-        if (!is_array($req)) {
+        $req = empty($req) ? null : (array)$req;
+
+        if (!RouteService::getinstance()->validate($req)) {
+
+            self::$error = RouteService::getinstance()->getError();
+
             return null;
         }
 
-        if (!Validate::getinstance()->safe(Validate::$instance->validateData, $req)) {
-            return null;
-        }
         self::$request = $req;
         return self::$request;
     }

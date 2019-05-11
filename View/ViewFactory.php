@@ -10,11 +10,9 @@ namespace View;
 
 use View\FileViewFinder;
 
-class Factory
+class ViewFactory
 {
     private $fileViewFinder;
-
-    protected static $registry = [];
 
     public function __construct(FileViewFinder $fileViewFinder)
     {
@@ -29,19 +27,5 @@ class Factory
     public function exec($path,$data)
     {
         return $this->fileViewFinder->getContent($path,$data);
-    }
-
-    public static function bind($name, callable $callable)
-    {
-        static::$registry[$name] = $callable;
-    }
-
-    public static function make($name)
-    {
-        if (isset(static::$registry[$name])) {
-            $resolver = static::$registry[$name];
-            return $resolver();
-        }
-        throw new \Exception('make err');
     }
 }

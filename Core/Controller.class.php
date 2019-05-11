@@ -11,7 +11,7 @@ namespace Core;
 
 use Core\Http\Request;
 use Core\Http\Cookie;
-use View\Factory;
+use Core\Factory;
 
 /**
  * Class Controller
@@ -45,7 +45,9 @@ abstract class Controller
 
     protected function validateError()
     {
-        return Validate::getinstance()->erros;
+        debug_var(Factory::make('Validate'));
+        return Factory::make('Validate')->errors;
+        //return Validate::getinstance()->erros;
     }
 
     /**
@@ -79,5 +81,9 @@ abstract class Controller
             }
         }
         return $this;
+    }
+
+    protected function getReqError(){
+        return Request::$error;
     }
 }

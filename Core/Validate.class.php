@@ -8,12 +8,9 @@
 
 namespace Core;
 
-
-use Core\Http\Cookie;
 use Core\Http\Request;
-use Core\Lib\Filter;
 
-class Validate
+class Validate implements ValidateInterface
 {
     /**
      * @var array
@@ -24,156 +21,137 @@ class Validate
     /**
      * @var array
      */
-    public $validateCookie = [];
-
-
-    /**
-     * 声明私有构造方法为了防止外部代码使用new来创建对象
-     * Validate constructor.
-     */
-    private function __construct()
-    {
-    }
-
-
-    /**
-     * @var
-     */
-    static public $instance;
-
+    private $validateCookie = [];
 
     /**
      * 绑定参数的错误信息
      * @var
      */
-    public $bindingParamError = [];
+    private $bindingParamError = [];
 
 
-    public $erros;
+    public $errors;
 
-
-    /**声明一个静态变量（保存在类中唯一的一个实例）
-     * @return Validate
-     */
-    static public function getinstance()
-    {
-        if (!self::$instance) self::$instance = new self();
-        return self::$instance;
-    }
+    private $fieldNull = 'null';
 
     /**
      * 添加错误提示
      * @param $arr
-     * @return array|null
+     * @return $this
      */
-    public function bandingError($arr)
+    public function bindingError($arr)
     {
         if (empty($arr)) {
-            return self::$instance;
+            return $this;
         }
         if (!is_array($arr)) {
-            return self::$instance;
+            return $this;
         }
         foreach ($arr as $k => $v) {
             $this->bindingParamError[$k] = $v;
         }
-        return self::$instance;
+        return $this;
     }
 
-    /**
-     * 添加cookie的验证规则
-     * @param $vail
-     * @return mixed
-     */
-    public function rulesCookie($vail)
+    public function bindingParam()
     {
-        if (is_array($vail) && !empty($vail)) {
-            foreach ($vail as $name => $rule) {
-                $this->validateCookie[$name] = $rule;
-            }
-        }
-        return self::$instance;
+        // TODO: Implement bindingParam() method.
     }
 
     /**
      * 添加请求数据的验证规则
-     * @param $vail
+     * @param array $vail 验证规则
      * @return mixed
      */
-    public function rulesData($vail)
+    public function Data($vail)
     {
         if (is_array($vail) && !empty($vail)) {
             foreach ($vail as $name => $rule) {
                 $this->validateData[$name] = $rule;
             }
         }
-        return self::$instance;
+        return $this;
     }
 
+    /**
+     * 设置字段可以为空的标记
+     * @param $sign
+     */
+    public function filedNull($sign)
+    {
+        if (is_string($sign)) {
+            $this->fieldNull = $sign;
+        }
+    }
 
     /**
      * 传入规则和请求数据调用安全库开始验证
-     * @param $vaild
-     * @param $value
+     * @param $valid array 验证规则 array[参数名=>规则]
+     * @param $value array 验证的值
      * @return bool|mixed
      */
-    public function safe($vaild, $value)
+    public function safe($valid, $value)
     {
-        try {
-            if (!is_array($vaild)) throw new Error('验证规则因该是数组');
-            if (!is_array($value)) throw new Error('验证数据因该是数组');
-        } catch (Error $e) {
-            $e->errorMessage();
-        }
-        if (empty($vaild))
-        {
-            return false;
-        }
+        $valid = (array)$valid;
+        $value = (array)$value;
 
-        foreach ($vaild as $name => $rule) {
-            $arr = array_flip(explode('|', $rule));
+        foreach ($valid as $name => $rule) {
 
-            //验证是否允许是空的传值
-            if (empty($value) || !array_key_exists($name, $value)) {
-                if (!isset($arr['nullable'])) {
-                    $this->setError('isNull');
-                    return false;
+            $rules = array_flip(explode('|', $rule));
+
+            //首先检查这个参数是否为空，如果是允许空值并且是空值那就进行下一个参数检查，否则继续下一项检查
+            if (empty($value) || !array_key_exists($name, $value) || count($value) == 0) {
+                if (isset($rules['null'])) {
+                    unset($rules['null']);
+                    continue;
                 }
-                continue;
+
+                //没有设置空设置错误信息
+                if (empty($this->getError($name . '|' . $this->fieldNull))) {
+                    $this->errors = $name . ' is null';
+                } else {
+                    $this->setError($name . '|' . $this->fieldNull);
+                }
+                return false;
             }
-            foreach (array_flip($arr) as $index => $rules) {
-                if(Filter::getinstance()->filter($value[$name], $rules))
-                {
-                    return true;
-                }else
-                {
-                    if (empty($name))
-                    {
-                        $this->setError($rules);
-                    }else
-                    {
-                        $this->setError($name.'|'.$rules);
+
+            foreach (array_flip($rules) as $ruleType) {
+                if (Filter::getinstance()->filter($value[$name], $ruleType)) {
+                    continue;
+                } else {
+                    if (empty($name)) {
+                        $this->setError($ruleType);
+                    } else {
+                        $this->setError($name . '|' . $ruleType);
                     }
                     return false;
                 }
             }
         }
-        return false;
+        return true;
     }
 
 
     private function setError($name)
     {
-
-        if (!empty($name))
-        {
-            $this->erros = $this->bindingParamError[$name][config('language')];
+        if (empty($this->bindingParamError[$name][config('language')])) {
+            list($name,) = explode('|', $name);
+            $this->errors = empty($this->bindingParamError[$name]) ? 'field: '.$name . ' error' : $this->bindingParamError[$name];
+        } else {
+            $this->errors = $this->bindingParamError[$name][config('language')];
         }
-        return null;
+        return;
     }
+
+
+    private function getError($name)
+    {
+        return empty($this->bindingParamError[$name]) ? null : $this->bindingParamError[$name];
+    }
+
 
     private function unsetReq($name = null)
     {
-        Request::delete();
+        Request::delete($name);
     }
 }
