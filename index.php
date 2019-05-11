@@ -29,6 +29,7 @@ define("WEB_INDEX",'index');
 //要根据服务器配置决定
 define('MAIN_FILE','index.php');
 
+//默认语言
 define('DEFAULT_LANGUAGE','zh');
 
 
