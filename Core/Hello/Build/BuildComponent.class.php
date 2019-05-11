@@ -10,6 +10,7 @@ namespace Core\Hello\Build;
 
 use Core\Factory;
 use Core\Hello\LoadInterFace;
+use Core\Http\Cookie;
 use Core\RouteService;
 use Core\Validate;
 
@@ -48,11 +49,22 @@ class BuildComponent implements LoadInterFace
     }
 
 
+    private function loadCookie()
+    {
+        Factory::bind('Cookie', function () {
+            return new Cookie(Factory::make($this->loadValidate()));
+        });
+
+        Factory::make('Cookie');
+    }
+
+
     /**
      * 加载器
      */
     public function load()
     {
         $this->loadRouteValidate();
+        $this->loadCookie();
     }
 }

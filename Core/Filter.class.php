@@ -60,7 +60,6 @@ class Filter
             } catch (Error $e) {
                 $e->errorMessage();
             }
-
             return filter_var($string, FILTER_CALLBACK, [
                 'options' => '__' . $filter
             ]);
