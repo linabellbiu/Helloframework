@@ -12,6 +12,7 @@ use Core\Controller;
 use Core\Http\Cookie;
 use Core\Http\Request;
 use App\model\index\IndexModel;
+use Core\Middleware;
 use View\View;
 
 class IndexController extends Controller
@@ -19,7 +20,7 @@ class IndexController extends Controller
     public function index()
     {
         if (!Request::request()) {
-             var_dump($this->getReqError());
+            var_dump($this->getReqError());
         }
         var_dump(Cookie::cookie('language'));
 //        echo $this->validateError();
@@ -36,5 +37,12 @@ class IndexController extends Controller
     public function postLogin()
     {
         var_dump(Request::request());
+    }
+
+    public function test()
+    {
+        $mid = new Middleware();
+        $mid->middleware('Auth');
+        $mid->run();
     }
 }

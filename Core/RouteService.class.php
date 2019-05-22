@@ -236,7 +236,7 @@ class RouteService
     private static function setRouteParam($method, $name, $url, $callable)
     {
 
-        //设置回调函数
+        //设置闭包
         self::setCallable($callable);
 
 

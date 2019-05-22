@@ -5,8 +5,7 @@
   "autoload":{
     "classmap": [
       "Core/",
-      "App/controller",
-      "App/model",
+      "App/",
       "View/"
     ]
   }

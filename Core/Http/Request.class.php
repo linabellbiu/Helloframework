@@ -66,12 +66,15 @@ class Request
 
         $req = empty($req) ? null : (array)$req;
 
+        //对请求的参数进行验证
         if (!RouteService::getinstance()->validate($req)) {
 
             self::$error = RouteService::getinstance()->getError();
 
             return null;
         }
+
+        //建议在这里进行中间件
 
         self::$request = $req;
         return self::$request;

@@ -8,6 +8,7 @@ use \Core\Validate;
 //);
 
 RouteService::get('IndexController@index', '/', function () {
+    //这个闭包是在控制器之后
 //   view('welcome','test','call');
     \Core\Http\Cookie::bindingParam(['language' => 'string']);
 })->bindingParam([
@@ -27,6 +28,7 @@ RouteService::get('IndexController@index', '/', function () {
 //RouteService::get('IndexController@index', '/index.php');
 //
 RouteService::get('IndexController@login', '/login');
+RouteService::get('IndexController@test', '/test');
 //
 RouteService::post('IndexController@postLogin', '/login');
 //    ->bandingError([

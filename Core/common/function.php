@@ -153,9 +153,12 @@ function view($args = null)
     exit(\Core\Factory::make('View')->make(trim(strtolower($view), '.'), $value)->render());
 }
 
-function debug_var($val)
+function debug_var($args)
 {
-    var_dump($val);
+    $args = func_get_args();
+    foreach ($args as $arg) {
+        var_dump($arg);
+    }
     exit;
 }
 
